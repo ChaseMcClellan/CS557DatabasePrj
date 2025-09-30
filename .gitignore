@@ -1,0 +1,25 @@
+# Visual Studio
+.vs/
+*/Debug/
+*/Release/
+*/x64/
+*/x86/
+*/bin/
+*/obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+# Build outputs
+*.pdb
+*.ilk
+*.log
+*.cache
+*.opendb
+*.VC.db
+# NuGet
+packages/
+*.nupkg
+# IDE miscellany
+.idea/
+*.VC.VC.opendb
