@@ -29,6 +29,18 @@ namespace CS557DatabasePrj
                }
              
             */
+            if(txtUsername.Text == "hello" && txtPassword.Text == "world")
+            {
+                //open user form
+                frmUser userform = new frmUser();
+                userform.Show();
+                this.Hide();
+            }
+            else
+            {
+                lblAlert.Visible = true;
+            }
+
         }
     }
 }

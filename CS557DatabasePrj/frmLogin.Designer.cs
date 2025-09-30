@@ -35,6 +35,7 @@
             lblPassword = new Label();
             lblTitle = new Label();
             btnLogin = new Button();
+            lblAlert = new Label();
             SuspendLayout();
             // 
             // btnExit
@@ -98,11 +99,24 @@
             btnLogin.UseVisualStyleBackColor = true;
             btnLogin.Click += btnLogin_Click;
             // 
+            // lblAlert
+            // 
+            lblAlert.AutoSize = true;
+            lblAlert.ForeColor = Color.Red;
+            lblAlert.Location = new Point(373, 286);
+            lblAlert.Name = "lblAlert";
+            lblAlert.Size = new Size(87, 15);
+            lblAlert.TabIndex = 7;
+            lblAlert.Text = "Incorrect Login";
+            lblAlert.Visible = false;
+            // 
             // frmLogin
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = SystemColors.ActiveCaption;
             ClientSize = new Size(800, 450);
+            Controls.Add(lblAlert);
             Controls.Add(btnLogin);
             Controls.Add(lblTitle);
             Controls.Add(lblPassword);
@@ -126,5 +140,6 @@
         private Label lblPassword;
         private Label lblTitle;
         private Button btnLogin;
+        private Label lblAlert;
     }
 }
