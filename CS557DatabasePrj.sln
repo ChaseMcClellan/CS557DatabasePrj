@@ -1,9 +1,18 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36518.9 d17.14
+VisualStudioVersion = 17.14.36518.9
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CS557DatabasePrj", "CS557DatabasePrj\CS557DatabasePrj.csproj", "{0A5DEB06-4C2C-4109-990B-8BB71C132963}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CS557DatabasePrj.UI", "CS557DatabasePrj\CS557DatabasePrj.UI.csproj", "{0A5DEB06-4C2C-4109-990B-8BB71C132963}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CS557DatabasePrj.BL", "CS557DatabasePrj.BL\CS557DatabasePrj.BL.csproj", "{879CA41F-B9F2-4464-B089-AC9FB2FFE808}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CS557DatabasePrj.DL", "CS557DatabasePrj.DL\CS557DatabasePrj.DL.csproj", "{AD333B51-20E6-4726-A182-72B1A6610A1A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scripts", "scripts", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+	ProjectSection(SolutionItems) = preProject
+		init.sql = init.sql
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +24,14 @@ Global
 		{0A5DEB06-4C2C-4109-990B-8BB71C132963}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0A5DEB06-4C2C-4109-990B-8BB71C132963}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0A5DEB06-4C2C-4109-990B-8BB71C132963}.Release|Any CPU.Build.0 = Release|Any CPU
+		{879CA41F-B9F2-4464-B089-AC9FB2FFE808}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{879CA41F-B9F2-4464-B089-AC9FB2FFE808}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{879CA41F-B9F2-4464-B089-AC9FB2FFE808}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{879CA41F-B9F2-4464-B089-AC9FB2FFE808}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD333B51-20E6-4726-A182-72B1A6610A1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD333B51-20E6-4726-A182-72B1A6610A1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD333B51-20E6-4726-A182-72B1A6610A1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD333B51-20E6-4726-A182-72B1A6610A1A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
