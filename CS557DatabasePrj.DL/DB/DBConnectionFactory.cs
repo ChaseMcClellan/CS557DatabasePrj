@@ -11,7 +11,8 @@ namespace CS557DatabasePrj.DL.DB
     public static class DbConnectionFactory
     {
         private static readonly string _connString =
-            "Server=localhost;Database=Name;Uid=root;Pwd=Password;";
+    "Server=localhost;Port=3306;Database=BankSim;Uid=root;Pwd=tester123@;SslMode=None;";
+
 
         public static IDbConnection CreateConnection()
         {
