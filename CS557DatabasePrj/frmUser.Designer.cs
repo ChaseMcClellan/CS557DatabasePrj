@@ -31,6 +31,7 @@
             lblHelloUser = new Label();
             btnExit = new Button();
             btnLogout = new Button();
+            btnTestConnection = new Button();
             SuspendLayout();
             // 
             // lblHelloUser
@@ -62,11 +63,22 @@
             btnLogout.UseVisualStyleBackColor = true;
             btnLogout.Click += btnLogout_Click;
             // 
+            // btnTestConnection
+            // 
+            btnTestConnection.Location = new Point(105, 386);
+            btnTestConnection.Name = "btnTestConnection";
+            btnTestConnection.Size = new Size(75, 23);
+            btnTestConnection.TabIndex = 3;
+            btnTestConnection.Text = "Debug";
+            btnTestConnection.UseVisualStyleBackColor = true;
+            btnTestConnection.Click += btnTestConnection_Click;
+            // 
             // frmUser
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(btnTestConnection);
             Controls.Add(btnLogout);
             Controls.Add(btnExit);
             Controls.Add(lblHelloUser);
@@ -81,5 +93,6 @@
         private Label lblHelloUser;
         private Button btnExit;
         private Button btnLogout;
+        private Button btnTestConnection;
     }
 }
