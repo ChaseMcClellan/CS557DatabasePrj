@@ -30,6 +30,7 @@
         {
             btnExit = new Button();
             btnLogout = new Button();
+            btnNewUser = new Button();
             SuspendLayout();
             // 
             // btnExit
@@ -52,11 +53,22 @@
             btnLogout.UseVisualStyleBackColor = true;
             btnLogout.Click += btnLogout_Click;
             // 
+            // btnNewUser
+            // 
+            btnNewUser.Location = new Point(111, 293);
+            btnNewUser.Name = "btnNewUser";
+            btnNewUser.Size = new Size(178, 23);
+            btnNewUser.TabIndex = 2;
+            btnNewUser.Text = "Create New User";
+            btnNewUser.UseVisualStyleBackColor = true;
+            btnNewUser.Click += btnNewUser_Click;
+            // 
             // frmAdmin
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(btnNewUser);
             Controls.Add(btnLogout);
             Controls.Add(btnExit);
             Name = "frmAdmin";
@@ -68,5 +80,6 @@
 
         private Button btnExit;
         private Button btnLogout;
+        private Button btnNewUser;
     }
 }

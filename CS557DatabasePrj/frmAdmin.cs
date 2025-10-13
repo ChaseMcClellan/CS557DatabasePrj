@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CS557DatabasePrj.UI;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -27,6 +28,12 @@ namespace CS557DatabasePrj
             frmLogin loginForm = new frmLogin();
             loginForm.Show();
             this.Close();
+        }
+
+        private void btnNewUser_Click(object sender, EventArgs e)
+        {
+            frmCreateUser frmCreateUser = new frmCreateUser();
+            frmCreateUser.Show();
         }
     }
 }
