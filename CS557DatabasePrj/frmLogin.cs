@@ -1,10 +1,22 @@
+using CS557DatabasePrj.BL;
+using CS557DatabasePrj.DL.Repo;  // repository namespace
+using CS557DatabasePrj.UI;
+using Dapper;
+using System;
+using System.Windows.Forms;
+
 namespace CS557DatabasePrj
 {
     public partial class frmLogin : Form
     {
+        //Declare the field here (this is what fixes CS0103)
+        private readonly UserRepository _users = new UserRepository();
+
         public frmLogin()
         {
             InitializeComponent();
+            AcceptButton = btnLogin;
+            CancelButton = btnExit;
         }
 
         private void btnExit_Click(object sender, EventArgs e)
@@ -14,33 +26,49 @@ namespace CS557DatabasePrj
 
         private void frmLogin_Load(object sender, EventArgs e)
         {
-            //init DB
+            // optional: DB warm-up
         }
 
-        private void btnLogin_Click(object sender, EventArgs e)
+        private async void btnLogin_Click(object sender, EventArgs e)
         {
-            //psudocode when we implement
-            /*
-             * if(findandreturnUser(txtUsername.text,txtPassword.text) != null){
-                    if(user.role == 1){open Userform;}
-                    else if (user.role == 2) {open Tellerform;}
-                    else if (user.role == 3) {open adminForm;}
-            }else{lblAlert.hidden == true} //invalid user if method returns null then show lblAlert saying wrong credentials 
-               }
-             
-            */
-            if(txtUsername.Text == "hello" && txtPassword.Text == "world")
+            string username = txtUsername.Text.Trim();
+            string password = txtPassword.Text.Trim();
+
+            if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
             {
-                //open user form
-                frmUser userform = new frmUser();
-                userform.Show();
-                this.Hide();
-            }
-            else
-            {
-                lblAlert.Visible = true;
+                MessageBox.Show("Please enter a username and password.");
+                return;
             }
 
+            try
+            {
+                var user = await _users.GetByUsernameAsync(username);
+                if (user is null || !user.IsActive)
+                {
+                    MessageBox.Show("Invalid username or password.");
+                    return;
+                }
+
+                // TEMP password match (until hashing is added)
+                if (!string.Equals(password, user.PasswordHash, StringComparison.Ordinal))
+                {
+                    MessageBox.Show("Invalid username or password.");
+                    return;
+                }
+
+                // Success — store session and show next form
+                AppSession.CurrentUser = user;
+
+                Form nextForm = (user.RoleId == 1) ? new frmAdmin() : new frmUser();
+
+                nextForm.FormClosed += (s, _) => this.Close();
+                nextForm.Show();
+                this.Hide();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Login error: {ex.Message}");
+            }
         }
     }
 }

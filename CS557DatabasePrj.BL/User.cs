@@ -10,6 +10,21 @@ namespace CS557DatabasePrj.BL
 {
     public class User : AuditableEntity
     {
+        public User(string u, string p, string first, string last, string email, string phone, string Ssn, int Role, int Branch ) {
+
+            this.FirstName = first;
+            this.LastName = last;
+            this.Email = email;
+            this.Phone = phone;
+            this.HomeBranchId = Branch;
+            this.RoleId = Role;
+            this.Username = u;
+            this.PasswordHash = p;
+            this.SsnHash = Ssn;
+
+        }
+
+
         public string Username { get; set; } = "";//uniq
         public string PasswordHash { get; set; } = "";//store hash
         public string FirstName { get; set; } = "";
