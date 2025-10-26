@@ -33,7 +33,8 @@
             btnLogout = new Button();
             btnTestConnection = new Button();
             lblBalance = new Label();
-            listAccounts = new ListBox();
+            dgvAccounts = new DataGridView();
+            ((System.ComponentModel.ISupportInitialize)dgvAccounts).BeginInit();
             SuspendLayout();
             // 
             // lblHelloUser
@@ -84,21 +85,20 @@
             lblBalance.TabIndex = 4;
             lblBalance.Text = "Balance";
             // 
-            // listAccounts
+            // dgvAccounts
             // 
-            listAccounts.FormattingEnabled = true;
-            listAccounts.ItemHeight = 15;
-            listAccounts.Location = new Point(382, 50);
-            listAccounts.Name = "listAccounts";
-            listAccounts.Size = new Size(389, 109);
-            listAccounts.TabIndex = 6;
+            dgvAccounts.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvAccounts.Location = new Point(313, 25);
+            dgvAccounts.Name = "dgvAccounts";
+            dgvAccounts.Size = new Size(409, 150);
+            dgvAccounts.TabIndex = 5;
             // 
             // frmUser
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(listAccounts);
+            Controls.Add(dgvAccounts);
             Controls.Add(lblBalance);
             Controls.Add(btnTestConnection);
             Controls.Add(btnLogout);
@@ -106,6 +106,7 @@
             Controls.Add(lblHelloUser);
             Name = "frmUser";
             Text = "User";
+            ((System.ComponentModel.ISupportInitialize)dgvAccounts).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -117,6 +118,6 @@
         private Button btnLogout;
         private Button btnTestConnection;
         private Label lblBalance;
-        private ListBox listAccounts;
+        private DataGridView dgvAccounts;
     }
 }

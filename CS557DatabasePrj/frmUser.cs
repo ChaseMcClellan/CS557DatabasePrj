@@ -17,18 +17,20 @@ namespace CS557DatabasePrj
 {
     public partial class frmUser : Form
     {
+        private static User? currentUser = AppSession.CurrentUser;
+        private static List<Account>? accounts = currentUser.Accounts?.ToList();
+
         public frmUser()
         {
             InitializeComponent();
-            if(AppSession.CurrentUser != null)
+            if (currentUser != null)
             {
-                lblHelloUser.Text = "Hello " + AppSession.CurrentUser.FirstName + "!";
-                var accounts = AppSession.CurrentUser.Accounts?.ToList() ?? new List<Account>();
-                listAccounts.DisplayMember = nameof(Account.AccountNumber);
-                listAccounts.ValueMember = nameof(Account.Id);
-                listAccounts.DataSource = accounts;
+                lblHelloUser.Text = "Hello " + currentUser.FirstName + "!";
+                dgvAccounts.DataSource = accounts;
+
+
             }
-            
+
         }
 
         private void btnExit_Click(object sender, EventArgs e)
@@ -46,7 +48,7 @@ namespace CS557DatabasePrj
 
 
 
-
+        //test
         private async void btnTestConnection_Click(object sender, EventArgs e)
         {
             try
@@ -75,7 +77,6 @@ namespace CS557DatabasePrj
             }
         }
 
-
-
+        
     }
 }
