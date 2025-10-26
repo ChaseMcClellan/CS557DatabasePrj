@@ -32,16 +32,18 @@
             btnExit = new Button();
             btnLogout = new Button();
             btnTestConnection = new Button();
+            lblBalance = new Label();
+            listAccounts = new ListBox();
             SuspendLayout();
             // 
             // lblHelloUser
             // 
             lblHelloUser.AutoSize = true;
-            lblHelloUser.Location = new Point(560, 58);
+            lblHelloUser.Location = new Point(40, 25);
             lblHelloUser.Name = "lblHelloUser";
-            lblHelloUser.Size = new Size(64, 15);
+            lblHelloUser.Size = new Size(46, 15);
             lblHelloUser.TabIndex = 0;
-            lblHelloUser.Text = "Hello User!";
+            lblHelloUser.Text = "Hello {}";
             // 
             // btnExit
             // 
@@ -73,11 +75,31 @@
             btnTestConnection.UseVisualStyleBackColor = true;
             btnTestConnection.Click += btnTestConnection_Click;
             // 
+            // lblBalance
+            // 
+            lblBalance.AutoSize = true;
+            lblBalance.Location = new Point(38, 102);
+            lblBalance.Name = "lblBalance";
+            lblBalance.Size = new Size(48, 15);
+            lblBalance.TabIndex = 4;
+            lblBalance.Text = "Balance";
+            // 
+            // listAccounts
+            // 
+            listAccounts.FormattingEnabled = true;
+            listAccounts.ItemHeight = 15;
+            listAccounts.Location = new Point(382, 50);
+            listAccounts.Name = "listAccounts";
+            listAccounts.Size = new Size(389, 109);
+            listAccounts.TabIndex = 6;
+            // 
             // frmUser
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(listAccounts);
+            Controls.Add(lblBalance);
             Controls.Add(btnTestConnection);
             Controls.Add(btnLogout);
             Controls.Add(btnExit);
@@ -94,5 +116,7 @@
         private Button btnExit;
         private Button btnLogout;
         private Button btnTestConnection;
+        private Label lblBalance;
+        private ListBox listAccounts;
     }
 }
