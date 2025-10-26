@@ -1,4 +1,6 @@
 ﻿using CS557DatabasePrj.BL;
+using CS557DatabasePrj.DL;
+using CS557DatabasePrj.DL.Repo;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,6 +15,8 @@ namespace CS557DatabasePrj.UI
 {
     public partial class frmCreateUser : Form
     {
+
+
         public frmCreateUser()
         {
             InitializeComponent();
@@ -41,7 +45,7 @@ namespace CS557DatabasePrj.UI
             }
 
             User newUser = new User(user, pass, first, last, email, phone, SSN, isAdmin, branch);
-
+            //UserRepository.InsertAsync(newUser);
         }
     }
 }

@@ -24,6 +24,8 @@ namespace CS557DatabasePrj.BL
 
         }
 
+        public User() { }
+
 
         public string Username { get; set; } = "";//uniq
         public string PasswordHash { get; set; } = "";//store hash
