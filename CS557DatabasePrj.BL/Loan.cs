@@ -8,6 +8,8 @@ namespace CS557DatabasePrj.BL
 {
     public class Loan : AuditableEntity
     {
+        // needs some sort of pk to be referenced by transactiions/payments
+        public int loanId { get; set; } //PK for loan
         public int AccountId { get; set; }// FK -> Account (the loan account)
         public decimal Principal { get; set; }
         public decimal AnnualInterestRate { get; set; }//ex: 0.065m for 6.5%

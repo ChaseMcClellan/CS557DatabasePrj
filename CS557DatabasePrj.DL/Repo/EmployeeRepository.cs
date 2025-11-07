@@ -22,11 +22,11 @@ namespace CS557DatabasePrj.DL.Repo
         {
             using var conn = Open();
             var sql = @"
-INSERT INTO Employees
-(EmployeeNumber, FirstName, LastName, BranchId, UserId, CreatedUtc, CreatedByUserId, IsActive)
-VALUES
-(@EmployeeNumber, @FirstName, @LastName, @BranchId, @UserId, @CreatedUtc, @CreatedByUserId, @IsActive);
-SELECT LAST_INSERT_ID();";
+            INSERT INTO Employees
+             (EmployeeNumber, FirstName, LastName, BranchId, UserId, CreatedUtc, CreatedByUserId, IsActive)
+             VALUES
+             (@EmployeeNumber, @FirstName, @LastName, @BranchId, @UserId, @CreatedUtc, @CreatedByUserId, @IsActive);
+            SELECT LAST_INSERT_ID();";
             return await conn.ExecuteScalarAsync<int>(sql, e);
         }
 
@@ -34,11 +34,11 @@ SELECT LAST_INSERT_ID();";
         {
             using var conn = Open();
             var sql = @"
-UPDATE Employees SET
- EmployeeNumber=@EmployeeNumber, FirstName=@FirstName, LastName=@LastName,
- BranchId=@BranchId, UserId=@UserId,
- UpdatedUtc=@UpdatedUtc, UpdatedByUserId=@UpdatedByUserId, IsActive=@IsActive
-WHERE Id=@Id;";
+            UPDATE Employees SET
+             EmployeeNumber=@EmployeeNumber, FirstName=@FirstName, LastName=@LastName,
+             BranchId=@BranchId, UserId=@UserId,
+             UpdatedUtc=@UpdatedUtc, UpdatedByUserId=@UpdatedByUserId, IsActive=@IsActive
+            WHERE Id=@Id;";
             return (await conn.ExecuteAsync(sql, e)) > 0;
         }
 

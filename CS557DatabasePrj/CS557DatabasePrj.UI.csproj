@@ -9,6 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Dapper" Version="2.1.66" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\CS557DatabasePrj.BL\CS557DatabasePrj.BL.csproj" />
     <ProjectReference Include="..\CS557DatabasePrj.DL\CS557DatabasePrj.DL.csproj" />
   </ItemGroup>

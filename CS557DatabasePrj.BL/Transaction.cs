@@ -13,7 +13,8 @@ namespace CS557DatabasePrj.BL
         public decimal Amount { get; set; }//positive value
         public string? Memo { get; set; }
         public DateTime PostedUtc { get; set; } = DateTime.UtcNow;
-        //TODO: should we include?
+        //TODO: should we include? I dont think this is needed because we dont neceserarily have to store all transactions seperaretly
+
         public int? RelatedEntityId { get; set; }//can optional link to Deposit/Withdrawal/Transfer/Payment id
 
         public Account? Account { get; set; }

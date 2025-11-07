@@ -19,11 +19,11 @@ namespace CS557DatabasePrj.DL.Repo
         {
             using var conn = Open();
             var sql = @"
-INSERT INTO Transactions
-(AccountId, Kind, Amount, Memo, PostedUtc, RelatedEntityId, CreatedUtc, CreatedByUserId, IsActive)
-VALUES
-(@AccountId, @Kind, @Amount, @Memo, @PostedUtc, @RelatedEntityId, @CreatedUtc, @CreatedByUserId, @IsActive);
-SELECT LAST_INSERT_ID();";
+            INSERT INTO Transactions
+             (AccountId, Kind, Amount, Memo, PostedUtc, RelatedEntityId, CreatedUtc, CreatedByUserId, IsActive)
+             VALUES
+             (@AccountId, @Kind, @Amount, @Memo, @PostedUtc, @RelatedEntityId, @CreatedUtc, @CreatedByUserId, @IsActive);
+            SELECT LAST_INSERT_ID();";
             return await conn.ExecuteScalarAsync<int>(sql, t);
         }
     }

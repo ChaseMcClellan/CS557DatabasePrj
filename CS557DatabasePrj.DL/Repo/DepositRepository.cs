@@ -15,11 +15,11 @@ namespace CS557DatabasePrj.DL.Repo
             {
                 // 1) Insert deposit
                 var depId = await conn.ExecuteScalarAsync<int>(@"
-INSERT INTO Deposits
-(AccountId, Amount, Source, ReceivedUtc, CreatedUtc, CreatedByUserId, IsActive)
-VALUES
-(@AccountId, @Amount, @Source, @ReceivedUtc, @CreatedUtc, @CreatedByUserId, @IsActive);
-SELECT LAST_INSERT_ID();", d, tx);
+                INSERT INTO Deposits
+                 (AccountId, Amount, Source, ReceivedUtc, CreatedUtc, CreatedByUserId, IsActive)
+                 VALUES
+                 (@AccountId, @Amount, @Source, @ReceivedUtc, @CreatedUtc, @CreatedByUserId, @IsActive);
+                SELECT LAST_INSERT_ID();", d, tx);
 
                 // 2) Update balance
                 await conn.ExecuteAsync(
@@ -54,11 +54,11 @@ SELECT LAST_INSERT_ID();", d, tx);
         internal static async Task<int> InsertInternalAsync(this TransactionRepository _, IDbConnection conn, IDbTransaction tx, Transaction t)
         {
             var sql = @"
-INSERT INTO Transactions
-(AccountId, Kind, Amount, Memo, PostedUtc, RelatedEntityId, CreatedUtc, CreatedByUserId, IsActive)
-VALUES
-(@AccountId, @Kind, @Amount, @Memo, @PostedUtc, @RelatedEntityId, @CreatedUtc, @CreatedByUserId, @IsActive);
-SELECT LAST_INSERT_ID();";
+            INSERT INTO Transactions
+             (AccountId, Kind, Amount, Memo, PostedUtc, RelatedEntityId, CreatedUtc, CreatedByUserId, IsActive)
+             VALUES
+             (@AccountId, @Kind, @Amount, @Memo, @PostedUtc, @RelatedEntityId, @CreatedUtc, @CreatedByUserId, @IsActive);
+            SELECT LAST_INSERT_ID();";
             return await conn.ExecuteScalarAsync<int>(sql, t, tx);
         }
     }

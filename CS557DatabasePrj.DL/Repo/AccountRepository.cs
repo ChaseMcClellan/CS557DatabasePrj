@@ -28,11 +28,11 @@ namespace CS557DatabasePrj.DL.Repo
         {
             using var conn = Open();
             var sql = @"
-INSERT INTO Accounts
-(AccountNumber, AccountType, OwnerUserId, BranchId, CurrentBalance, CurrencyCode, CreatedUtc, CreatedByUserId, IsActive)
-VALUES
-(@AccountNumber, @AccountType, @OwnerUserId, @BranchId, @CurrentBalance, @CurrencyCode, @CreatedUtc, @CreatedByUserId, @IsActive);
-SELECT LAST_INSERT_ID();";
+            INSERT INTO Accounts
+             (AccountNumber, AccountType, OwnerUserId, BranchId, CurrentBalance, CurrencyCode, CreatedUtc, CreatedByUserId, IsActive)
+             VALUES
+             (@AccountNumber, @AccountType, @OwnerUserId, @BranchId, @CurrentBalance, @CurrencyCode, @CreatedUtc, @CreatedByUserId, @IsActive);
+            SELECT LAST_INSERT_ID();";
             return await conn.ExecuteScalarAsync<int>(sql, a);
         }
 
@@ -40,11 +40,11 @@ SELECT LAST_INSERT_ID();";
         {
             using var conn = Open();
             var sql = @"
-UPDATE Accounts SET
- AccountNumber=@AccountNumber, AccountType=@AccountType, OwnerUserId=@OwnerUserId, BranchId=@BranchId,
- CurrentBalance=@CurrentBalance, CurrencyCode=@CurrencyCode,
- UpdatedUtc=@UpdatedUtc, UpdatedByUserId=@UpdatedByUserId, IsActive=@IsActive
-WHERE Id=@Id;";
+            UPDATE Accounts SET
+             AccountNumber=@AccountNumber, AccountType=@AccountType, OwnerUserId=@OwnerUserId, BranchId=@BranchId,
+             CurrentBalance=@CurrentBalance, CurrencyCode=@CurrencyCode,
+             UpdatedUtc=@UpdatedUtc, UpdatedByUserId=@UpdatedByUserId, IsActive=@IsActive
+            WHERE Id=@Id;";
             return (await conn.ExecuteAsync(sql, a)) > 0;
         }
 

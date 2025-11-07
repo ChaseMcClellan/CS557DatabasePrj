@@ -21,6 +21,7 @@ namespace CS557DatabasePrj.BL
             this.Username = u;
             this.PasswordHash = p;
             this.SsnHash = Ssn;
+            //think this needs owner id for pk to reference in accounts
 
         }
 

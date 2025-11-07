@@ -20,11 +20,11 @@ namespace CS557DatabasePrj.DL.Repo
             {
                 // Record payment row
                 var pid = await conn.ExecuteScalarAsync<int>(@"
-INSERT INTO LoanPayments
-(LoanId, Amount, DueDateUtc, PaidDateUtc, PrincipalPortion, InterestPortion, Reference, CreatedUtc, CreatedByUserId, IsActive)
-VALUES
-(@LoanId, @Amount, @DueDateUtc, @PaidDateUtc, @PrincipalPortion, @InterestPortion, @Reference, @CreatedUtc, @CreatedByUserId, @IsActive);
-SELECT LAST_INSERT_ID();", p, tx);
+                INSERT INTO LoanPayments
+                 (LoanId, Amount, DueDateUtc, PaidDateUtc, PrincipalPortion, InterestPortion, Reference, CreatedUtc, CreatedByUserId, IsActive)
+                 VALUES
+                 (@LoanId, @Amount, @DueDateUtc, @PaidDateUtc, @PrincipalPortion, @InterestPortion, @Reference, @CreatedUtc, @CreatedByUserId, @IsActive);
+                SELECT LAST_INSERT_ID();", p, tx);
 
                 // Decrease payer account balance
                 await conn.ExecuteAsync(

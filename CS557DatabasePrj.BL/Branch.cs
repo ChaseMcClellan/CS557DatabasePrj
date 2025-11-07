@@ -15,6 +15,7 @@ namespace CS557DatabasePrj.BL
         public string State { get; set; } = "";
         public string PostalCode { get; set; } = "";
         public string? Phone { get; set; }
+        //Need bank code as a primary key link branchId?
 
         public List<Employee> Employees { get; set; } = new();
         public List<Account> Accounts { get; set; } = new();
