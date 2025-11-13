@@ -40,5 +40,23 @@ namespace CS557DatabasePrj
             frmCreateUser frmCreateUser = new frmCreateUser();
             frmCreateUser.Show();
         }
+
+        private void btnCreateEmployee_Click(object sender, EventArgs e)
+        {
+            var frm = new frmCreateEmployee();
+            frm.Show();
+        }
+
+        private void btnCreateBranch_Click(object sender, EventArgs e)
+        {
+            var frm = new frmCreateBranch();
+            frm.Show();
+        }
+
+        private void btnDeposit_Click(object sender, EventArgs e)
+        {
+            var frm = new frmCreateUser();
+            frm.Show();
+        }
     }
 }

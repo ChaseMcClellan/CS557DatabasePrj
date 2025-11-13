@@ -31,6 +31,9 @@
             btnExit = new Button();
             btnLogout = new Button();
             btnNewUser = new Button();
+            btnCreateBranch = new Button();
+            btnDeposit = new Button();
+            btnCreateEmployee = new Button();
             SuspendLayout();
             // 
             // btnExit
@@ -55,7 +58,7 @@
             // 
             // btnNewUser
             // 
-            btnNewUser.Location = new Point(111, 293);
+            btnNewUser.Location = new Point(39, 32);
             btnNewUser.Name = "btnNewUser";
             btnNewUser.Size = new Size(178, 23);
             btnNewUser.TabIndex = 2;
@@ -63,11 +66,44 @@
             btnNewUser.UseVisualStyleBackColor = true;
             btnNewUser.Click += btnNewUser_Click;
             // 
+            // btnCreateBranch
+            // 
+            btnCreateBranch.Location = new Point(407, 32);
+            btnCreateBranch.Name = "btnCreateBranch";
+            btnCreateBranch.Size = new Size(178, 23);
+            btnCreateBranch.TabIndex = 3;
+            btnCreateBranch.Text = "Create Branch";
+            btnCreateBranch.UseVisualStyleBackColor = true;
+            btnCreateBranch.Click += btnCreateBranch_Click;
+            // 
+            // btnDeposit
+            // 
+            btnDeposit.Location = new Point(591, 32);
+            btnDeposit.Name = "btnDeposit";
+            btnDeposit.Size = new Size(178, 23);
+            btnDeposit.TabIndex = 4;
+            btnDeposit.Text = "Add Deposit";
+            btnDeposit.UseVisualStyleBackColor = true;
+            btnDeposit.Click += btnDeposit_Click;
+            // 
+            // btnCreateEmployee
+            // 
+            btnCreateEmployee.Location = new Point(223, 32);
+            btnCreateEmployee.Name = "btnCreateEmployee";
+            btnCreateEmployee.Size = new Size(178, 23);
+            btnCreateEmployee.TabIndex = 5;
+            btnCreateEmployee.Text = "Create Employee";
+            btnCreateEmployee.UseVisualStyleBackColor = true;
+            btnCreateEmployee.Click += btnCreateEmployee_Click;
+            // 
             // frmAdmin
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(btnCreateEmployee);
+            Controls.Add(btnDeposit);
+            Controls.Add(btnCreateBranch);
             Controls.Add(btnNewUser);
             Controls.Add(btnLogout);
             Controls.Add(btnExit);
@@ -81,5 +117,8 @@
         private Button btnExit;
         private Button btnLogout;
         private Button btnNewUser;
+        private Button btnCreateBranch;
+        private Button btnDeposit;
+        private Button btnCreateEmployee;
     }
 }
