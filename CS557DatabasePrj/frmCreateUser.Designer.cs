@@ -46,8 +46,10 @@
             lblPhone = new Label();
             lblSSN = new Label();
             lblPasswordConfirm = new Label();
-            textBox1 = new TextBox();
+            txtPassConfirm = new TextBox();
             lstBranch = new ListView();
+            cmbBranch = new ComboBox();
+            lblBranch = new Label();
             SuspendLayout();
             // 
             // btnExit
@@ -201,29 +203,48 @@
             lblPasswordConfirm.TabIndex = 18;
             lblPasswordConfirm.Text = "Confirm Password";
             // 
-            // textBox1
+            // txtPassConfirm
             // 
-            textBox1.Location = new Point(112, 117);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(100, 23);
-            textBox1.TabIndex = 17;
+            txtPassConfirm.Location = new Point(112, 117);
+            txtPassConfirm.Name = "txtPassConfirm";
+            txtPassConfirm.Size = new Size(100, 23);
+            txtPassConfirm.TabIndex = 17;
             // 
             // lstBranch
             // 
-            lstBranch.Location = new Point(285, 170);
+            lstBranch.Location = new Point(280, 199);
             lstBranch.Name = "lstBranch";
             lstBranch.Size = new Size(121, 97);
             lstBranch.TabIndex = 19;
             lstBranch.UseCompatibleStateImageBehavior = false;
+            // 
+            // cmbBranch
+            // 
+            cmbBranch.FormattingEnabled = true;
+            cmbBranch.Location = new Point(317, 152);
+            cmbBranch.Name = "cmbBranch";
+            cmbBranch.Size = new Size(121, 23);
+            cmbBranch.TabIndex = 20;
+            // 
+            // lblBranch
+            // 
+            lblBranch.AutoSize = true;
+            lblBranch.Location = new Point(261, 157);
+            lblBranch.Name = "lblBranch";
+            lblBranch.Size = new Size(50, 15);
+            lblBranch.TabIndex = 21;
+            lblBranch.Text = "Branch: ";
             // 
             // frmCreateUser
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(460, 347);
+            Controls.Add(lblBranch);
+            Controls.Add(cmbBranch);
             Controls.Add(lstBranch);
             Controls.Add(lblPasswordConfirm);
-            Controls.Add(textBox1);
+            Controls.Add(txtPassConfirm);
             Controls.Add(lblSSN);
             Controls.Add(lblPhone);
             Controls.Add(lblLast);
@@ -267,7 +288,9 @@
         private Label lblPhone;
         private Label lblSSN;
         private Label lblPasswordConfirm;
-        private TextBox textBox1;
+        private TextBox txtPassConfirm;
         private ListView lstBranch;
+        private ComboBox cmbBranch;
+        private Label lblBranch;
     }
 }

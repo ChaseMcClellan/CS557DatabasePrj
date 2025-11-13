@@ -11,13 +11,14 @@ namespace CS557DatabasePrj.DL.DB
     public static class DbConnectionFactory
     {
         private static readonly string _connString =
-    "Server=localhost;Port=3306;Database=BankSim;Uid=root;Pwd=tester123@;SslMode=None;";
+    "Server=localhost;Port=3306;Database=BankSim;Uid=root;Pwd=tester123@;SslMode=None;"; //change pwd to MySQL workbench pwd
 
 
         public static IDbConnection CreateConnection()
         {
             var conn = new MySqlConnection(_connString);
             conn.Open();
+
             return conn;
         }
     }

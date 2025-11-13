@@ -1,13 +1,7 @@
 ﻿using CS557DatabasePrj.BL;
-using CS557DatabasePrj.DL;
 using CS557DatabasePrj.DL.Repo;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -15,11 +9,35 @@ namespace CS557DatabasePrj.UI
 {
     public partial class frmCreateUser : Form
     {
-
-
         public frmCreateUser()
         {
             InitializeComponent();
+            this.Load += frmCreateUser_Load;
+        }
+
+        private async void frmCreateUser_Load(object sender, EventArgs e)
+        {
+            await LoadBranchesAsync();
+        }
+
+        private async Task LoadBranchesAsync()
+        {
+            try
+            {
+                var branchRepo = new BranchRepository();
+                var branches = (await branchRepo.GetAllAsync()).ToList();
+
+                cmbBranch.DataSource = branches;
+                cmbBranch.DisplayMember = "Name";
+                cmbBranch.ValueMember = "Id";
+                if (branches.Count > 0)
+                    cmbBranch.SelectedIndex = 0;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error loading branches: " + ex.Message,
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnExit_Click(object sender, EventArgs e)
@@ -27,25 +45,43 @@ namespace CS557DatabasePrj.UI
             this.Close();
         }
 
-        private void btnSave_Click(object sender, EventArgs e)
+        private async void btnSave_Click(object sender, EventArgs e)
         {
-            //do verifications
-            string user = txtUsername.Text;
-            string first = txtFirst.Text;
-            string last = txtLast.Text;
-            string SSN = txtSSN.Text;//hash needed
-            string pass = txtPassword.Text;//hash needed
-            string phone = txtPhone.Text;
-            string email = txtEmail.Text;
-            int branch = 0;
 
-            int isAdmin = 0;
-            if (chkAdmin.Checked) { 
-                isAdmin = 1;
+            string user = txtUsername.Text.Trim();
+            string first = txtFirst.Text.Trim();
+            string last = txtLast.Text.Trim();
+            string SSN = txtSSN.Text.Trim();
+            string pass = txtPassword.Text;
+            string phone = txtPhone.Text.Trim();
+            string email = txtEmail.Text.Trim();
+
+            int branchId = (int)cmbBranch.SelectedValue;
+
+            int roleId = chkAdmin.Checked ? 1 : 2;
+
+            var newUser = new User(user, pass, first, last, email, phone, SSN, roleId, branchId);
+
+            try
+            {
+                var repo = new UserRepository();
+                var id = await repo.InsertAsync(newUser);
+
+                MessageBox.Show("User created successfully.",
+                    "Success",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+
+                this.DialogResult = DialogResult.OK;
+                this.Close();
             }
-
-            User newUser = new User(user, pass, first, last, email, phone, SSN, isAdmin, branch);
-            //UserRepository.InsertAsync(newUser);
+            catch (Exception ex)
+            {
+                MessageBox.Show("DB insert error: " + ex.Message,
+                    "Database Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
         }
     }
 }
