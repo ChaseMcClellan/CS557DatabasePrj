@@ -1,4 +1,5 @@
-﻿using CS557DatabasePrj.UI;
+﻿using CS557DatabasePrj.BL;
+using CS557DatabasePrj.UI;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,6 +14,9 @@ namespace CS557DatabasePrj
 {
     public partial class frmAdmin : Form
     {
+
+        private static User? currentUser = AppSession.CurrentUser;
+
         public frmAdmin()
         {
             InitializeComponent();
@@ -25,6 +29,7 @@ namespace CS557DatabasePrj
 
         private void btnLogout_Click(object sender, EventArgs e)
         {
+            AppSession.CurrentUser = null;
             frmLogin loginForm = new frmLogin();
             loginForm.Show();
             this.Close();

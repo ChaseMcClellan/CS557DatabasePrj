@@ -47,7 +47,6 @@
             lblSSN = new Label();
             lblPasswordConfirm = new Label();
             txtPassConfirm = new TextBox();
-            lstBranch = new ListView();
             cmbBranch = new ComboBox();
             lblBranch = new Label();
             SuspendLayout();
@@ -124,7 +123,7 @@
             // chkAdmin
             // 
             chkAdmin.AutoSize = true;
-            chkAdmin.Location = new Point(334, 121);
+            chkAdmin.Location = new Point(328, 120);
             chkAdmin.Name = "chkAdmin";
             chkAdmin.Size = new Size(78, 19);
             chkAdmin.TabIndex = 9;
@@ -210,18 +209,10 @@
             txtPassConfirm.Size = new Size(100, 23);
             txtPassConfirm.TabIndex = 17;
             // 
-            // lstBranch
-            // 
-            lstBranch.Location = new Point(280, 199);
-            lstBranch.Name = "lstBranch";
-            lstBranch.Size = new Size(121, 97);
-            lstBranch.TabIndex = 19;
-            lstBranch.UseCompatibleStateImageBehavior = false;
-            // 
             // cmbBranch
             // 
             cmbBranch.FormattingEnabled = true;
-            cmbBranch.Location = new Point(317, 152);
+            cmbBranch.Location = new Point(296, 152);
             cmbBranch.Name = "cmbBranch";
             cmbBranch.Size = new Size(121, 23);
             cmbBranch.TabIndex = 20;
@@ -229,7 +220,7 @@
             // lblBranch
             // 
             lblBranch.AutoSize = true;
-            lblBranch.Location = new Point(261, 157);
+            lblBranch.Location = new Point(240, 157);
             lblBranch.Name = "lblBranch";
             lblBranch.Size = new Size(50, 15);
             lblBranch.TabIndex = 21;
@@ -242,7 +233,6 @@
             ClientSize = new Size(460, 347);
             Controls.Add(lblBranch);
             Controls.Add(cmbBranch);
-            Controls.Add(lstBranch);
             Controls.Add(lblPasswordConfirm);
             Controls.Add(txtPassConfirm);
             Controls.Add(lblSSN);
@@ -289,7 +279,6 @@
         private Label lblSSN;
         private Label lblPasswordConfirm;
         private TextBox txtPassConfirm;
-        private ListView lstBranch;
         private ComboBox cmbBranch;
         private Label lblBranch;
     }
