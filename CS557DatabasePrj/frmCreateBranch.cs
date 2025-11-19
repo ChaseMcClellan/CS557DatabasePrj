@@ -21,7 +21,7 @@ namespace CS557DatabasePrj.UI
         {
             if (string.IsNullOrWhiteSpace(txtName.Text))
             {
-                MessageBox.Show("Branch name is required.",
+                MessageBox.Show("Branchname is required.",
                     "Validation Error",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Warning);
