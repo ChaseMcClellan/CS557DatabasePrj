@@ -33,7 +33,7 @@
             // 
             // btnClose
             // 
-            btnClose.Location = new Point(398, 203);
+            btnClose.Location = new Point(459, 277);
             btnClose.Name = "btnClose";
             btnClose.Size = new Size(75, 23);
             btnClose.TabIndex = 1;
@@ -45,7 +45,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(485, 238);
+            ClientSize = new Size(546, 312);
             Controls.Add(btnClose);
             Name = "frmAddDeposit";
             Text = "AddDeposit";
