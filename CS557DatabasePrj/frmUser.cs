@@ -44,7 +44,7 @@ namespace CS557DatabasePrj
             AppSession.CurrentUser = null;
             frmLogin loginForm = new frmLogin();
             loginForm.Show();
-            this.Close();
+            this.Hide();
         }
 
 

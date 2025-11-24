@@ -34,6 +34,10 @@
             btnCreateBranch = new Button();
             btnDeposit = new Button();
             btnCreateEmployee = new Button();
+            btnViewUser = new Button();
+            btnViewEmployees = new Button();
+            btnViewBranches = new Button();
+            btnTransactions = new Button();
             SuspendLayout();
             // 
             // btnExit
@@ -60,7 +64,7 @@
             // 
             btnNewUser.Location = new Point(39, 32);
             btnNewUser.Name = "btnNewUser";
-            btnNewUser.Size = new Size(178, 23);
+            btnNewUser.Size = new Size(178, 81);
             btnNewUser.TabIndex = 2;
             btnNewUser.Text = "Create New User";
             btnNewUser.UseVisualStyleBackColor = true;
@@ -70,7 +74,7 @@
             // 
             btnCreateBranch.Location = new Point(407, 32);
             btnCreateBranch.Name = "btnCreateBranch";
-            btnCreateBranch.Size = new Size(178, 23);
+            btnCreateBranch.Size = new Size(178, 81);
             btnCreateBranch.TabIndex = 3;
             btnCreateBranch.Text = "Create Branch";
             btnCreateBranch.UseVisualStyleBackColor = true;
@@ -80,7 +84,7 @@
             // 
             btnDeposit.Location = new Point(591, 32);
             btnDeposit.Name = "btnDeposit";
-            btnDeposit.Size = new Size(178, 23);
+            btnDeposit.Size = new Size(178, 81);
             btnDeposit.TabIndex = 4;
             btnDeposit.Text = "Add Deposit";
             btnDeposit.UseVisualStyleBackColor = true;
@@ -90,17 +94,61 @@
             // 
             btnCreateEmployee.Location = new Point(223, 32);
             btnCreateEmployee.Name = "btnCreateEmployee";
-            btnCreateEmployee.Size = new Size(178, 23);
+            btnCreateEmployee.Size = new Size(178, 81);
             btnCreateEmployee.TabIndex = 5;
             btnCreateEmployee.Text = "Create Employee";
             btnCreateEmployee.UseVisualStyleBackColor = true;
             btnCreateEmployee.Click += btnCreateEmployee_Click;
+            // 
+            // btnViewUser
+            // 
+            btnViewUser.Location = new Point(39, 175);
+            btnViewUser.Name = "btnViewUser";
+            btnViewUser.Size = new Size(178, 81);
+            btnViewUser.TabIndex = 6;
+            btnViewUser.Text = "View all Users";
+            btnViewUser.UseVisualStyleBackColor = true;
+            btnViewUser.Click += btnViewUser_Click;
+            // 
+            // btnViewEmployees
+            // 
+            btnViewEmployees.Location = new Point(223, 175);
+            btnViewEmployees.Name = "btnViewEmployees";
+            btnViewEmployees.Size = new Size(178, 81);
+            btnViewEmployees.TabIndex = 7;
+            btnViewEmployees.Text = "View All Employees";
+            btnViewEmployees.UseVisualStyleBackColor = true;
+            btnViewEmployees.Click += btnViewEmployees_Click;
+            // 
+            // btnViewBranches
+            // 
+            btnViewBranches.Location = new Point(407, 175);
+            btnViewBranches.Name = "btnViewBranches";
+            btnViewBranches.Size = new Size(178, 81);
+            btnViewBranches.TabIndex = 8;
+            btnViewBranches.Text = "View All Branches";
+            btnViewBranches.UseVisualStyleBackColor = true;
+            btnViewBranches.Click += btnViewBranches_Click;
+            // 
+            // btnTransactions
+            // 
+            btnTransactions.Location = new Point(591, 175);
+            btnTransactions.Name = "btnTransactions";
+            btnTransactions.Size = new Size(178, 81);
+            btnTransactions.TabIndex = 9;
+            btnTransactions.Text = "View All Transactions";
+            btnTransactions.UseVisualStyleBackColor = true;
+            btnTransactions.Click += btnTransactions_Click;
             // 
             // frmAdmin
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(btnTransactions);
+            Controls.Add(btnViewBranches);
+            Controls.Add(btnViewEmployees);
+            Controls.Add(btnViewUser);
             Controls.Add(btnCreateEmployee);
             Controls.Add(btnDeposit);
             Controls.Add(btnCreateBranch);
@@ -120,5 +168,9 @@
         private Button btnCreateBranch;
         private Button btnDeposit;
         private Button btnCreateEmployee;
+        private Button btnViewUser;
+        private Button btnViewEmployees;
+        private Button btnViewBranches;
+        private Button btnTransactions;
     }
 }

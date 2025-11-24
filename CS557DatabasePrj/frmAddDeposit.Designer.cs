@@ -36,6 +36,8 @@
             txtAmount = new TextBox();
             cmbSource = new ComboBox();
             lblSource = new Label();
+            cmbUser = new ComboBox();
+            lblUser = new Label();
             SuspendLayout();
             // 
             // btnClose
@@ -51,7 +53,7 @@
             // lblAccount
             // 
             lblAccount.AutoSize = true;
-            lblAccount.Location = new Point(32, 49);
+            lblAccount.Location = new Point(49, 107);
             lblAccount.Name = "lblAccount";
             lblAccount.Size = new Size(52, 15);
             lblAccount.TabIndex = 2;
@@ -60,7 +62,7 @@
             // lblAmount
             // 
             lblAmount.AutoSize = true;
-            lblAmount.Location = new Point(32, 83);
+            lblAmount.Location = new Point(49, 141);
             lblAmount.Name = "lblAmount";
             lblAmount.Size = new Size(51, 15);
             lblAmount.TabIndex = 3;
@@ -79,14 +81,14 @@
             // cmbAccount
             // 
             cmbAccount.FormattingEnabled = true;
-            cmbAccount.Location = new Point(90, 46);
+            cmbAccount.Location = new Point(107, 104);
             cmbAccount.Name = "cmbAccount";
             cmbAccount.Size = new Size(121, 23);
             cmbAccount.TabIndex = 5;
             // 
             // txtAmount
             // 
-            txtAmount.Location = new Point(89, 80);
+            txtAmount.Location = new Point(106, 138);
             txtAmount.Name = "txtAmount";
             txtAmount.Size = new Size(100, 23);
             txtAmount.TabIndex = 6;
@@ -94,7 +96,7 @@
             // cmbSource
             // 
             cmbSource.FormattingEnabled = true;
-            cmbSource.Location = new Point(89, 126);
+            cmbSource.Location = new Point(106, 184);
             cmbSource.Name = "cmbSource";
             cmbSource.Size = new Size(121, 23);
             cmbSource.TabIndex = 7;
@@ -102,17 +104,36 @@
             // lblSource
             // 
             lblSource.AutoSize = true;
-            lblSource.Location = new Point(32, 126);
+            lblSource.Location = new Point(49, 184);
             lblSource.Name = "lblSource";
             lblSource.Size = new Size(43, 15);
             lblSource.TabIndex = 10;
             lblSource.Text = "Source";
+            // 
+            // cmbUser
+            // 
+            cmbUser.FormattingEnabled = true;
+            cmbUser.Location = new Point(106, 61);
+            cmbUser.Name = "cmbUser";
+            cmbUser.Size = new Size(121, 23);
+            cmbUser.TabIndex = 12;
+            // 
+            // lblUser
+            // 
+            lblUser.AutoSize = true;
+            lblUser.Location = new Point(48, 64);
+            lblUser.Name = "lblUser";
+            lblUser.Size = new Size(30, 15);
+            lblUser.TabIndex = 11;
+            lblUser.Text = "User";
             // 
             // frmAddDeposit
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(546, 312);
+            Controls.Add(cmbUser);
+            Controls.Add(lblUser);
             Controls.Add(lblSource);
             Controls.Add(cmbSource);
             Controls.Add(txtAmount);
@@ -137,5 +158,7 @@
         private TextBox txtAmount;
         private ComboBox cmbSource;
         private Label lblSource;
+        private ComboBox cmbUser;
+        private Label lblUser;
     }
 }
