@@ -98,8 +98,7 @@ namespace CS557DatabasePrj.UI
                 cmbBranch.SelectedIndex = -1;
             }
 
-            txtPassword.Text = "";
-            txtPassConfirm.Text = "";
+            txtPassword.Text = u.PasswordHash;
         }
 
         private async void btnUpdate_Click(object sender, EventArgs e)
