@@ -115,3 +115,70 @@ The repo is organised into separate projects for each layer:
 ```bash
 git clone https://github.com/ChaseMcClellan/CS557DatabasePrj.git
 cd CS557DatabasePrj
+```
+### 2. Install NuGet packages (Dapper + MySQL) via terminal
+
+If the packages aren’t already restored, you can install them via the dotnet CLI.
+From the solution root, add packages to the data layer project (and any other project that directly uses them):
+
+```bash
+cd CS557DatabasePrj.DL
+dotnet add package Dapper
+dotnet add package MySql.Data
+```
+If you also need Dapper/MySQL in other projects (e.g., tests):
+```bash
+cd ../CS557DatabasePrj.Tests
+dotnet add package Dapper
+dotnet add package MySql.Data
+```
+Then restore:
+```bash
+cd ..
+dotnet restore
+```
+
+### 3. Set Up MySQL Database
+
+Make sure MySQL Server is running.
+Use the init.sql script in the repo root to create the schema and seed data.
+
+```bash
+mysql -u root -p < init.sql
+```
+
+### 4. Configure the connection string
+
+The repositories use a shared BaseRepository (in CS557DatabasePrj.DL) that opens MySQL connections.
+Open BaseRepository.cs and update the connection string to point to your MySQL instance, for example:
+
+``` bash
+private const string ConnString =
+    "Server=localhost;Port=3306;Database=cs557db;Uid=youruser;Pwd=yourpassword;";
+```
+Adjust:
+
+- Server / Port
+- Database name (whatever init.sql creates)
+- Uid and Pwd for your MySQL user
+
+## Key Features
+
+User authentication (login form, AppSession.CurrentUser)
+Admin management screens:
+View & edit Users (username, name, email, phone, SSN hash, admin flag, home branch)
+View & edit Employees (first/last name, branch, linked user)
+View & edit Branches (name, address, phone)
+View & edit Accounts (owner, branch, balance, account type)
+Deposits (ATM-style admin entry):
+Admin selects a user, then one of their accounts
+Enters amount and source (Cash, Check, etc.)
+DepositRepository:
+Inserts into Deposits
+Updates Accounts.CurrentBalance
+Writes a Transaction row for the history
+Transaction history / admin tools:
+DataGridView listing of transactions
+Ability to “undo” a transaction (creates a reversing transaction and adjusts balance)
+Ability to update transaction details (memo, amount, kind, date) while keeping audit fields
+
