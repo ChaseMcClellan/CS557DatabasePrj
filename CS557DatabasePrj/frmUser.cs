@@ -1,5 +1,6 @@
 ﻿using CS557DatabasePrj.BL;
 using CS557DatabasePrj.DL.DB;
+using CS557DatabasePrj.DL.Repo;
 using CS557DatabasePrj.UI; 
 using Dapper;
 using System;
@@ -76,7 +77,89 @@ namespace CS557DatabasePrj
                 MessageBox.Show("DB error: " + ex.Message);
             }
         }
+        private async void btnNewcard_Click(object sender, EventArgs e)
+        {
+            var repository = new CardRepository();
 
-        
+            try
+            {
+                Card card = new Card
+                {
+                    AccountId = currentUser.Id,
+                    CardNumber = txtCardNumber.Text,
+                    ExpiryDate = dtpExpiryDate.Value,
+                    Cvv = txtCvv.Text
+                };
+
+                await repository.InsertAsync(card);
+
+                MessageBox.Show("Card created!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("try again");
+            }
+        }
+
+        private async void btnNewtransaction_Click(object sender, EventArgs e)
+        {
+            TransactionRepository repository = new TransactionRepository();
+
+            try
+            {
+                Transaction transaction = new Transaction
+                {
+                    AccountId = currentUser.Id,    // THE ACCOUNT THAT OWNS THE TRANSACTION
+                    Amount = decimal.Parse(txtAmount.Text),
+                };
+
+                await repository.InsertAsync(transaction);
+
+                MessageBox.Show("Transaction saved!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("try again");
+            }
+        }
+
+
+        private async void btnNewLoanPayment_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var repository = new LoanPaymentRepository();
+                var accountRepository = new AccountRepository();
+
+                // Load the logged-in user's account from DB
+                Account account = await accountRepository.GetByIdAsync(currentUser.Id);
+
+                // Validate the text box input
+                if (!decimal.TryParse(txtAmount.Text, out decimal amount))
+                {
+                    MessageBox.Show("Please enter a valid amount.");
+                    return;
+                }
+
+                // Create the payment
+                LoanPayment loanPayment = new LoanPayment
+                {
+                    Amount = amount
+                };
+
+                // Save to DB
+                await repository.InsertAsync(loanPayment, account.Id);
+
+                MessageBox.Show("Payment saved!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Try again");
+            }
+        }
+
+
+
+
     }
 }
