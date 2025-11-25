@@ -1,0 +1,184 @@
+# CS557DatabasePrj
+
+A simple educational **banking system** built in C# WinForms for CS 557 (Database Systems).  
+The app demonstrates a classic 3-layer architecture (UI / Business Logic / Data Access) on top of a MySQL database using Dapper.
+
+---
+
+## Features
+
+### Core banking domain
+
+- **Branches**
+  - Create, view, update, and delete branches
+  - Store address, phone, and other contact details
+
+- **Users**
+  - Application users with:
+    - Username & password hash
+    - First & last name
+    - Email, phone, SSN hash
+    - Role (admin vs regular user)
+    - Home branch
+  - Admin UI to view / edit / delete users
+
+- **Employees**
+  - Employees linked to a branch and a user login
+  - Admin UI to view employees by branch and edit their details
+
+- **Accounts**
+  - Accounts linked to a user and branch
+  - Account types (Checking, Savings, Credit, Loan, CD)
+  - Current balance and currency
+
+- **Transactions & Deposits**
+  - Domain model for `Transaction` and `Deposit`
+  - Transaction kinds: Deposit, Withdrawal, Transfer, Fee, Interest, Payment
+  - Admin can:
+    - View all transactions in a DataGridView
+    - Edit transaction details (amount, kind, memo, date)
+    - “Undo” a transaction:
+      - Creates a reversing transaction that negates the original
+      - Adjusts the account balance while preserving audit history
+  - Admin can record **deposits** (acting like an ATM deposit):
+    - Select a user → load their accounts
+    - Select an account
+    - Enter amount and source (Cash, Check, Wire, etc.)
+    - Inserts a row into `Deposits`
+    - Updates the account’s balance
+    - Writes a corresponding transaction
+
+- **Audit fields**
+  - All major entities inherit from `AuditableEntity`:
+    - `CreatedUtc`, `CreatedByUserId`
+    - `UpdatedUtc`, `UpdatedByUserId`
+    - `IsActive`
+  - Enables basic auditability across the system
+
+---
+
+## Solution structure
+
+The repo is organised into separate projects for each layer:
+
+- `CS557DatabasePrj.BL`  
+  Business entities and enums:
+  - `User`, `Employee`, `Branch`, `Account`, `Card`, `Transaction`, `Deposit`, etc.
+  - Common base types like `Entity` and `AuditableEntity`
+  - Enums: `AccountType`, `CardType`, `TransactionKind`, `LoanStatus`
+
+- `CS557DatabasePrj.DL`  
+  Data access layer using **Dapper**:
+  - `BaseRepository` (opens MySQL connections)
+  - Repositories:
+    - `UserRepository`
+    - `EmployeeRepository`
+    - `BranchRepository`
+    - `AccountRepository`
+    - `TransactionRepository`
+    - `DepositRepository`
+  - Repositories encapsulate CRUD logic and balance updates  
+    (e.g. `DepositRepository.InsertAsync` inserts a deposit, updates balance, and writes a `Transaction` inside a transaction scope)
+
+- `CS557DatabasePrj`  
+  C# **WinForms** UI:
+  - `frmLogin` – login screen using `UserRepository`
+  - `frmAddDeposit` – admin deposit entry
+  - `FrmViewTransactions` – admin transaction viewer/editor + undo
+  - `FrmViewBranches` – branch manager
+  - `FrmViewEmployees` – employee manager
+  - `FrmViewUsers` – user manager
+  - Various other forms for creating/maintaining domain data
+
+- `CS557DatabasePrj.Tests`  
+  Placeholder for unit/integration tests.
+
+- `init.sql`  
+  Database schema and initial seed data for MySQL.
+
+---
+
+## Technologies
+
+- **Language:** C#  
+- **Desktop UI:** Windows Forms  
+- **Database:** MySQL or MariaDB  
+- **ORM / Data Access:** [Dapper](https://github.com/DapperLib/Dapper)  
+- **IDE:** Visual Studio 2022+ (recommended)
+
+---
+
+## Getting Started
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/ChaseMcClellan/CS557DatabasePrj.git
+cd CS557DatabasePrj
+```
+### 2. Install NuGet packages (Dapper + MySQL) via terminal
+
+If the packages aren’t already restored, you can install them via the dotnet CLI.
+From the solution root, add packages to the data layer project (and any other project that directly uses them):
+
+```bash
+cd CS557DatabasePrj.DL
+dotnet add package Dapper
+dotnet add package MySql.Data
+```
+If you also need Dapper/MySQL in other projects (e.g., tests):
+```bash
+cd ../CS557DatabasePrj.Tests
+dotnet add package Dapper
+dotnet add package MySql.Data
+```
+Then restore:
+```bash
+cd ..
+dotnet restore
+```
+
+### 3. Set Up MySQL Database
+
+Make sure MySQL Server is running.
+Use the init.sql script in the repo root to create the schema and seed data.
+
+```bash
+mysql -u root -p < init.sql
+```
+
+### 4. Configure the connection string
+
+The repositories use a shared BaseRepository (in CS557DatabasePrj.DL) that opens MySQL connections.
+Open BaseRepository.cs and update the connection string to point to your MySQL instance, for example:
+
+``` bash
+private const string ConnString =
+    "Server=localhost;Port=3306;Database=cs557db;Uid=youruser;Pwd=yourpassword;";
+```
+Adjust:
+
+- Server / Port
+- Database name (whatever init.sql creates)
+- Uid and Pwd for your MySQL user
+
+## Key Features
+
+User authentication (login form, AppSession.CurrentUser)
+Admin management screens:
+View & edit Users (username, name, email, phone, SSN hash, admin flag, home branch)
+View & edit Employees (first/last name, branch, linked user)
+View & edit Branches (name, address, phone)
+View & edit Accounts (owner, branch, balance, account type)
+Deposits (ATM-style admin entry):
+Admin selects a user, then one of their accounts
+Enters amount and source (Cash, Check, etc.)
+DepositRepository:
+Inserts into Deposits
+Updates Accounts.CurrentBalance
+Writes a Transaction row for the history
+Transaction history / admin tools:
+DataGridView listing of transactions
+Ability to “undo” a transaction (creates a reversing transaction and adjusts balance)
+Ability to update transaction details (memo, amount, kind, date) while keeping audit fields
+
