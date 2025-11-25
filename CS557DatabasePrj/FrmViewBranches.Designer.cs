@@ -29,68 +29,50 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            cmbKind = new ComboBox();
             lblDate = new Label();
-            label4 = new Label();
             lblName = new Label();
             Amount = new Label();
             lblMemo = new Label();
-            txtMemo = new TextBox();
-            txtAmount = new TextBox();
-            txtDate = new TextBox();
-            txtAccount = new TextBox();
-            dgvTransactions = new DataGridView();
-            btnDelete = new Button();
-            btnUpdate = new Button();
-            btnClose = new Button();
-            branchBindingSource = new BindingSource(components);
-            nameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            addressLine1DataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            addressLine2DataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            cityDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            stateDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            postalCodeDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            phoneDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            txtPhone = new TextBox();
+            txtPostal = new TextBox();
+            txtAddress2 = new TextBox();
+            txtName = new TextBox();
+            dgvBranch = new DataGridView();
             createdUtcDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             createdByUserIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             updatedUtcDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             updatedByUserIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             isActiveDataGridViewCheckBoxColumn = new DataGridViewCheckBoxColumn();
             idDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            ((System.ComponentModel.ISupportInitialize)dgvTransactions).BeginInit();
+            branchBindingSource = new BindingSource(components);
+            btnDelete = new Button();
+            btnUpdate = new Button();
+            btnClose = new Button();
+            label1 = new Label();
+            txtAddress = new TextBox();
+            lblCity = new Label();
+            txtCity = new TextBox();
+            lblState = new Label();
+            txtState = new TextBox();
+            employeeBindingSource = new BindingSource(components);
+            ((System.ComponentModel.ISupportInitialize)dgvBranch).BeginInit();
             ((System.ComponentModel.ISupportInitialize)branchBindingSource).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)employeeBindingSource).BeginInit();
             SuspendLayout();
-            // 
-            // cmbKind
-            // 
-            cmbKind.FormattingEnabled = true;
-            cmbKind.Location = new Point(49, 269);
-            cmbKind.Name = "cmbKind";
-            cmbKind.Size = new Size(121, 23);
-            cmbKind.TabIndex = 28;
             // 
             // lblDate
             // 
             lblDate.AutoSize = true;
-            lblDate.Location = new Point(12, 305);
+            lblDate.Location = new Point(6, 320);
             lblDate.Name = "lblDate";
-            lblDate.Size = new Size(31, 15);
+            lblDate.Size = new Size(55, 15);
             lblDate.TabIndex = 27;
-            lblDate.Text = "Date";
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Location = new Point(12, 272);
-            label4.Name = "label4";
-            label4.Size = new Size(31, 15);
-            label4.TabIndex = 26;
-            label4.Text = "Kind";
+            lblDate.Text = "Address2";
             // 
             // lblName
             // 
             lblName.AutoSize = true;
-            lblName.Location = new Point(12, 227);
+            lblName.Location = new Point(12, 232);
             lblName.Name = "lblName";
             lblName.Size = new Size(39, 15);
             lblName.TabIndex = 25;
@@ -99,60 +81,108 @@
             // Amount
             // 
             Amount.AutoSize = true;
-            Amount.Location = new Point(199, 226);
+            Amount.Location = new Point(209, 229);
             Amount.Name = "Amount";
-            Amount.Size = new Size(51, 15);
+            Amount.Size = new Size(67, 15);
             Amount.TabIndex = 24;
-            Amount.Text = "Amount";
+            Amount.Text = "PostalCode";
             // 
             // lblMemo
             // 
             lblMemo.AutoSize = true;
-            lblMemo.Location = new Point(206, 275);
+            lblMemo.Location = new Point(234, 263);
             lblMemo.Name = "lblMemo";
-            lblMemo.Size = new Size(42, 15);
+            lblMemo.Size = new Size(41, 15);
             lblMemo.TabIndex = 23;
-            lblMemo.Text = "Memo";
+            lblMemo.Text = "Phone";
             // 
-            // txtMemo
+            // txtPhone
             // 
-            txtMemo.Location = new Point(254, 272);
-            txtMemo.Name = "txtMemo";
-            txtMemo.Size = new Size(100, 23);
-            txtMemo.TabIndex = 22;
+            txtPhone.Location = new Point(282, 260);
+            txtPhone.Name = "txtPhone";
+            txtPhone.Size = new Size(100, 23);
+            txtPhone.TabIndex = 22;
             // 
-            // txtAmount
+            // txtPostal
             // 
-            txtAmount.Location = new Point(256, 223);
-            txtAmount.Name = "txtAmount";
-            txtAmount.Size = new Size(100, 23);
-            txtAmount.TabIndex = 21;
+            txtPostal.Location = new Point(282, 226);
+            txtPostal.Name = "txtPostal";
+            txtPostal.Size = new Size(100, 23);
+            txtPostal.TabIndex = 21;
             // 
-            // txtDate
+            // txtAddress2
             // 
-            txtDate.Location = new Point(49, 305);
-            txtDate.Name = "txtDate";
-            txtDate.Size = new Size(100, 23);
-            txtDate.TabIndex = 20;
+            txtAddress2.Location = new Point(70, 317);
+            txtAddress2.Name = "txtAddress2";
+            txtAddress2.Size = new Size(100, 23);
+            txtAddress2.TabIndex = 20;
             // 
-            // txtAccount
+            // txtName
             // 
-            txtAccount.Location = new Point(70, 227);
-            txtAccount.Name = "txtAccount";
-            txtAccount.ReadOnly = true;
-            txtAccount.Size = new Size(100, 23);
-            txtAccount.TabIndex = 19;
+            txtName.Location = new Point(69, 229);
+            txtName.Name = "txtName";
+            txtName.Size = new Size(100, 23);
+            txtName.TabIndex = 19;
             // 
-            // dgvTransactions
+            // dgvBranch
             // 
-            dgvTransactions.AutoGenerateColumns = false;
-            dgvTransactions.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvTransactions.Columns.AddRange(new DataGridViewColumn[] { nameDataGridViewTextBoxColumn, addressLine1DataGridViewTextBoxColumn, addressLine2DataGridViewTextBoxColumn, cityDataGridViewTextBoxColumn, stateDataGridViewTextBoxColumn, postalCodeDataGridViewTextBoxColumn, phoneDataGridViewTextBoxColumn, createdUtcDataGridViewTextBoxColumn, createdByUserIdDataGridViewTextBoxColumn, updatedUtcDataGridViewTextBoxColumn, updatedByUserIdDataGridViewTextBoxColumn, isActiveDataGridViewCheckBoxColumn, idDataGridViewTextBoxColumn });
-            dgvTransactions.DataSource = branchBindingSource;
-            dgvTransactions.Location = new Point(12, 18);
-            dgvTransactions.Name = "dgvTransactions";
-            dgvTransactions.Size = new Size(736, 150);
-            dgvTransactions.TabIndex = 18;
+            dgvBranch.AllowUserToAddRows = false;
+            dgvBranch.AllowUserToDeleteRows = false;
+            dgvBranch.AutoGenerateColumns = false;
+            dgvBranch.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvBranch.Columns.AddRange(new DataGridViewColumn[] { createdUtcDataGridViewTextBoxColumn, createdByUserIdDataGridViewTextBoxColumn, updatedUtcDataGridViewTextBoxColumn, updatedByUserIdDataGridViewTextBoxColumn, isActiveDataGridViewCheckBoxColumn, idDataGridViewTextBoxColumn });
+            dgvBranch.DataSource = branchBindingSource;
+            dgvBranch.Location = new Point(12, 18);
+            dgvBranch.Name = "dgvBranch";
+            dgvBranch.ReadOnly = true;
+            dgvBranch.Size = new Size(736, 150);
+            dgvBranch.TabIndex = 18;
+            // 
+            // createdUtcDataGridViewTextBoxColumn
+            // 
+            createdUtcDataGridViewTextBoxColumn.DataPropertyName = "CreatedUtc";
+            createdUtcDataGridViewTextBoxColumn.HeaderText = "CreatedUtc";
+            createdUtcDataGridViewTextBoxColumn.Name = "createdUtcDataGridViewTextBoxColumn";
+            createdUtcDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // createdByUserIdDataGridViewTextBoxColumn
+            // 
+            createdByUserIdDataGridViewTextBoxColumn.DataPropertyName = "CreatedByUserId";
+            createdByUserIdDataGridViewTextBoxColumn.HeaderText = "CreatedByUserId";
+            createdByUserIdDataGridViewTextBoxColumn.Name = "createdByUserIdDataGridViewTextBoxColumn";
+            createdByUserIdDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // updatedUtcDataGridViewTextBoxColumn
+            // 
+            updatedUtcDataGridViewTextBoxColumn.DataPropertyName = "UpdatedUtc";
+            updatedUtcDataGridViewTextBoxColumn.HeaderText = "UpdatedUtc";
+            updatedUtcDataGridViewTextBoxColumn.Name = "updatedUtcDataGridViewTextBoxColumn";
+            updatedUtcDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // updatedByUserIdDataGridViewTextBoxColumn
+            // 
+            updatedByUserIdDataGridViewTextBoxColumn.DataPropertyName = "UpdatedByUserId";
+            updatedByUserIdDataGridViewTextBoxColumn.HeaderText = "UpdatedByUserId";
+            updatedByUserIdDataGridViewTextBoxColumn.Name = "updatedByUserIdDataGridViewTextBoxColumn";
+            updatedByUserIdDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // isActiveDataGridViewCheckBoxColumn
+            // 
+            isActiveDataGridViewCheckBoxColumn.DataPropertyName = "IsActive";
+            isActiveDataGridViewCheckBoxColumn.HeaderText = "IsActive";
+            isActiveDataGridViewCheckBoxColumn.Name = "isActiveDataGridViewCheckBoxColumn";
+            isActiveDataGridViewCheckBoxColumn.ReadOnly = true;
+            // 
+            // idDataGridViewTextBoxColumn
+            // 
+            idDataGridViewTextBoxColumn.DataPropertyName = "Id";
+            idDataGridViewTextBoxColumn.HeaderText = "Id";
+            idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+            idDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // branchBindingSource
+            // 
+            branchBindingSource.DataSource = typeof(BL.Branch);
             // 
             // btnDelete
             // 
@@ -184,111 +214,86 @@
             btnClose.UseVisualStyleBackColor = true;
             btnClose.Click += btnClose_Click;
             // 
-            // branchBindingSource
+            // label1
             // 
-            branchBindingSource.DataSource = typeof(BL.Branch);
+            label1.AutoSize = true;
+            label1.Location = new Point(12, 276);
+            label1.Name = "label1";
+            label1.Size = new Size(49, 15);
+            label1.TabIndex = 29;
+            label1.Text = "Address";
             // 
-            // nameDataGridViewTextBoxColumn
+            // txtAddress
             // 
-            nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
-            nameDataGridViewTextBoxColumn.HeaderText = "Name";
-            nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+            txtAddress.Location = new Point(70, 273);
+            txtAddress.Name = "txtAddress";
+            txtAddress.Size = new Size(100, 23);
+            txtAddress.TabIndex = 28;
             // 
-            // addressLine1DataGridViewTextBoxColumn
+            // lblCity
             // 
-            addressLine1DataGridViewTextBoxColumn.DataPropertyName = "AddressLine1";
-            addressLine1DataGridViewTextBoxColumn.HeaderText = "AddressLine1";
-            addressLine1DataGridViewTextBoxColumn.Name = "addressLine1DataGridViewTextBoxColumn";
+            lblCity.AutoSize = true;
+            lblCity.Location = new Point(23, 360);
+            lblCity.Name = "lblCity";
+            lblCity.Size = new Size(28, 15);
+            lblCity.TabIndex = 31;
+            lblCity.Text = "City";
             // 
-            // addressLine2DataGridViewTextBoxColumn
+            // txtCity
             // 
-            addressLine2DataGridViewTextBoxColumn.DataPropertyName = "AddressLine2";
-            addressLine2DataGridViewTextBoxColumn.HeaderText = "AddressLine2";
-            addressLine2DataGridViewTextBoxColumn.Name = "addressLine2DataGridViewTextBoxColumn";
+            txtCity.Location = new Point(70, 357);
+            txtCity.Name = "txtCity";
+            txtCity.Size = new Size(100, 23);
+            txtCity.TabIndex = 30;
             // 
-            // cityDataGridViewTextBoxColumn
+            // lblState
             // 
-            cityDataGridViewTextBoxColumn.DataPropertyName = "City";
-            cityDataGridViewTextBoxColumn.HeaderText = "City";
-            cityDataGridViewTextBoxColumn.Name = "cityDataGridViewTextBoxColumn";
+            lblState.AutoSize = true;
+            lblState.Location = new Point(12, 399);
+            lblState.Name = "lblState";
+            lblState.Size = new Size(33, 15);
+            lblState.TabIndex = 33;
+            lblState.Text = "State";
             // 
-            // stateDataGridViewTextBoxColumn
+            // txtState
             // 
-            stateDataGridViewTextBoxColumn.DataPropertyName = "State";
-            stateDataGridViewTextBoxColumn.HeaderText = "State";
-            stateDataGridViewTextBoxColumn.Name = "stateDataGridViewTextBoxColumn";
+            txtState.Location = new Point(69, 396);
+            txtState.Name = "txtState";
+            txtState.Size = new Size(100, 23);
+            txtState.TabIndex = 32;
             // 
-            // postalCodeDataGridViewTextBoxColumn
+            // employeeBindingSource
             // 
-            postalCodeDataGridViewTextBoxColumn.DataPropertyName = "PostalCode";
-            postalCodeDataGridViewTextBoxColumn.HeaderText = "PostalCode";
-            postalCodeDataGridViewTextBoxColumn.Name = "postalCodeDataGridViewTextBoxColumn";
-            // 
-            // phoneDataGridViewTextBoxColumn
-            // 
-            phoneDataGridViewTextBoxColumn.DataPropertyName = "Phone";
-            phoneDataGridViewTextBoxColumn.HeaderText = "Phone";
-            phoneDataGridViewTextBoxColumn.Name = "phoneDataGridViewTextBoxColumn";
-            // 
-            // createdUtcDataGridViewTextBoxColumn
-            // 
-            createdUtcDataGridViewTextBoxColumn.DataPropertyName = "CreatedUtc";
-            createdUtcDataGridViewTextBoxColumn.HeaderText = "CreatedUtc";
-            createdUtcDataGridViewTextBoxColumn.Name = "createdUtcDataGridViewTextBoxColumn";
-            // 
-            // createdByUserIdDataGridViewTextBoxColumn
-            // 
-            createdByUserIdDataGridViewTextBoxColumn.DataPropertyName = "CreatedByUserId";
-            createdByUserIdDataGridViewTextBoxColumn.HeaderText = "CreatedByUserId";
-            createdByUserIdDataGridViewTextBoxColumn.Name = "createdByUserIdDataGridViewTextBoxColumn";
-            // 
-            // updatedUtcDataGridViewTextBoxColumn
-            // 
-            updatedUtcDataGridViewTextBoxColumn.DataPropertyName = "UpdatedUtc";
-            updatedUtcDataGridViewTextBoxColumn.HeaderText = "UpdatedUtc";
-            updatedUtcDataGridViewTextBoxColumn.Name = "updatedUtcDataGridViewTextBoxColumn";
-            // 
-            // updatedByUserIdDataGridViewTextBoxColumn
-            // 
-            updatedByUserIdDataGridViewTextBoxColumn.DataPropertyName = "UpdatedByUserId";
-            updatedByUserIdDataGridViewTextBoxColumn.HeaderText = "UpdatedByUserId";
-            updatedByUserIdDataGridViewTextBoxColumn.Name = "updatedByUserIdDataGridViewTextBoxColumn";
-            // 
-            // isActiveDataGridViewCheckBoxColumn
-            // 
-            isActiveDataGridViewCheckBoxColumn.DataPropertyName = "IsActive";
-            isActiveDataGridViewCheckBoxColumn.HeaderText = "IsActive";
-            isActiveDataGridViewCheckBoxColumn.Name = "isActiveDataGridViewCheckBoxColumn";
-            // 
-            // idDataGridViewTextBoxColumn
-            // 
-            idDataGridViewTextBoxColumn.DataPropertyName = "Id";
-            idDataGridViewTextBoxColumn.HeaderText = "Id";
-            idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+            employeeBindingSource.DataSource = typeof(BL.Employee);
             // 
             // FrmViewBranches
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(cmbKind);
+            Controls.Add(lblState);
+            Controls.Add(txtState);
+            Controls.Add(lblCity);
+            Controls.Add(txtCity);
+            Controls.Add(label1);
+            Controls.Add(txtAddress);
             Controls.Add(lblDate);
-            Controls.Add(label4);
             Controls.Add(lblName);
             Controls.Add(Amount);
             Controls.Add(lblMemo);
-            Controls.Add(txtMemo);
-            Controls.Add(txtAmount);
-            Controls.Add(txtDate);
-            Controls.Add(txtAccount);
-            Controls.Add(dgvTransactions);
+            Controls.Add(txtPhone);
+            Controls.Add(txtPostal);
+            Controls.Add(txtAddress2);
+            Controls.Add(txtName);
+            Controls.Add(dgvBranch);
             Controls.Add(btnDelete);
             Controls.Add(btnUpdate);
             Controls.Add(btnClose);
             Name = "FrmViewBranches";
             Text = "FrmViewBranches";
-            ((System.ComponentModel.ISupportInitialize)dgvTransactions).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvBranch).EndInit();
             ((System.ComponentModel.ISupportInitialize)branchBindingSource).EndInit();
+            ((System.ComponentModel.ISupportInitialize)employeeBindingSource).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -301,21 +306,14 @@
         private Label lblName;
         private Label Amount;
         private Label lblMemo;
-        private TextBox txtMemo;
-        private TextBox txtAmount;
-        private TextBox txtDate;
-        private TextBox txtAccount;
-        private DataGridView dgvTransactions;
+        private TextBox txtPhone;
+        private TextBox txtPostal;
+        private TextBox txtAddress2;
+        private TextBox txtName;
+        private DataGridView dgvBranch;
         private Button btnDelete;
         private Button btnUpdate;
         private Button btnClose;
-        private DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn addressLine1DataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn addressLine2DataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn cityDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn stateDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn postalCodeDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn phoneDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn createdUtcDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn createdByUserIdDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn updatedUtcDataGridViewTextBoxColumn;
@@ -323,5 +321,12 @@
         private DataGridViewCheckBoxColumn isActiveDataGridViewCheckBoxColumn;
         private DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
         private BindingSource branchBindingSource;
+        private Label label1;
+        private TextBox txtAddress;
+        private Label lblCity;
+        private TextBox txtCity;
+        private Label lblState;
+        private TextBox txtState;
+        private BindingSource employeeBindingSource;
     }
 }

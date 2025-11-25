@@ -145,12 +145,15 @@
             // 
             // dgvTransactions
             // 
+            dgvTransactions.AllowUserToAddRows = false;
+            dgvTransactions.AllowUserToDeleteRows = false;
             dgvTransactions.AutoGenerateColumns = false;
             dgvTransactions.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvTransactions.Columns.AddRange(new DataGridViewColumn[] { employeeNumberDataGridViewTextBoxColumn, firstNameDataGridViewTextBoxColumn, lastNameDataGridViewTextBoxColumn, branchIdDataGridViewTextBoxColumn, userIdDataGridViewTextBoxColumn, branchDataGridViewTextBoxColumn, userDataGridViewTextBoxColumn, createdUtcDataGridViewTextBoxColumn, createdByUserIdDataGridViewTextBoxColumn, updatedUtcDataGridViewTextBoxColumn, updatedByUserIdDataGridViewTextBoxColumn, isActiveDataGridViewCheckBoxColumn, idDataGridViewTextBoxColumn });
             dgvTransactions.DataSource = employeeBindingSource;
             dgvTransactions.Location = new Point(12, 18);
             dgvTransactions.Name = "dgvTransactions";
+            dgvTransactions.ReadOnly = true;
             dgvTransactions.Size = new Size(736, 150);
             dgvTransactions.TabIndex = 18;
             // 
@@ -159,78 +162,91 @@
             employeeNumberDataGridViewTextBoxColumn.DataPropertyName = "EmployeeNumber";
             employeeNumberDataGridViewTextBoxColumn.HeaderText = "EmployeeNumber";
             employeeNumberDataGridViewTextBoxColumn.Name = "employeeNumberDataGridViewTextBoxColumn";
+            employeeNumberDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // firstNameDataGridViewTextBoxColumn
             // 
             firstNameDataGridViewTextBoxColumn.DataPropertyName = "FirstName";
             firstNameDataGridViewTextBoxColumn.HeaderText = "FirstName";
             firstNameDataGridViewTextBoxColumn.Name = "firstNameDataGridViewTextBoxColumn";
+            firstNameDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // lastNameDataGridViewTextBoxColumn
             // 
             lastNameDataGridViewTextBoxColumn.DataPropertyName = "LastName";
             lastNameDataGridViewTextBoxColumn.HeaderText = "LastName";
             lastNameDataGridViewTextBoxColumn.Name = "lastNameDataGridViewTextBoxColumn";
+            lastNameDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // branchIdDataGridViewTextBoxColumn
             // 
             branchIdDataGridViewTextBoxColumn.DataPropertyName = "BranchId";
             branchIdDataGridViewTextBoxColumn.HeaderText = "BranchId";
             branchIdDataGridViewTextBoxColumn.Name = "branchIdDataGridViewTextBoxColumn";
+            branchIdDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // userIdDataGridViewTextBoxColumn
             // 
             userIdDataGridViewTextBoxColumn.DataPropertyName = "UserId";
             userIdDataGridViewTextBoxColumn.HeaderText = "UserId";
             userIdDataGridViewTextBoxColumn.Name = "userIdDataGridViewTextBoxColumn";
+            userIdDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // branchDataGridViewTextBoxColumn
             // 
             branchDataGridViewTextBoxColumn.DataPropertyName = "Branch";
             branchDataGridViewTextBoxColumn.HeaderText = "Branch";
             branchDataGridViewTextBoxColumn.Name = "branchDataGridViewTextBoxColumn";
+            branchDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // userDataGridViewTextBoxColumn
             // 
             userDataGridViewTextBoxColumn.DataPropertyName = "User";
             userDataGridViewTextBoxColumn.HeaderText = "User";
             userDataGridViewTextBoxColumn.Name = "userDataGridViewTextBoxColumn";
+            userDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // createdUtcDataGridViewTextBoxColumn
             // 
             createdUtcDataGridViewTextBoxColumn.DataPropertyName = "CreatedUtc";
             createdUtcDataGridViewTextBoxColumn.HeaderText = "CreatedUtc";
             createdUtcDataGridViewTextBoxColumn.Name = "createdUtcDataGridViewTextBoxColumn";
+            createdUtcDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // createdByUserIdDataGridViewTextBoxColumn
             // 
             createdByUserIdDataGridViewTextBoxColumn.DataPropertyName = "CreatedByUserId";
             createdByUserIdDataGridViewTextBoxColumn.HeaderText = "CreatedByUserId";
             createdByUserIdDataGridViewTextBoxColumn.Name = "createdByUserIdDataGridViewTextBoxColumn";
+            createdByUserIdDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // updatedUtcDataGridViewTextBoxColumn
             // 
             updatedUtcDataGridViewTextBoxColumn.DataPropertyName = "UpdatedUtc";
             updatedUtcDataGridViewTextBoxColumn.HeaderText = "UpdatedUtc";
             updatedUtcDataGridViewTextBoxColumn.Name = "updatedUtcDataGridViewTextBoxColumn";
+            updatedUtcDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // updatedByUserIdDataGridViewTextBoxColumn
             // 
             updatedByUserIdDataGridViewTextBoxColumn.DataPropertyName = "UpdatedByUserId";
             updatedByUserIdDataGridViewTextBoxColumn.HeaderText = "UpdatedByUserId";
             updatedByUserIdDataGridViewTextBoxColumn.Name = "updatedByUserIdDataGridViewTextBoxColumn";
+            updatedByUserIdDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // isActiveDataGridViewCheckBoxColumn
             // 
             isActiveDataGridViewCheckBoxColumn.DataPropertyName = "IsActive";
             isActiveDataGridViewCheckBoxColumn.HeaderText = "IsActive";
             isActiveDataGridViewCheckBoxColumn.Name = "isActiveDataGridViewCheckBoxColumn";
+            isActiveDataGridViewCheckBoxColumn.ReadOnly = true;
             // 
             // idDataGridViewTextBoxColumn
             // 
             idDataGridViewTextBoxColumn.DataPropertyName = "Id";
             idDataGridViewTextBoxColumn.HeaderText = "Id";
             idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+            idDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // employeeBindingSource
             // 
