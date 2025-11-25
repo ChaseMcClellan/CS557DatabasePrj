@@ -40,10 +40,6 @@
             txtDate = new TextBox();
             txtAccount = new TextBox();
             dgvTransactions = new DataGridView();
-            btnDelete = new Button();
-            btnUpdate = new Button();
-            btnClose = new Button();
-            employeeBindingSource = new BindingSource(components);
             employeeNumberDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             firstNameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             lastNameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
@@ -57,6 +53,10 @@
             updatedByUserIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             isActiveDataGridViewCheckBoxColumn = new DataGridViewCheckBoxColumn();
             idDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            employeeBindingSource = new BindingSource(components);
+            btnDelete = new Button();
+            btnUpdate = new Button();
+            btnClose = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvTransactions).BeginInit();
             ((System.ComponentModel.ISupportInitialize)employeeBindingSource).BeginInit();
             SuspendLayout();
@@ -118,7 +118,7 @@
             // 
             txtMemo.Location = new Point(254, 272);
             txtMemo.Name = "txtMemo";
-            txtMemo.Size = new Size(100, 23);
+            txtMemo.Size = new Size(366, 23);
             txtMemo.TabIndex = 22;
             // 
             // txtAmount
@@ -153,37 +153,6 @@
             dgvTransactions.Name = "dgvTransactions";
             dgvTransactions.Size = new Size(736, 150);
             dgvTransactions.TabIndex = 18;
-            // 
-            // btnDelete
-            // 
-            btnDelete.Location = new Point(486, 381);
-            btnDelete.Name = "btnDelete";
-            btnDelete.Size = new Size(110, 51);
-            btnDelete.TabIndex = 17;
-            btnDelete.Text = "Delete";
-            btnDelete.UseVisualStyleBackColor = true;
-            // 
-            // btnUpdate
-            // 
-            btnUpdate.Location = new Point(602, 381);
-            btnUpdate.Name = "btnUpdate";
-            btnUpdate.Size = new Size(105, 51);
-            btnUpdate.TabIndex = 16;
-            btnUpdate.Text = "Update";
-            btnUpdate.UseVisualStyleBackColor = true;
-            // 
-            // btnClose
-            // 
-            btnClose.Location = new Point(713, 409);
-            btnClose.Name = "btnClose";
-            btnClose.Size = new Size(75, 23);
-            btnClose.TabIndex = 15;
-            btnClose.Text = "Close";
-            btnClose.UseVisualStyleBackColor = true;
-            // 
-            // employeeBindingSource
-            // 
-            employeeBindingSource.DataSource = typeof(BL.Employee);
             // 
             // employeeNumberDataGridViewTextBoxColumn
             // 
@@ -262,6 +231,37 @@
             idDataGridViewTextBoxColumn.DataPropertyName = "Id";
             idDataGridViewTextBoxColumn.HeaderText = "Id";
             idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+            // 
+            // employeeBindingSource
+            // 
+            employeeBindingSource.DataSource = typeof(BL.Employee);
+            // 
+            // btnDelete
+            // 
+            btnDelete.Location = new Point(486, 381);
+            btnDelete.Name = "btnDelete";
+            btnDelete.Size = new Size(110, 51);
+            btnDelete.TabIndex = 17;
+            btnDelete.Text = "Delete";
+            btnDelete.UseVisualStyleBackColor = true;
+            // 
+            // btnUpdate
+            // 
+            btnUpdate.Location = new Point(602, 381);
+            btnUpdate.Name = "btnUpdate";
+            btnUpdate.Size = new Size(105, 51);
+            btnUpdate.TabIndex = 16;
+            btnUpdate.Text = "Update";
+            btnUpdate.UseVisualStyleBackColor = true;
+            // 
+            // btnClose
+            // 
+            btnClose.Location = new Point(713, 409);
+            btnClose.Name = "btnClose";
+            btnClose.Size = new Size(75, 23);
+            btnClose.TabIndex = 15;
+            btnClose.Text = "Close";
+            btnClose.UseVisualStyleBackColor = true;
             // 
             // FrmViewEmployees
             // 
