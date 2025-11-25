@@ -20,7 +20,6 @@ namespace CS557DatabasePrj.UI
             dgvBranch.SelectionChanged += dgvBranch_SelectionChanged;
         }
 
-        // ---------------- FORM LOAD ----------------
         private async void FrmViewBranches_Load(object sender, EventArgs e)
         {
             await ReloadBranchesGridAsync();
