@@ -32,7 +32,7 @@ namespace CS557DatabasePrj
             AppSession.CurrentUser = null;
             frmLogin loginForm = new frmLogin();
             loginForm.Show();
-            this.Close();
+            this.Hide();
         }
 
         private void btnNewUser_Click(object sender, EventArgs e)
@@ -55,7 +55,31 @@ namespace CS557DatabasePrj
 
         private void btnDeposit_Click(object sender, EventArgs e)
         {
-            var frm = new frmCreateUser();
+            var frm = new frmAddDeposit();
+            frm.Show();
+        }
+
+        private void btnViewUser_Click(object sender, EventArgs e)
+        {
+            var frm = new FrmViewUsers();
+            frm.Show();
+        }
+
+        private void btnViewEmployees_Click(object sender, EventArgs e)
+        {
+            var frm = new FrmViewEmployees();
+            frm.Show();
+        }
+
+        private void btnViewBranches_Click(object sender, EventArgs e)
+        {
+            var frm = new FrmViewBranches();
+            frm.Show();
+        }
+
+        private void btnTransactions_Click(object sender, EventArgs e)
+        {
+            var frm = new FrmViewTransactions();
             frm.Show();
         }
     }

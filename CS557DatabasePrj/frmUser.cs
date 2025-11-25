@@ -1,5 +1,6 @@
 ﻿using CS557DatabasePrj.BL;
 using CS557DatabasePrj.DL.DB;
+using CS557DatabasePrj.DL.Repo;
 using CS557DatabasePrj.UI; 
 using Dapper;
 using System;
@@ -43,7 +44,7 @@ namespace CS557DatabasePrj
             AppSession.CurrentUser = null;
             frmLogin loginForm = new frmLogin();
             loginForm.Show();
-            this.Close();
+            this.Hide();
         }
 
 
@@ -77,6 +78,27 @@ namespace CS557DatabasePrj
             }
         }
 
-        
+        private async void btnNewLoan_Click(object sender, EventArgs e)
+        {
+            Loan loan = new Loan();
+            LoanRepository repository = new LoanRepository();
+
+            try
+            {
+                repository.InsertAsync(loan);
+            }
+            catch (Exception ex) {
+                MessageBox.Show("Fail!");
+            }
+
+
+            //MessageBox.Show("Success");
+
+
+
+
+
+
+        }
     }
 }

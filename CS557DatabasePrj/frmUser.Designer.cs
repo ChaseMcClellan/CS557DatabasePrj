@@ -34,6 +34,7 @@
             btnTestConnection = new Button();
             lblBalance = new Label();
             dgvAccounts = new DataGridView();
+            btnNewLoan = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvAccounts).BeginInit();
             SuspendLayout();
             // 
@@ -93,11 +94,22 @@
             dgvAccounts.Size = new Size(409, 150);
             dgvAccounts.TabIndex = 5;
             // 
+            // btnNewLoan
+            // 
+            btnNewLoan.Location = new Point(329, 386);
+            btnNewLoan.Name = "btnNewLoan";
+            btnNewLoan.Size = new Size(148, 23);
+            btnNewLoan.TabIndex = 6;
+            btnNewLoan.Text = "Take out loan";
+            btnNewLoan.UseVisualStyleBackColor = true;
+            btnNewLoan.Click += btnNewLoan_Click;
+            // 
             // frmUser
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(btnNewLoan);
             Controls.Add(dgvAccounts);
             Controls.Add(lblBalance);
             Controls.Add(btnTestConnection);
@@ -119,5 +131,6 @@
         private Button btnTestConnection;
         private Label lblBalance;
         private DataGridView dgvAccounts;
+        private Button btnNewLoan;
     }
 }
