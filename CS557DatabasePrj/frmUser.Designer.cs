@@ -28,16 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             lblHelloUser = new Label();
             btnExit = new Button();
             btnLogout = new Button();
             btnTestConnection = new Button();
             lblBalance = new Label();
             dgvAccounts = new DataGridView();
-            button1 = new Button();
             button2 = new Button();
             button3 = new Button();
+            errorProvider1 = new ErrorProvider(components);
+            textBox1 = new TextBox();
             ((System.ComponentModel.ISupportInitialize)dgvAccounts).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
             SuspendLayout();
             // 
             // lblHelloUser
@@ -53,7 +56,7 @@
             // btnExit
             // 
             btnExit.Location = new Point(1276, 823);
-            btnExit.Margin = new Padding(6, 6, 6, 6);
+            btnExit.Margin = new Padding(6);
             btnExit.Name = "btnExit";
             btnExit.Size = new Size(139, 49);
             btnExit.TabIndex = 1;
@@ -64,7 +67,7 @@
             // btnLogout
             // 
             btnLogout.Location = new Point(1125, 823);
-            btnLogout.Margin = new Padding(6, 6, 6, 6);
+            btnLogout.Margin = new Padding(6);
             btnLogout.Name = "btnLogout";
             btnLogout.Size = new Size(139, 49);
             btnLogout.TabIndex = 2;
@@ -75,7 +78,7 @@
             // btnTestConnection
             // 
             btnTestConnection.Location = new Point(116, 823);
-            btnTestConnection.Margin = new Padding(6, 6, 6, 6);
+            btnTestConnection.Margin = new Padding(6);
             btnTestConnection.Name = "btnTestConnection";
             btnTestConnection.Size = new Size(139, 49);
             btnTestConnection.TabIndex = 3;
@@ -97,20 +100,11 @@
             // 
             dgvAccounts.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvAccounts.Location = new Point(581, 53);
-            dgvAccounts.Margin = new Padding(6, 6, 6, 6);
+            dgvAccounts.Margin = new Padding(6);
             dgvAccounts.Name = "dgvAccounts";
             dgvAccounts.RowHeadersWidth = 82;
             dgvAccounts.Size = new Size(760, 320);
             dgvAccounts.TabIndex = 5;
-            // 
-            // button1
-            // 
-            button1.Location = new Point(809, 823);
-            button1.Name = "button1";
-            button1.Size = new Size(250, 46);
-            button1.TabIndex = 6;
-            button1.Text = "NewLoanPayment";
-            button1.UseVisualStyleBackColor = true;
             // 
             // button2
             // 
@@ -130,24 +124,37 @@
             button3.Text = "Newcard";
             button3.UseVisualStyleBackColor = true;
             // 
+            // errorProvider1
+            // 
+            errorProvider1.ContainerControl = this;
+            // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(805, 558);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(200, 39);
+            textBox1.TabIndex = 9;
+            // 
             // frmUser
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1486, 960);
+            Controls.Add(textBox1);
             Controls.Add(button3);
             Controls.Add(button2);
-            Controls.Add(button1);
             Controls.Add(dgvAccounts);
             Controls.Add(lblBalance);
             Controls.Add(btnTestConnection);
             Controls.Add(btnLogout);
             Controls.Add(btnExit);
             Controls.Add(lblHelloUser);
-            Margin = new Padding(6, 6, 6, 6);
+            Margin = new Padding(6);
             Name = "frmUser";
             Text = "User";
+            Load += frmUser_Load;
             ((System.ComponentModel.ISupportInitialize)dgvAccounts).EndInit();
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -160,8 +167,9 @@
         private Button btnTestConnection;
         private Label lblBalance;
         private DataGridView dgvAccounts;
-        private Button button1;
         private Button button2;
         private Button button3;
+        private ErrorProvider errorProvider1;
+        private TextBox textBox1;
     }
 }
