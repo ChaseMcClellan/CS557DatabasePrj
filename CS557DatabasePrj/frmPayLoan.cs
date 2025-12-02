@@ -22,7 +22,6 @@ namespace CS557DatabasePrj.UI
             dgvAccount.SelectionChanged += dgvAccount_SelectionChanged;
         }
 
-        // ---------------- FORM LOAD ----------------
         private async void frmPayLoan_Load(object sender, EventArgs e)
         {
             _currentUser = AppSession.CurrentUser;
@@ -52,7 +51,7 @@ namespace CS557DatabasePrj.UI
                 dgvAccount.DataSource = _accounts;
 
                 if (dgvAccount.Rows.Count > 0)
-                    dgvAccount.Rows[0].Selected = true; // triggers SelectionChanged → loads loans
+                    dgvAccount.Rows[0].Selected = true;
                 else
                 {
                     dgvLoan.DataSource = null;
@@ -66,7 +65,6 @@ namespace CS557DatabasePrj.UI
             }
         }
 
-        // ------------- ACCOUNT → LOANS -------------
         private async void dgvAccount_SelectionChanged(object sender, EventArgs e)
         {
             if (dgvAccount.CurrentRow?.DataBoundItem is not Account acct)
@@ -97,13 +95,11 @@ namespace CS557DatabasePrj.UI
             }
         }
 
-        // ---------------- BUTTONS ----------------
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
-        // Put current loan "balance" into txtAmount (use Principal for this project)
         private void btnCurrentLoanBalance_Click(object sender, EventArgs e)
         {
             if (dgvLoan.CurrentRow?.DataBoundItem is not Loan loan)
@@ -112,8 +108,6 @@ namespace CS557DatabasePrj.UI
                     "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-
-            // For this project, treat Principal as the outstanding balance
             txtAmount.Text = loan.Principal.ToString("0.00");
         }
 
@@ -126,7 +120,6 @@ namespace CS557DatabasePrj.UI
                 return;
             }
 
-            // Validate paying-from account
             if (dgvAccount.CurrentRow?.DataBoundItem is not Account acct)
             {
                 MessageBox.Show("Please select an account to pay from.",
@@ -134,7 +127,6 @@ namespace CS557DatabasePrj.UI
                 return;
             }
 
-            // Validate loan
             if (dgvLoan.CurrentRow?.DataBoundItem is not Loan loan)
             {
                 MessageBox.Show("Please select a loan to pay.",
@@ -142,7 +134,6 @@ namespace CS557DatabasePrj.UI
                 return;
             }
 
-            // Validate amount
             if (!decimal.TryParse(txtAmount.Text, out decimal amount) || amount <= 0)
             {
                 MessageBox.Show("Please enter a valid payment amount greater than zero.",
@@ -150,16 +141,13 @@ namespace CS557DatabasePrj.UI
                 return;
             }
 
-            // Build LoanPayment
             var payment = new LoanPayment
             {
                 LoanId = loan.Id,
                 Amount = amount,
-                // For a simple project we can treat 'now' as both due and paid date.
                 DueDateUtc = DateTime.UtcNow,
                 PaidDateUtc = DateTime.UtcNow,
 
-                // Simple split: everything goes to principal
                 PrincipalPortion = amount,
                 InterestPortion = 0m,
 
@@ -181,7 +169,6 @@ namespace CS557DatabasePrj.UI
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information);
 
-                // Optional: reload accounts/loans to reflect changes
                 await LoadAccountsAsync();
             }
             catch (InvalidOperationException ex) when (ex.Message.Contains("Insufficient funds"))
