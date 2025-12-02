@@ -6,6 +6,7 @@ using Dapper;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -29,9 +30,7 @@ namespace CS557DatabasePrj
                 lblHelloUser.Text = "Hello " + currentUser.FirstName + "!";
                 dgvAccounts.DataSource = accounts;
 
-
             }
-
         }
 
         private void btnExit_Click(object sender, EventArgs e)
@@ -46,8 +45,6 @@ namespace CS557DatabasePrj
             loginForm.Show();
             this.Hide();
         }
-
-
 
         //test
         private async void btnTestConnection_Click(object sender, EventArgs e)
@@ -77,91 +74,19 @@ namespace CS557DatabasePrj
                 MessageBox.Show("DB error: " + ex.Message);
             }
         }
-        private async void btnNewcard_Click(object sender, EventArgs e)
+        
+
+        private void Newcard_Click(object sender, EventArgs e)
         {
-            var repository = new CardRepository();
-            try
-            {
-                Card card = new Card
-                {
-                    AccountId = currentUser.Id,
-                    CardNumberMasked = txtCardNumber.Text,
-                    ExpirationUtc = dtpExpiryDate.Value,
-                    Cvv = txtCvv.Text
-                };
-
-                await repository.InsertAsync(card);
-
-                MessageBox.Show("Card created!");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("try again");
-            }
+            var frm = new frmCard();
+            frm.Show();
         }
 
-        private async void btnNewtransaction_Click(object sender, EventArgs e)
+        private void Newtransaction_Click(object sender, EventArgs e)
         {
-            TransactionRepository repository = new TransactionRepository();
-
-            try
-            {
-                Transaction transaction = new Transaction
-                {
-                    AccountId = currentUser.Id,    // THE ACCOUNT THAT OWNS THE TRANSACTION
-                    Amount = decimal.Parse(txtAmount.Text),
-                };
-
-                await repository.InsertAsync(transaction);
-
-                MessageBox.Show("Transaction saved!");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("try again");
-            }
+            var frm = new frmpayments();
+            frm.Show();
         }
 
-
-        private async void btnNewLoanPayment_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                var repository = new LoanPaymentRepository();
-                var accountRepository = new AccountRepository();
-
-                // Load the logged-in user's account from DB
-                Account account = await accountRepository.GetByIdAsync(currentUser.Id);
-
-                // Validate the text box input
-                if (!decimal.TryParse(txtAmount.Text, out decimal amount))
-                {
-                    MessageBox.Show("Please enter a valid amount.");
-                    return;
-                }
-
-                // Create the payment
-                LoanPayment loanPayment = new LoanPayment
-                {
-                    Amount = amount
-                };
-
-                // Save to DB
-                await repository.InsertAsync(loanPayment, account.Id);
-
-                MessageBox.Show("Payment saved!");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Try again");
-            }
-        }
-
-        private void frmUser_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        //changed
     }
 }

@@ -8,8 +8,6 @@ namespace CS557DatabasePrj.BL
 {
     public class Card : AuditableEntity
     {
-        public string Cvv { get; set; }
-
         public string CardNumberMasked { get; set; } = "";//store masked PAN for UI; real PAN never stored here
         public CardType CardType { get; set; } = CardType.Debit;
         public DateTime ExpirationUtc { get; set; }

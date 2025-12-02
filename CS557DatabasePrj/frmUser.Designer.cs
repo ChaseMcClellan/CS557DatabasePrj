@@ -38,10 +38,6 @@
             Newtransaction = new Button();
             Newcard = new Button();
             errorProvider1 = new ErrorProvider(components);
-            txtAmount = new TextBox();
-            dtpExpiryDate = new DateTimePicker();
-            txtCardNumber = new TextBox();
-            txtCvv = new TextBox();
             ((System.ComponentModel.ISupportInitialize)dgvAccounts).BeginInit();
             ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
             SuspendLayout();
@@ -49,19 +45,17 @@
             // lblHelloUser
             // 
             lblHelloUser.AutoSize = true;
-            lblHelloUser.Location = new Point(74, 53);
-            lblHelloUser.Margin = new Padding(6, 0, 6, 0);
+            lblHelloUser.Location = new Point(40, 25);
             lblHelloUser.Name = "lblHelloUser";
-            lblHelloUser.Size = new Size(91, 32);
+            lblHelloUser.Size = new Size(46, 15);
             lblHelloUser.TabIndex = 0;
             lblHelloUser.Text = "Hello {}";
             // 
             // btnExit
             // 
-            btnExit.Location = new Point(1276, 823);
-            btnExit.Margin = new Padding(6);
+            btnExit.Location = new Point(687, 386);
             btnExit.Name = "btnExit";
-            btnExit.Size = new Size(139, 49);
+            btnExit.Size = new Size(75, 23);
             btnExit.TabIndex = 1;
             btnExit.Text = "Exit";
             btnExit.UseVisualStyleBackColor = true;
@@ -69,10 +63,9 @@
             // 
             // btnLogout
             // 
-            btnLogout.Location = new Point(1125, 823);
-            btnLogout.Margin = new Padding(6);
+            btnLogout.Location = new Point(606, 386);
             btnLogout.Name = "btnLogout";
-            btnLogout.Size = new Size(139, 49);
+            btnLogout.Size = new Size(75, 23);
             btnLogout.TabIndex = 2;
             btnLogout.Text = "Logout";
             btnLogout.UseVisualStyleBackColor = true;
@@ -80,10 +73,9 @@
             // 
             // btnTestConnection
             // 
-            btnTestConnection.Location = new Point(116, 823);
-            btnTestConnection.Margin = new Padding(6);
+            btnTestConnection.Location = new Point(12, 415);
             btnTestConnection.Name = "btnTestConnection";
-            btnTestConnection.Size = new Size(139, 49);
+            btnTestConnection.Size = new Size(75, 23);
             btnTestConnection.TabIndex = 3;
             btnTestConnection.Text = "Debug";
             btnTestConnection.UseVisualStyleBackColor = true;
@@ -92,82 +84,52 @@
             // lblBalance
             // 
             lblBalance.AutoSize = true;
-            lblBalance.Location = new Point(71, 218);
-            lblBalance.Margin = new Padding(6, 0, 6, 0);
+            lblBalance.Location = new Point(38, 102);
             lblBalance.Name = "lblBalance";
-            lblBalance.Size = new Size(96, 32);
+            lblBalance.Size = new Size(48, 15);
             lblBalance.TabIndex = 4;
             lblBalance.Text = "Balance";
             // 
             // dgvAccounts
             // 
             dgvAccounts.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvAccounts.Location = new Point(581, 53);
-            dgvAccounts.Margin = new Padding(6);
+            dgvAccounts.Location = new Point(313, 25);
             dgvAccounts.Name = "dgvAccounts";
             dgvAccounts.RowHeadersWidth = 82;
-            dgvAccounts.Size = new Size(760, 320);
+            dgvAccounts.Size = new Size(409, 150);
             dgvAccounts.TabIndex = 5;
             // 
             // Newtransaction
             // 
-            Newtransaction.Location = new Point(530, 823);
+            Newtransaction.Location = new Point(357, 415);
+            Newtransaction.Margin = new Padding(2, 1, 2, 1);
             Newtransaction.Name = "Newtransaction";
-            Newtransaction.Size = new Size(252, 46);
+            Newtransaction.Size = new Size(136, 22);
             Newtransaction.TabIndex = 7;
             Newtransaction.Text = "Newtransaction";
             Newtransaction.UseVisualStyleBackColor = true;
+            Newtransaction.Click += Newtransaction_Click;
             // 
             // Newcard
             // 
-            Newcard.Location = new Point(355, 823);
+            Newcard.Location = new Point(272, 415);
+            Newcard.Margin = new Padding(2, 1, 2, 1);
             Newcard.Name = "Newcard";
-            Newcard.Size = new Size(150, 46);
+            Newcard.Size = new Size(81, 22);
             Newcard.TabIndex = 8;
             Newcard.Text = "Newcard";
             Newcard.UseVisualStyleBackColor = true;
+            Newcard.Click += Newcard_Click;
             // 
             // errorProvider1
             // 
             errorProvider1.ContainerControl = this;
             // 
-            // txtAmount
-            // 
-            txtAmount.Location = new Point(485, 469);
-            txtAmount.Name = "txtAmount";
-            txtAmount.Size = new Size(200, 39);
-            txtAmount.TabIndex = 9;
-            // 
-            // dtpExpiryDate
-            // 
-            dtpExpiryDate.Location = new Point(751, 632);
-            dtpExpiryDate.Name = "dtpExpiryDate";
-            dtpExpiryDate.Size = new Size(400, 39);
-            dtpExpiryDate.TabIndex = 10;
-            // 
-            // txtCardNumber
-            // 
-            txtCardNumber.Location = new Point(469, 556);
-            txtCardNumber.Name = "txtCardNumber";
-            txtCardNumber.Size = new Size(200, 39);
-            txtCardNumber.TabIndex = 11;
-            // 
-            // txtCvv
-            // 
-            txtCvv.Location = new Point(625, 753);
-            txtCvv.Name = "txtCvv";
-            txtCvv.Size = new Size(200, 39);
-            txtCvv.TabIndex = 12;
-            // 
             // frmUser
             // 
-            AutoScaleDimensions = new SizeF(13F, 32F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1486, 960);
-            Controls.Add(txtCvv);
-            Controls.Add(txtCardNumber);
-            Controls.Add(dtpExpiryDate);
-            Controls.Add(txtAmount);
+            ClientSize = new Size(800, 450);
             Controls.Add(Newcard);
             Controls.Add(Newtransaction);
             Controls.Add(dgvAccounts);
@@ -176,10 +138,8 @@
             Controls.Add(btnLogout);
             Controls.Add(btnExit);
             Controls.Add(lblHelloUser);
-            Margin = new Padding(6);
             Name = "frmUser";
             Text = "User";
-            Load += frmUser_Load;
             ((System.ComponentModel.ISupportInitialize)dgvAccounts).EndInit();
             ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
             ResumeLayout(false);
@@ -197,9 +157,5 @@
         private Button Newtransaction;
         private Button Newcard;
         private ErrorProvider errorProvider1;
-        private TextBox txtAmount;
-        private DateTimePicker dtpExpiryDate;
-        private TextBox txtCardNumber;
-        private TextBox txtCvv;
     }
 }

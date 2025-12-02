@@ -82,5 +82,11 @@ namespace CS557DatabasePrj
             var frm = new FrmViewTransactions();
             frm.Show();
         }
+
+        private void btnWithdrawl_Click(object sender, EventArgs e)
+        {
+            var frm = new frmAddWithdrawl();
+            frm.Show();
+        }
     }
 }
