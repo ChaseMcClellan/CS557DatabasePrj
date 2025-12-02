@@ -35,10 +35,13 @@
             btnTestConnection = new Button();
             lblBalance = new Label();
             dgvAccounts = new DataGridView();
-            button2 = new Button();
-            button3 = new Button();
+            Newtransaction = new Button();
+            Newcard = new Button();
             errorProvider1 = new ErrorProvider(components);
-            textBox1 = new TextBox();
+            txtAmount = new TextBox();
+            dtpExpiryDate = new DateTimePicker();
+            txtCardNumber = new TextBox();
+            txtCvv = new TextBox();
             ((System.ComponentModel.ISupportInitialize)dgvAccounts).BeginInit();
             ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
             SuspendLayout();
@@ -106,43 +109,67 @@
             dgvAccounts.Size = new Size(760, 320);
             dgvAccounts.TabIndex = 5;
             // 
-            // button2
+            // Newtransaction
             // 
-            button2.Location = new Point(530, 823);
-            button2.Name = "button2";
-            button2.Size = new Size(252, 46);
-            button2.TabIndex = 7;
-            button2.Text = "Newtransaction";
-            button2.UseVisualStyleBackColor = true;
+            Newtransaction.Location = new Point(530, 823);
+            Newtransaction.Name = "Newtransaction";
+            Newtransaction.Size = new Size(252, 46);
+            Newtransaction.TabIndex = 7;
+            Newtransaction.Text = "Newtransaction";
+            Newtransaction.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // Newcard
             // 
-            button3.Location = new Point(355, 823);
-            button3.Name = "button3";
-            button3.Size = new Size(150, 46);
-            button3.TabIndex = 8;
-            button3.Text = "Newcard";
-            button3.UseVisualStyleBackColor = true;
+            Newcard.Location = new Point(355, 823);
+            Newcard.Name = "Newcard";
+            Newcard.Size = new Size(150, 46);
+            Newcard.TabIndex = 8;
+            Newcard.Text = "Newcard";
+            Newcard.UseVisualStyleBackColor = true;
             // 
             // errorProvider1
             // 
             errorProvider1.ContainerControl = this;
             // 
-            // textBox1
+            // txtAmount
             // 
-            textBox1.Location = new Point(805, 558);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(200, 39);
-            textBox1.TabIndex = 9;
+            txtAmount.Location = new Point(485, 469);
+            txtAmount.Name = "txtAmount";
+            txtAmount.Size = new Size(200, 39);
+            txtAmount.TabIndex = 9;
+            // 
+            // dtpExpiryDate
+            // 
+            dtpExpiryDate.Location = new Point(751, 632);
+            dtpExpiryDate.Name = "dtpExpiryDate";
+            dtpExpiryDate.Size = new Size(400, 39);
+            dtpExpiryDate.TabIndex = 10;
+            // 
+            // txtCardNumber
+            // 
+            txtCardNumber.Location = new Point(469, 556);
+            txtCardNumber.Name = "txtCardNumber";
+            txtCardNumber.Size = new Size(200, 39);
+            txtCardNumber.TabIndex = 11;
+            // 
+            // txtCvv
+            // 
+            txtCvv.Location = new Point(625, 753);
+            txtCvv.Name = "txtCvv";
+            txtCvv.Size = new Size(200, 39);
+            txtCvv.TabIndex = 12;
             // 
             // frmUser
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1486, 960);
-            Controls.Add(textBox1);
-            Controls.Add(button3);
-            Controls.Add(button2);
+            Controls.Add(txtCvv);
+            Controls.Add(txtCardNumber);
+            Controls.Add(dtpExpiryDate);
+            Controls.Add(txtAmount);
+            Controls.Add(Newcard);
+            Controls.Add(Newtransaction);
             Controls.Add(dgvAccounts);
             Controls.Add(lblBalance);
             Controls.Add(btnTestConnection);
@@ -167,9 +194,12 @@
         private Button btnTestConnection;
         private Label lblBalance;
         private DataGridView dgvAccounts;
-        private Button button2;
-        private Button button3;
+        private Button Newtransaction;
+        private Button Newcard;
         private ErrorProvider errorProvider1;
-        private TextBox textBox1;
+        private TextBox txtAmount;
+        private DateTimePicker dtpExpiryDate;
+        private TextBox txtCardNumber;
+        private TextBox txtCvv;
     }
 }

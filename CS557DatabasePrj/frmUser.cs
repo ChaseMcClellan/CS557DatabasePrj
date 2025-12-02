@@ -80,14 +80,13 @@ namespace CS557DatabasePrj
         private async void btnNewcard_Click(object sender, EventArgs e)
         {
             var repository = new CardRepository();
-
             try
             {
                 Card card = new Card
                 {
                     AccountId = currentUser.Id,
-                    CardNumber = txtCardNumber.Text,
-                    ExpiryDate = dtpExpiryDate.Value,
+                    CardNumberMasked = txtCardNumber.Text,
+                    ExpirationUtc = dtpExpiryDate.Value,
                     Cvv = txtCvv.Text
                 };
 
@@ -162,5 +161,7 @@ namespace CS557DatabasePrj
         {
 
         }
+
+        //changed
     }
 }
