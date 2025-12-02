@@ -151,22 +151,41 @@ namespace CS557DatabasePrj
             frm.Show();
         }
 
-        private void btnCard_Click(object sender, EventArgs e)
-        {
-            var frm = new frmAddCard();
-            frm.Show();
-        }
-
-        private void btnPayCard_Click(object sender, EventArgs e)
-        {
-            var frm = new frmPayCard();
-            frm.Show();
-        }
-
         private void btnPayLoan_Click(object sender, EventArgs e)
         {
             var frm = new frmPayLoan();
             frm.Show();
         }
+
+        private async void btnRefresh_Click(object sender, EventArgs e)
+        {
+            int? selectedAccountId = null;
+
+            if (dgvAccounts.CurrentRow?.DataBoundItem is Account acct)
+            {
+                selectedAccountId = acct.Id;
+            }
+
+            await LoadAccountsAsync();
+
+            if (selectedAccountId.HasValue && dgvAccounts.Rows.Count > 0)
+            {
+                foreach (DataGridViewRow row in dgvAccounts.Rows)
+                {
+                    if (row.DataBoundItem is Account a && a.Id == selectedAccountId.Value)
+                    {
+                        row.Selected = true;
+                        dgvAccounts.CurrentCell = row.Cells[0];
+                        break;
+                    }
+                }
+            }
+            else if (dgvAccounts.Rows.Count > 0)
+            {
+                dgvAccounts.Rows[0].Selected = true;
+                dgvAccounts.CurrentCell = dgvAccounts.Rows[0].Cells[0];
+            }
+        }
+
     }
 }
