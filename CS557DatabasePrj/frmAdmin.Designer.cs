@@ -38,6 +38,7 @@
             btnViewEmployees = new Button();
             btnViewBranches = new Button();
             btnTransactions = new Button();
+            btnWithdrawl = new Button();
             SuspendLayout();
             // 
             // btnExit
@@ -140,11 +141,22 @@
             btnTransactions.UseVisualStyleBackColor = true;
             btnTransactions.Click += btnTransactions_Click;
             // 
+            // btnWithdrawl
+            // 
+            btnWithdrawl.Location = new Point(39, 294);
+            btnWithdrawl.Name = "btnWithdrawl";
+            btnWithdrawl.Size = new Size(178, 78);
+            btnWithdrawl.TabIndex = 10;
+            btnWithdrawl.Text = "Add Withdrawl";
+            btnWithdrawl.UseVisualStyleBackColor = true;
+            btnWithdrawl.Click += btnWithdrawl_Click;
+            // 
             // frmAdmin
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(btnWithdrawl);
             Controls.Add(btnTransactions);
             Controls.Add(btnViewBranches);
             Controls.Add(btnViewEmployees);
@@ -172,5 +184,6 @@
         private Button btnViewEmployees;
         private Button btnViewBranches;
         private Button btnTransactions;
+        private Button btnWithdrawl;
     }
 }
