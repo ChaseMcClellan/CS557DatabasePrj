@@ -42,7 +42,9 @@ SELECT LAST_INSERT_ID();", w, tx);
                     CreatedByUserId = w.CreatedByUserId,
                     IsActive = w.IsActive
                 };
-                await new TransactionRepository().InsertInternalAsync(conn, tx, t);
+                TransactionRepository repo = new TransactionRepository();
+
+                await repo.InsertAsync(t);
 
                 tx.Commit();
                 return wid;
