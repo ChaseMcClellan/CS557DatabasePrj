@@ -10,11 +10,16 @@ using System.Windows.Forms;
 
 namespace CS557DatabasePrj.UI
 {
-    public partial class frmCard : Form
+    public partial class frmPayCard : Form
     {
-        public frmCard()
+        public frmPayCard()
         {
             InitializeComponent();
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

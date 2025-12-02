@@ -28,24 +28,27 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
             lblHelloUser = new Label();
             btnExit = new Button();
             btnLogout = new Button();
             btnTestConnection = new Button();
-            lblBalance = new Label();
             dgvAccounts = new DataGridView();
-            Newtransaction = new Button();
-            Newcard = new Button();
-            errorProvider1 = new ErrorProvider(components);
+            btnTransfer = new Button();
+            btnCard = new Button();
+            dgvTransactions = new DataGridView();
+            btnLoan = new Button();
+            btnPayCard = new Button();
+            lblAccount = new Label();
+            lblTransactions = new Label();
+            btnPayLoan = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvAccounts).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvTransactions).BeginInit();
             SuspendLayout();
             // 
             // lblHelloUser
             // 
             lblHelloUser.AutoSize = true;
-            lblHelloUser.Location = new Point(40, 25);
+            lblHelloUser.Location = new Point(12, 25);
             lblHelloUser.Name = "lblHelloUser";
             lblHelloUser.Size = new Size(46, 15);
             lblHelloUser.TabIndex = 0;
@@ -53,7 +56,7 @@
             // 
             // btnExit
             // 
-            btnExit.Location = new Point(687, 386);
+            btnExit.Location = new Point(1242, 544);
             btnExit.Name = "btnExit";
             btnExit.Size = new Size(75, 23);
             btnExit.TabIndex = 1;
@@ -63,7 +66,7 @@
             // 
             // btnLogout
             // 
-            btnLogout.Location = new Point(606, 386);
+            btnLogout.Location = new Point(1161, 544);
             btnLogout.Name = "btnLogout";
             btnLogout.Size = new Size(75, 23);
             btnLogout.TabIndex = 2;
@@ -73,7 +76,7 @@
             // 
             // btnTestConnection
             // 
-            btnTestConnection.Location = new Point(12, 415);
+            btnTestConnection.Location = new Point(12, 546);
             btnTestConnection.Name = "btnTestConnection";
             btnTestConnection.Size = new Size(75, 23);
             btnTestConnection.TabIndex = 3;
@@ -81,59 +84,111 @@
             btnTestConnection.UseVisualStyleBackColor = true;
             btnTestConnection.Click += btnTestConnection_Click;
             // 
-            // lblBalance
-            // 
-            lblBalance.AutoSize = true;
-            lblBalance.Location = new Point(38, 102);
-            lblBalance.Name = "lblBalance";
-            lblBalance.Size = new Size(48, 15);
-            lblBalance.TabIndex = 4;
-            lblBalance.Text = "Balance";
-            // 
             // dgvAccounts
             // 
             dgvAccounts.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvAccounts.Location = new Point(313, 25);
+            dgvAccounts.Location = new Point(254, 42);
             dgvAccounts.Name = "dgvAccounts";
             dgvAccounts.RowHeadersWidth = 82;
-            dgvAccounts.Size = new Size(409, 150);
+            dgvAccounts.Size = new Size(1045, 150);
             dgvAccounts.TabIndex = 5;
             // 
-            // Newtransaction
+            // btnTransfer
             // 
-            Newtransaction.Location = new Point(357, 415);
-            Newtransaction.Margin = new Padding(2, 1, 2, 1);
-            Newtransaction.Name = "Newtransaction";
-            Newtransaction.Size = new Size(136, 22);
-            Newtransaction.TabIndex = 7;
-            Newtransaction.Text = "Newtransaction";
-            Newtransaction.UseVisualStyleBackColor = true;
-            Newtransaction.Click += Newtransaction_Click;
+            btnTransfer.Location = new Point(12, 142);
+            btnTransfer.Margin = new Padding(2, 1, 2, 1);
+            btnTransfer.Name = "btnTransfer";
+            btnTransfer.Size = new Size(173, 50);
+            btnTransfer.TabIndex = 7;
+            btnTransfer.Text = "Transfer to another User";
+            btnTransfer.UseVisualStyleBackColor = true;
+            btnTransfer.Click += btnTransfer_Click;
             // 
-            // Newcard
+            // btnCard
             // 
-            Newcard.Location = new Point(272, 415);
-            Newcard.Margin = new Padding(2, 1, 2, 1);
-            Newcard.Name = "Newcard";
-            Newcard.Size = new Size(81, 22);
-            Newcard.TabIndex = 8;
-            Newcard.Text = "Newcard";
-            Newcard.UseVisualStyleBackColor = true;
-            Newcard.Click += Newcard_Click;
+            btnCard.Location = new Point(12, 210);
+            btnCard.Margin = new Padding(2, 1, 2, 1);
+            btnCard.Name = "btnCard";
+            btnCard.Size = new Size(173, 50);
+            btnCard.TabIndex = 8;
+            btnCard.Text = "New Credit Card";
+            btnCard.UseVisualStyleBackColor = true;
+            btnCard.Click += btnCard_Click;
             // 
-            // errorProvider1
+            // dgvTransactions
             // 
-            errorProvider1.ContainerControl = this;
+            dgvTransactions.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvTransactions.Location = new Point(254, 283);
+            dgvTransactions.Name = "dgvTransactions";
+            dgvTransactions.RowHeadersWidth = 82;
+            dgvTransactions.Size = new Size(1045, 150);
+            dgvTransactions.TabIndex = 9;
+            // 
+            // btnLoan
+            // 
+            btnLoan.Location = new Point(12, 76);
+            btnLoan.Margin = new Padding(2, 1, 2, 1);
+            btnLoan.Name = "btnLoan";
+            btnLoan.Size = new Size(173, 50);
+            btnLoan.TabIndex = 11;
+            btnLoan.Text = "Take out a Loan";
+            btnLoan.UseVisualStyleBackColor = true;
+            btnLoan.Click += btnLoan_Click;
+            // 
+            // btnPayCard
+            // 
+            btnPayCard.Location = new Point(12, 283);
+            btnPayCard.Margin = new Padding(2, 1, 2, 1);
+            btnPayCard.Name = "btnPayCard";
+            btnPayCard.Size = new Size(173, 50);
+            btnPayCard.TabIndex = 12;
+            btnPayCard.Text = "Pay Card";
+            btnPayCard.UseVisualStyleBackColor = true;
+            btnPayCard.Click += btnPayCard_Click;
+            // 
+            // lblAccount
+            // 
+            lblAccount.AutoSize = true;
+            lblAccount.Location = new Point(257, 18);
+            lblAccount.Name = "lblAccount";
+            lblAccount.Size = new Size(57, 15);
+            lblAccount.TabIndex = 13;
+            lblAccount.Text = "Accounts";
+            // 
+            // lblTransactions
+            // 
+            lblTransactions.AutoSize = true;
+            lblTransactions.Location = new Point(254, 254);
+            lblTransactions.Name = "lblTransactions";
+            lblTransactions.Size = new Size(72, 15);
+            lblTransactions.TabIndex = 14;
+            lblTransactions.Text = "Transactions";
+            // 
+            // btnPayLoan
+            // 
+            btnPayLoan.Location = new Point(12, 362);
+            btnPayLoan.Margin = new Padding(2, 1, 2, 1);
+            btnPayLoan.Name = "btnPayLoan";
+            btnPayLoan.Size = new Size(173, 50);
+            btnPayLoan.TabIndex = 15;
+            btnPayLoan.Text = "Pay Loan";
+            btnPayLoan.UseVisualStyleBackColor = true;
+            btnPayLoan.Click += btnPayLoan_Click;
             // 
             // frmUser
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
-            Controls.Add(Newcard);
-            Controls.Add(Newtransaction);
+            ClientSize = new Size(1329, 579);
+            Controls.Add(btnPayLoan);
+            Controls.Add(lblTransactions);
+            Controls.Add(lblAccount);
+            Controls.Add(btnPayCard);
+            Controls.Add(btnLoan);
+            Controls.Add(dgvTransactions);
+            Controls.Add(btnCard);
+            Controls.Add(btnTransfer);
             Controls.Add(dgvAccounts);
-            Controls.Add(lblBalance);
             Controls.Add(btnTestConnection);
             Controls.Add(btnLogout);
             Controls.Add(btnExit);
@@ -141,7 +196,7 @@
             Name = "frmUser";
             Text = "User";
             ((System.ComponentModel.ISupportInitialize)dgvAccounts).EndInit();
-            ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvTransactions).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -152,10 +207,14 @@
         private Button btnExit;
         private Button btnLogout;
         private Button btnTestConnection;
-        private Label lblBalance;
         private DataGridView dgvAccounts;
-        private Button Newtransaction;
-        private Button Newcard;
-        private ErrorProvider errorProvider1;
+        private Button btnTransfer;
+        private Button btnCard;
+        private DataGridView dgvTransactions;
+        private Button btnLoan;
+        private Button btnPayCard;
+        private Label lblAccount;
+        private Label lblTransactions;
+        private Button btnPayLoan;
     }
 }

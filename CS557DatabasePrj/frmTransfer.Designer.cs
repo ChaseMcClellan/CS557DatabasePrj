@@ -1,6 +1,6 @@
 ﻿namespace CS557DatabasePrj.UI
 {
-    partial class frmpayments
+    partial class frmTransfer
     {
         /// <summary>
         /// Required designer variable.
@@ -28,12 +28,32 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "payments";
+            btnClose = new Button();
+            SuspendLayout();
+            // 
+            // btnClose
+            // 
+            btnClose.Location = new Point(713, 415);
+            btnClose.Name = "btnClose";
+            btnClose.Size = new Size(75, 23);
+            btnClose.TabIndex = 1;
+            btnClose.Text = "Close";
+            btnClose.UseVisualStyleBackColor = true;
+            btnClose.Click += btnClose_Click;
+            // 
+            // frmTransfer
+            // 
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(800, 450);
+            Controls.Add(btnClose);
+            Name = "frmTransfer";
+            Text = "frmTransfer";
+            ResumeLayout(false);
         }
 
         #endregion
+
+        private Button btnClose;
     }
 }

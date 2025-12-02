@@ -164,7 +164,7 @@ namespace CS557DatabasePrj.UI
 
             try
             {
-                var repo = new WithdrawalRepository();
+                var repo = new  WithdrawalRepository();
                 int wid = await repo.InsertAsync(w);
 
                 MessageBox.Show($"Withdrawal #{wid} has been recorded and the account balance updated.",

@@ -10,11 +10,16 @@ using System.Windows.Forms;
 
 namespace CS557DatabasePrj.UI
 {
-    public partial class frmpayments : Form
+    public partial class frmTransfer : Form
     {
-        public frmpayments()
+        public frmTransfer()
         {
             InitializeComponent();
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

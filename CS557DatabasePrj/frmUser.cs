@@ -1,37 +1,102 @@
 ﻿using CS557DatabasePrj.BL;
 using CS557DatabasePrj.DL.DB;
 using CS557DatabasePrj.DL.Repo;
-using CS557DatabasePrj.UI; 
+using CS557DatabasePrj.UI;
 using Dapper;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
 
 namespace CS557DatabasePrj
 {
     public partial class frmUser : Form
     {
-        private static User? currentUser = AppSession.CurrentUser;
-        private static List<Account>? accounts = currentUser.Accounts?.ToList();
+        private User? _currentUser;
+        private List<Account> _accounts = new();
+        private List<Transaction> _transactions = new();
 
         public frmUser()
         {
             InitializeComponent();
-            if (currentUser != null)
-            {
-                lblHelloUser.Text = "Hello " + currentUser.FirstName + "!";
-                dgvAccounts.DataSource = accounts;
 
+            this.Load += frmUser_Load;
+            dgvAccounts.SelectionChanged += dgvAccounts_SelectionChanged;
+        }
+
+        private async void frmUser_Load(object? sender, EventArgs e)
+        {
+            _currentUser = AppSession.CurrentUser;
+
+            if (_currentUser == null)
+            {
+                MessageBox.Show("No user is logged in.", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Close();
+                return;
+            }
+
+            lblHelloUser.Text = "Hello " + _currentUser.FirstName + "!";
+
+            await LoadAccountsAsync();
+        }
+
+        private async Task LoadAccountsAsync()
+        {
+            if (_currentUser == null) return;
+
+            try
+            {
+                var acctRepo = new AccountRepository();
+                _accounts = (await acctRepo.GetByUserAsync(_currentUser.Id)).ToList();
+
+                dgvAccounts.AutoGenerateColumns = true;
+                dgvAccounts.DataSource = null;
+                dgvAccounts.DataSource = _accounts;
+
+                if (dgvAccounts.Rows.Count > 0)
+                    dgvAccounts.Rows[0].Selected = true;
+                else
+                {
+                    dgvTransactions.DataSource = null;
+                    _transactions.Clear();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error loading accounts: " + ex.Message,
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private async void dgvAccounts_SelectionChanged(object? sender, EventArgs e)
+        {
+            if (dgvAccounts.CurrentRow?.DataBoundItem is not Account acct)
+                return;
+
+            await LoadTransactionsAsync(acct.Id);
+        }
+
+        private async Task LoadTransactionsAsync(int accountId)
+        {
+            try
+            {
+                var txRepo = new TransactionRepository();
+                _transactions = (await txRepo.GetByAccountAsync(accountId, limit: 50)).ToList();
+
+                dgvTransactions.AutoGenerateColumns = true;
+                dgvTransactions.DataSource = null;
+                dgvTransactions.DataSource = _transactions;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error loading transactions: " + ex.Message,
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
 
         private void btnExit_Click(object sender, EventArgs e)
         {
@@ -41,7 +106,7 @@ namespace CS557DatabasePrj
         private void btnLogout_Click(object sender, EventArgs e)
         {
             AppSession.CurrentUser = null;
-            frmLogin loginForm = new frmLogin();
+            var loginForm = new frmLogin();
             loginForm.Show();
             this.Hide();
         }
@@ -62,31 +127,46 @@ namespace CS557DatabasePrj
                 var one = await conn.ExecuteScalarAsync<int>("SELECT 1;");
 
                 var accountCount = await conn.ExecuteScalarAsync<int>(
-                    "SELECT COUNT(*) FROM Accounts WHERE Id = @uid;",
+                    "SELECT COUNT(*) FROM Accounts WHERE OwnerUserId = @uid;",
                     new { uid = AppSession.CurrentUser.Id });
 
                 MessageBox.Show(
-                    $"DB OK (SELECT 1 = {one}). Accounts for {AppSession.CurrentUser.FirstName}: {accountCount}" + " current user " +
-                    "accounts: " + AppSession.CurrentUser.Accounts.ToString());
+                    $"DB OK (SELECT 1 = {one}). Accounts for {AppSession.CurrentUser.FirstName}: {accountCount}");
             }
             catch (Exception ex)
             {
                 MessageBox.Show("DB error: " + ex.Message);
             }
         }
-        
 
-        private void Newcard_Click(object sender, EventArgs e)
+        private void btnLoan_Click(object sender, EventArgs e)
         {
-            var frm = new frmCard();
+            var frm = new frmAddLoan();
             frm.Show();
         }
 
-        private void Newtransaction_Click(object sender, EventArgs e)
+        private void btnTransfer_Click(object sender, EventArgs e)
         {
-            var frm = new frmpayments();
+            var frm = new frmTransfer();
             frm.Show();
         }
 
+        private void btnCard_Click(object sender, EventArgs e)
+        {
+            var frm = new frmAddCard();
+            frm.Show();
+        }
+
+        private void btnPayCard_Click(object sender, EventArgs e)
+        {
+            var frm = new frmPayCard();
+            frm.Show();
+        }
+
+        private void btnPayLoan_Click(object sender, EventArgs e)
+        {
+            var frm = new frmPayLoan();
+            frm.Show();
+        }
     }
 }
