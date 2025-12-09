@@ -53,8 +53,6 @@
             btnClose = new Button();
             lblBranch = new Label();
             cmbBranch = new ComboBox();
-            lblPasswordConfirm = new Label();
-            txtPassConfirm = new TextBox();
             lblSSN = new Label();
             lblPhone = new Label();
             lblLast = new Label();
@@ -238,22 +236,6 @@
             cmbBranch.Size = new Size(121, 23);
             cmbBranch.TabIndex = 75;
             // 
-            // lblPasswordConfirm
-            // 
-            lblPasswordConfirm.AutoSize = true;
-            lblPasswordConfirm.Location = new Point(10, 271);
-            lblPasswordConfirm.Name = "lblPasswordConfirm";
-            lblPasswordConfirm.Size = new Size(104, 15);
-            lblPasswordConfirm.TabIndex = 74;
-            lblPasswordConfirm.Text = "Confirm Password";
-            // 
-            // txtPassConfirm
-            // 
-            txtPassConfirm.Location = new Point(120, 268);
-            txtPassConfirm.Name = "txtPassConfirm";
-            txtPassConfirm.Size = new Size(100, 23);
-            txtPassConfirm.TabIndex = 73;
-            // 
             // lblSSN
             // 
             lblSSN.AutoSize = true;
@@ -275,7 +257,7 @@
             // lblLast
             // 
             lblLast.AutoSize = true;
-            lblLast.Location = new Point(52, 392);
+            lblLast.Location = new Point(52, 351);
             lblLast.Name = "lblLast";
             lblLast.Size = new Size(63, 15);
             lblLast.TabIndex = 70;
@@ -284,7 +266,7 @@
             // lblFirst
             // 
             lblFirst.AutoSize = true;
-            lblFirst.Location = new Point(51, 350);
+            lblFirst.Location = new Point(51, 309);
             lblFirst.Name = "lblFirst";
             lblFirst.Size = new Size(64, 15);
             lblFirst.TabIndex = 69;
@@ -293,7 +275,7 @@
             // lblEmail
             // 
             lblEmail.AutoSize = true;
-            lblEmail.Location = new Point(78, 311);
+            lblEmail.Location = new Point(78, 270);
             lblEmail.Name = "lblEmail";
             lblEmail.Size = new Size(36, 15);
             lblEmail.TabIndex = 68;
@@ -329,7 +311,7 @@
             // 
             // txtEmail
             // 
-            txtEmail.Location = new Point(120, 308);
+            txtEmail.Location = new Point(120, 267);
             txtEmail.Name = "txtEmail";
             txtEmail.Size = new Size(100, 23);
             txtEmail.TabIndex = 64;
@@ -364,14 +346,14 @@
             // 
             // txtLast
             // 
-            txtLast.Location = new Point(120, 389);
+            txtLast.Location = new Point(120, 348);
             txtLast.Name = "txtLast";
             txtLast.Size = new Size(100, 23);
             txtLast.TabIndex = 59;
             // 
             // txtFirst
             // 
-            txtFirst.Location = new Point(120, 347);
+            txtFirst.Location = new Point(120, 306);
             txtFirst.Name = "txtFirst";
             txtFirst.Size = new Size(100, 23);
             txtFirst.TabIndex = 58;
@@ -383,8 +365,6 @@
             ClientSize = new Size(800, 450);
             Controls.Add(lblBranch);
             Controls.Add(cmbBranch);
-            Controls.Add(lblPasswordConfirm);
-            Controls.Add(txtPassConfirm);
             Controls.Add(lblSSN);
             Controls.Add(lblPhone);
             Controls.Add(lblLast);
@@ -437,8 +417,6 @@
         private Button btnClose;
         private Label lblBranch;
         private ComboBox cmbBranch;
-        private Label lblPasswordConfirm;
-        private TextBox txtPassConfirm;
         private Label lblSSN;
         private Label lblPhone;
         private Label lblLast;

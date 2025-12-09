@@ -99,7 +99,7 @@
             btnTransfer.Name = "btnTransfer";
             btnTransfer.Size = new Size(173, 50);
             btnTransfer.TabIndex = 7;
-            btnTransfer.Text = "Transfer to another User";
+            btnTransfer.Text = "Transfer";
             btnTransfer.UseVisualStyleBackColor = true;
             btnTransfer.Click += btnTransfer_Click;
             // 
