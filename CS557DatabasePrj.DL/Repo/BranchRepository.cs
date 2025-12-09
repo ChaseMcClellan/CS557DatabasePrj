@@ -22,11 +22,11 @@ namespace CS557DatabasePrj.DL.Repo
         {
             using var conn = Open();
             var sql = @"
-INSERT INTO Branches
-(Name, AddressLine1, AddressLine2, City, State, PostalCode, Phone, CreatedUtc, CreatedByUserId, IsActive)
-VALUES
-(@Name, @AddressLine1, @AddressLine2, @City, @State, @PostalCode, @Phone, @CreatedUtc, @CreatedByUserId, @IsActive);
-SELECT LAST_INSERT_ID();";
+              (Name, AddressLine1, AddressLine2, City, State, PostalCode, Phone, CreatedUtc, CreatedByUserId, IsActive)
+              INSERT INTO Branches
+              VALUES
+              (@Name, @AddressLine1, @AddressLine2, @City, @State, @PostalCode, @Phone, @CreatedUtc, @CreatedByUserId, @IsActive);
+              SELECT LAST_INSERT_ID();";
             return await conn.ExecuteScalarAsync<int>(sql, b);
         }
 
@@ -34,11 +34,11 @@ SELECT LAST_INSERT_ID();";
         {
             using var conn = Open();
             var sql = @"
-UPDATE Branches SET
- Name=@Name, AddressLine1=@AddressLine1, AddressLine2=@AddressLine2,
- City=@City, State=@State, PostalCode=@PostalCode, Phone=@Phone,
- UpdatedUtc=@UpdatedUtc, UpdatedByUserId=@UpdatedByUserId, IsActive=@IsActive
-WHERE Id=@Id;";
+              UPDATE Branches SET
+               Name=@Name, AddressLine1=@AddressLine1, AddressLine2=@AddressLine2,
+               City=@City, State=@State, PostalCode=@PostalCode, Phone=@Phone,
+               UpdatedUtc=@UpdatedUtc, UpdatedByUserId=@UpdatedByUserId, IsActive=@IsActive
+              WHERE Id=@Id;";
             return (await conn.ExecuteAsync(sql, b)) > 0;
         }
 

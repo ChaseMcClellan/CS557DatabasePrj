@@ -15,11 +15,11 @@ namespace CS557DatabasePrj.DL.Repo
         {
             using var conn = Open();
             var sql = @"
-INSERT INTO Cards
-(CardNumberMasked, CardType, ExpirationUtc, CardholderName, AccountId, OwnerUserId, CreatedUtc, CreatedByUserId, IsActive)
-VALUES
-(@CardNumberMasked, @CardType, @ExpirationUtc, @CardholderName, @AccountId, @OwnerUserId, @CreatedUtc, @CreatedByUserId, @IsActive);
-SELECT LAST_INSERT_ID();";
+              INSERT INTO Cards
+              (CardNumberMasked, CardType, ExpirationUtc, CardholderName, AccountId, OwnerUserId, CreatedUtc, CreatedByUserId, IsActive)
+              VALUES
+              (@CardNumberMasked, @CardType, @ExpirationUtc, @CardholderName, @AccountId, @OwnerUserId, @CreatedUtc, @CreatedByUserId, @IsActive);
+              SELECT LAST_INSERT_ID();";
             return await conn.ExecuteScalarAsync<int>(sql, c);
         }
 

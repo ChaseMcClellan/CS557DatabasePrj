@@ -18,11 +18,11 @@ namespace CS557DatabasePrj.DL.Repo
 
                 // 2) Insert withdrawal
                 var wid = await conn.ExecuteScalarAsync<int>(@"
-INSERT INTO Withdrawals
-(AccountId, Amount, Method, ProcessedUtc, CreatedUtc, CreatedByUserId, IsActive)
-VALUES
-(@AccountId, @Amount, @Method, @ProcessedUtc, @CreatedUtc, @CreatedByUserId, @IsActive);
-SELECT LAST_INSERT_ID();", w, tx);
+                  INSERT INTO Withdrawals
+                  (AccountId, Amount, Method, ProcessedUtc, CreatedUtc, CreatedByUserId, IsActive)
+                  VALUES
+                  (@AccountId, @Amount, @Method, @ProcessedUtc, @CreatedUtc, @CreatedByUserId, @IsActive);
+                  SELECT LAST_INSERT_ID();", w, tx);
 
                 // 3) Update balance
                 await conn.ExecuteAsync(

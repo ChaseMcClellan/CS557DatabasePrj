@@ -30,13 +30,13 @@ namespace CS557DatabasePrj.DL.Repo
         {
             using var conn = Open();
             var sql = @"
-INSERT INTO Users
-(Username, PasswordHash, FirstName, LastName, Email, Phone, SsnHash, RoleId, HomeBranchId,
- CreatedUtc, CreatedByUserId, IsActive)
-VALUES
-(@Username, @PasswordHash, @FirstName, @LastName, @Email, @Phone, @SsnHash, @RoleId, @HomeBranchId,
- @CreatedUtc, @CreatedByUserId, @IsActive);
-SELECT LAST_INSERT_ID();";
+              INSERT INTO Users
+              (Username, PasswordHash, FirstName, LastName, Email, Phone, SsnHash, RoleId, HomeBranchId,
+               CreatedUtc, CreatedByUserId, IsActive)
+              VALUES
+              (@Username, @PasswordHash, @FirstName, @LastName, @Email, @Phone, @SsnHash, @RoleId, @HomeBranchId,
+               @CreatedUtc, @CreatedByUserId, @IsActive);
+              SELECT LAST_INSERT_ID();";
             return await conn.ExecuteScalarAsync<int>(sql, u);
         }
 
@@ -44,11 +44,11 @@ SELECT LAST_INSERT_ID();";
         {
             using var conn = Open();
             var sql = @"
-UPDATE Users SET
- Username=@Username, FirstName=@FirstName, LastName=@LastName, Email=@Email, Phone=@Phone,
- SsnHash=@SsnHash, RoleId=@RoleId, HomeBranchId=@HomeBranchId,
- UpdatedUtc=@UpdatedUtc, UpdatedByUserId=@UpdatedByUserId, IsActive=@IsActive
-WHERE Id=@Id;";
+              UPDATE Users SET
+               Username=@Username, FirstName=@FirstName, LastName=@LastName, Email=@Email, Phone=@Phone,
+               SsnHash=@SsnHash, RoleId=@RoleId, HomeBranchId=@HomeBranchId,
+               UpdatedUtc=@UpdatedUtc, UpdatedByUserId=@UpdatedByUserId, IsActive=@IsActive
+              WHERE Id=@Id;";
             return (await conn.ExecuteAsync(sql, u)) > 0;
         }
 

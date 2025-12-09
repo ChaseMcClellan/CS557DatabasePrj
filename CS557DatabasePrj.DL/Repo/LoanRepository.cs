@@ -15,11 +15,11 @@ namespace CS557DatabasePrj.DL.Repo
         {
             using var conn = Open();
             var sql = @"
-INSERT INTO Loans
-(AccountId, Principal, AnnualInterestRate, TermMonths, StartUtc, Status, CreatedUtc, CreatedByUserId, IsActive)
-VALUES
-(@AccountId, @Principal, @AnnualInterestRate, @TermMonths, @StartUtc, @Status, @CreatedUtc, @CreatedByUserId, @IsActive);
-SELECT LAST_INSERT_ID();";
+              INSERT INTO Loans
+              (AccountId, Principal, AnnualInterestRate, TermMonths, StartUtc, Status, CreatedUtc, CreatedByUserId, IsActive)
+              VALUES
+              (@AccountId, @Principal, @AnnualInterestRate, @TermMonths, @StartUtc, @Status, @CreatedUtc, @CreatedByUserId, @IsActive);
+              SELECT LAST_INSERT_ID();";
             return await conn.ExecuteScalarAsync<int>(sql, l);
         }
 
@@ -27,11 +27,11 @@ SELECT LAST_INSERT_ID();";
         {
             using var conn = Open();
             var sql = @"
-UPDATE Loans SET
- Principal=@Principal, AnnualInterestRate=@AnnualInterestRate, TermMonths=@TermMonths,
- StartUtc=@StartUtc, Status=@Status,
- UpdatedUtc=@UpdatedUtc, UpdatedByUserId=@UpdatedByUserId, IsActive=@IsActive
-WHERE Id=@Id;";
+            UPDATE Loans SET
+             Principal=@Principal, AnnualInterestRate=@AnnualInterestRate, TermMonths=@TermMonths,
+             StartUtc=@StartUtc, Status=@Status,
+             UpdatedUtc=@UpdatedUtc, UpdatedByUserId=@UpdatedByUserId, IsActive=@IsActive
+            WHERE Id=@Id;";
             return (await conn.ExecuteAsync(sql, l)) > 0;
         }
     }

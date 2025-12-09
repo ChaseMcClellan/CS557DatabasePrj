@@ -21,12 +21,13 @@ namespace CS557DatabasePrj.DL.Repo
                 if (fromBal < tr.Amount) throw new InvalidOperationException("Insufficient funds.");
 
                 // 1) Insert transfer
-                var tid = await conn.ExecuteScalarAsync<int>(@"
-INSERT INTO Transfers
-(FromAccountId, ToAccountId, InitiatedByUserId, Amount, Memo, ExecutedUtc, CreatedUtc, CreatedByUserId, IsActive)
-VALUES
-(@FromAccountId, @ToAccountId, @InitiatedByUserId, @Amount, @Memo, @ExecutedUtc, @CreatedUtc, @CreatedByUserId, @IsActive);
-SELECT LAST_INSERT_ID();", tr, tx);
+                var tid = await conn.ExecuteScalarAsync<int>(
+                  @"
+                  INSERT INTO Transfers
+                  (FromAccountId, ToAccountId, InitiatedByUserId, Amount, Memo, ExecutedUtc, CreatedUtc, CreatedByUserId, IsActive)
+                  VALUES
+                  (@FromAccountId, @ToAccountId, @InitiatedByUserId, @Amount, @Memo, @ExecutedUtc, @CreatedUtc, @CreatedByUserId, @IsActive);
+                  SELECT LAST_INSERT_ID();", tr, tx);
 
                 // 2) Update balances
                 await conn.ExecuteAsync("UPDATE Accounts SET CurrentBalance = CurrentBalance - @a WHERE Id=@id;",

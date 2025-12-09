@@ -36,11 +36,11 @@ namespace CS557DatabasePrj.DL.Repo
         {
             using var conn = Open();
             var sql = @"
-INSERT INTO Transactions
-(AccountId, Kind, Amount, Memo, PostedUtc, RelatedEntityId, CreatedUtc, CreatedByUserId, IsActive)
-VALUES
-(@AccountId, @Kind, @Amount, @Memo, @PostedUtc, @RelatedEntityId, @CreatedUtc, @CreatedByUserId, @IsActive);
-SELECT LAST_INSERT_ID();";
+              INSERT INTO Transactions
+              (AccountId, Kind, Amount, Memo, PostedUtc, RelatedEntityId, CreatedUtc, CreatedByUserId, IsActive)
+              VALUES
+              (@AccountId, @Kind, @Amount, @Memo, @PostedUtc, @RelatedEntityId, @CreatedUtc, @CreatedByUserId, @IsActive);
+              SELECT LAST_INSERT_ID();";
             return await conn.ExecuteScalarAsync<int>(sql, t);
         }
 
@@ -52,11 +52,11 @@ SELECT LAST_INSERT_ID();";
             try
             {
                 var sql = @"
-INSERT INTO Transactions
-(AccountId, Kind, Amount, Memo, PostedUtc, RelatedEntityId, CreatedUtc, CreatedByUserId, IsActive)
-VALUES
-(@AccountId, @Kind, @Amount, @Memo, @PostedUtc, @RelatedEntityId, @CreatedUtc, @CreatedByUserId, @IsActive);
-SELECT LAST_INSERT_ID();";
+                  INSERT INTO Transactions
+                  (AccountId, Kind, Amount, Memo, PostedUtc, RelatedEntityId, CreatedUtc, CreatedByUserId, IsActive)
+                  VALUES
+                  (@AccountId, @Kind, @Amount, @Memo, @PostedUtc, @RelatedEntityId, @CreatedUtc, @CreatedByUserId, @IsActive);
+                  SELECT LAST_INSERT_ID();";
 
                 int id = await conn.ExecuteScalarAsync<int>(sql, t, tx);
 
@@ -80,17 +80,17 @@ SELECT LAST_INSERT_ID();";
         {
             using var conn = Open();
             var sql = @"
-UPDATE Transactions SET
-    AccountId       = @AccountId,
-    Kind            = @Kind,
-    Amount          = @Amount,
-    Memo            = @Memo,
-    PostedUtc       = @PostedUtc,
-    RelatedEntityId = @RelatedEntityId,
-    UpdatedUtc      = @UpdatedUtc,
-    UpdatedByUserId = @UpdatedByUserId,
-    IsActive        = @IsActive
-WHERE Id = @Id;";
+              UPDATE Transactions SET
+                  AccountId       = @AccountId,
+                  Kind            = @Kind,
+                  Amount          = @Amount,
+                  Memo            = @Memo,
+                  PostedUtc       = @PostedUtc,
+                  RelatedEntityId = @RelatedEntityId,
+                  UpdatedUtc      = @UpdatedUtc,
+                  UpdatedByUserId = @UpdatedByUserId,
+                  IsActive        = @IsActive
+              WHERE Id = @Id;";
             return (await conn.ExecuteAsync(sql, t)) > 0;
         }
 
@@ -98,9 +98,9 @@ WHERE Id = @Id;";
         {
             using var conn = Open();
             var sql = @"
-SELECT * FROM Transactions
-ORDER BY PostedUtc DESC
-LIMIT @limit OFFSET @offset;";
+              SELECT * FROM Transactions
+              ORDER BY PostedUtc DESC
+              LIMIT @limit OFFSET @offset;";
             return await conn.QueryAsync<Transaction>(sql, new { limit, offset });
         }
 
@@ -112,17 +112,17 @@ LIMIT @limit OFFSET @offset;";
             try
             {
                 var sql = @"
-UPDATE Transactions SET
-    AccountId       = @AccountId,
-    Kind            = @Kind,
-    Amount          = @Amount,
-    Memo            = @Memo,
-    PostedUtc       = @PostedUtc,
-    RelatedEntityId = @RelatedEntityId,
-    UpdatedUtc      = @UpdatedUtc,
-    UpdatedByUserId = @UpdatedByUserId,
-    IsActive        = @IsActive
-WHERE Id = @Id;";
+                  UPDATE Transactions SET
+                      AccountId       = @AccountId,
+                      Kind            = @Kind,
+                      Amount          = @Amount,
+                      Memo            = @Memo,
+                      PostedUtc       = @PostedUtc,
+                      RelatedEntityId = @RelatedEntityId,
+                      UpdatedUtc      = @UpdatedUtc,
+                      UpdatedByUserId = @UpdatedByUserId,
+                      IsActive        = @IsActive
+                  WHERE Id = @Id;";
 
                 await conn.ExecuteAsync(sql, updated, tx);
 
@@ -167,11 +167,11 @@ WHERE Id = @Id;";
             try
             {
                 var sql = @"
-INSERT INTO Transactions
-(AccountId, Kind, Amount, Memo, PostedUtc, RelatedEntityId, CreatedUtc, CreatedByUserId, IsActive)
-VALUES
-(@AccountId, @Kind, @Amount, @Memo, @PostedUtc, @RelatedEntityId, @CreatedUtc, @CreatedByUserId, @IsActive);
-SELECT LAST_INSERT_ID();";
+                  INSERT INTO Transactions
+                  (AccountId, Kind, Amount, Memo, PostedUtc, RelatedEntityId, CreatedUtc, CreatedByUserId, IsActive)
+                  VALUES
+                  (@AccountId, @Kind, @Amount, @Memo, @PostedUtc, @RelatedEntityId, @CreatedUtc, @CreatedByUserId, @IsActive);
+                  SELECT LAST_INSERT_ID();";
 
                 int newId = await conn.ExecuteScalarAsync<int>(sql, reversal, tx);
 
