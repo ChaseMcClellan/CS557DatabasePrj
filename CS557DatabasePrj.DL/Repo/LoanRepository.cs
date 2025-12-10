@@ -11,6 +11,18 @@ namespace CS557DatabasePrj.DL.Repo
             return await conn.QuerySingleOrDefaultAsync<Loan>("SELECT * FROM Loans WHERE AccountId=@accountId;", new { accountId });
         }
 
+        public async Task<IEnumerable<Loan>> GetByUserAsync(int userId)
+        {
+            using var conn = Open();
+            var sql = @"
+SELECT  l.*
+FROM    Loans l
+JOIN    Accounts a ON l.AccountId = a.Id
+WHERE   a.OwnerUserId = @userId
+ORDER BY l.StartUtc DESC;";
+            return await conn.QueryAsync<Loan>(sql, new { userId });
+        }
+
         public async Task<int> InsertAsync(Loan l)
         {
             using var conn = Open();

@@ -114,7 +114,6 @@ namespace CS557DatabasePrj.UI
                 TermMonths = termMonths,
                 StartUtc = DateTime.UtcNow,
                 Status = LoanStatus.Pending,
-
                 CreatedUtc = DateTime.UtcNow,
                 CreatedByUserId = _currentUser.Id,
                 IsActive = true
@@ -122,8 +121,11 @@ namespace CS557DatabasePrj.UI
 
             try
             {
-                var repo = new LoanRepository();
-                int loanId = await repo.InsertAsync(loan);
+                var loanRepo = new LoanRepository();
+                int loanId = await loanRepo.InsertAsync(loan);
+
+                var acctRepo = new AccountRepository();
+                await acctRepo.ApplyLoanFundingAsync(account.Id, principal, _currentUser.Id, loanId);
 
                 MessageBox.Show($"Loan #{loanId} created successfully.",
                     "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);

@@ -24,6 +24,55 @@ namespace CS557DatabasePrj.DL.Repo
                 "SELECT * FROM Accounts WHERE OwnerUserId=@ownerUserId ORDER BY Id;", new { ownerUserId });
         }
 
+        public async Task ApplyLoanFundingAsync(int accountId, decimal amount, int userId, int loanId)
+        {
+            using var conn = Open();
+            using var tx = conn.BeginTransaction();
+
+            // 1) Increase account balance
+            await conn.ExecuteAsync(
+                "UPDATE Accounts SET CurrentBalance = CurrentBalance + @amount WHERE Id = @id;",
+                new { amount, id = accountId }, tx);
+
+            // 2) Insert a deposit row (optional but nice for history)
+            var depositId = await conn.ExecuteScalarAsync<int>(@"
+INSERT INTO Deposits
+    (AccountId, Source, ReceivedUtc, Amount, CreatedUtc)
+VALUES
+    (@AccountId, @Source, @ReceivedUtc, @Amount, @CreatedUtc);
+SELECT LAST_INSERT_ID();",
+                new
+                {
+                    AccountId = accountId,
+                    Source = "Loan funding",
+                    ReceivedUtc = DateTime.UtcNow,
+                    Amount = amount,
+                    CreatedUtc = DateTime.UtcNow
+                }, tx);
+
+            // 3) Insert a transaction row (if you’re using the transactions table)
+            await conn.ExecuteAsync(@"
+INSERT INTO Transactions
+    (AccountId, Kind, Amount, Memo, PostedUtc,
+     RelatedEntityId, CreatedUtc, IsActive, CreatedByUserId)
+VALUES
+    (@AccountId, 1, @Amount, @Memo, @PostedUtc,
+     @RelatedEntityId, @CreatedUtc, 1, @CreatedByUserId);",
+                new
+                {
+                    AccountId = accountId,
+                    Amount = amount,
+                    Memo = $"Loan #{loanId} funding",
+                    PostedUtc = DateTime.UtcNow,
+                    RelatedEntityId = depositId,
+                    CreatedUtc = DateTime.UtcNow,
+                    CreatedByUserId = userId
+                }, tx);
+
+            tx.Commit();
+        }
+
+
         public async Task<int> InsertAsync(Account a)
         {
             using var conn = Open();

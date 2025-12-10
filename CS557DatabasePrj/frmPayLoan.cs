@@ -35,7 +35,33 @@ namespace CS557DatabasePrj.UI
             }
 
             await LoadAccountsAsync();
+            await LoadLoansAsync();
         }
+
+        private async Task LoadLoansAsync()
+        {
+            if (_currentUser == null) return;
+
+            try
+            {
+                var loanRepo = new LoanRepository();
+                _loans = (await loanRepo.GetByUserAsync(_currentUser.Id)).ToList();
+
+                dgvLoan.AutoGenerateColumns = true;
+                dgvLoan.DataSource = null;
+                dgvLoan.DataSource = _loans;
+
+                if (dgvLoan.Rows.Count > 0)
+                    dgvLoan.Rows[0].Selected = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error loading loans: " + ex.Message,
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
 
         private async Task LoadAccountsAsync()
         {
@@ -64,14 +90,8 @@ namespace CS557DatabasePrj.UI
                     "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-        private async void dgvAccount_SelectionChanged(object sender, EventArgs e)
-        {
-            if (dgvAccount.CurrentRow?.DataBoundItem is not Account acct)
-                return;
-
-            await LoadLoansForAccountAsync(acct.Id);
-        }
+        //delete
+        private async void dgvAccount_SelectionChanged(object sender, EventArgs e){}
 
         private async Task LoadLoansForAccountAsync(int accountId)
         {

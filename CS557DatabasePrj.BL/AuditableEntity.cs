@@ -20,8 +20,7 @@ namespace CS557DatabasePrj.BL
         Checking = 1,
         Savings = 2,
         Credit = 3,
-        Loan = 4,
-        CertificateOfDeposit = 5
+        CertificateOfDeposit = 4
     }
 
     public enum CardType
