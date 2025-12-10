@@ -18,7 +18,6 @@ namespace CS557DatabasePrj.UI
 
             this.Load += FrmViewEmployees_Load;
             dgvEmployee.SelectionChanged += dgvEmployee_SelectionChanged;
-            cmbBranch.SelectedIndexChanged += cmbBranch_SelectedIndexChanged;
         }
 
         private async void FrmViewEmployees_Load(object sender, EventArgs e)
@@ -70,26 +69,12 @@ namespace CS557DatabasePrj.UI
             }
         }
 
-        private async void cmbBranch_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            await ReloadEmployeesGridAsync();
-        }
-
         private async Task ReloadEmployeesGridAsync()
         {
             try
             {
-                if (cmbBranch.SelectedValue == null)
-                {
-                    dgvEmployee.DataSource = null;
-                    _employees.Clear();
-                    return;
-                }
-
-                int branchId = (int)cmbBranch.SelectedValue;
-
                 var repo = new EmployeeRepository();
-                _employees = (await repo.GetByBranchAsync(branchId)).ToList();
+                _employees = (await repo.GetAllAsync()).ToList();
 
                 dgvEmployee.AutoGenerateColumns = false;
                 dgvEmployee.DataSource = null;

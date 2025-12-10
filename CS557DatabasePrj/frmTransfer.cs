@@ -76,7 +76,9 @@ namespace CS557DatabasePrj.UI
             this.Close();
         }
 
-        private async void btnTransfer_Click(object sender, EventArgs e)
+        
+
+        private async void btnTranfer_Click(object sender, EventArgs e)
         {
             if (_currentUser == null)
             {

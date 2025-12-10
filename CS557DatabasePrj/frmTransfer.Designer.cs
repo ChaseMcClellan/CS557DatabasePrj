@@ -58,6 +58,7 @@
             btnTranfer.TabIndex = 2;
             btnTranfer.Text = "Transfer";
             btnTranfer.UseVisualStyleBackColor = true;
+            btnTranfer.Click += btnTranfer_Click;
             // 
             // cmbAccount
             // 
