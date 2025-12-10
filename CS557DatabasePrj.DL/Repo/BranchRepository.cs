@@ -22,11 +22,14 @@ namespace CS557DatabasePrj.DL.Repo
         {
             using var conn = Open();
             var sql = @"
-              (Name, AddressLine1, AddressLine2, City, State, PostalCode, Phone, CreatedUtc, CreatedByUserId, IsActive)
-              INSERT INTO Branches
-              VALUES
-              (@Name, @AddressLine1, @AddressLine2, @City, @State, @PostalCode, @Phone, @CreatedUtc, @CreatedByUserId, @IsActive);
-              SELECT LAST_INSERT_ID();";
+INSERT INTO branches
+    (Name, AddressLine1, AddressLine2, City, State, PostalCode, Phone,
+     CreatedUtc, CreatedByUserId, IsActive)
+VALUES
+    (@Name, @AddressLine1, @AddressLine2, @City, @State, @PostalCode, @Phone,
+     @CreatedUtc, @CreatedByUserId, @IsActive);
+SELECT LAST_INSERT_ID();";
+
             return await conn.ExecuteScalarAsync<int>(sql, b);
         }
 

@@ -16,11 +16,11 @@ namespace CS557DatabasePrj.UI
         {
             InitializeComponent();
 
-            this.Load += FrmViewEmployees_Load;
+            this.Load += frmViewEmployees_Load;
             dgvEmployee.SelectionChanged += dgvEmployee_SelectionChanged;
         }
 
-        private async void FrmViewEmployees_Load(object sender, EventArgs e)
+        private async void frmViewEmployees_Load(object sender, EventArgs e)
         {
             await LoadBranchesAsync();
             await LoadUsersAsync();
