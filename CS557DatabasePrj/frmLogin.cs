@@ -1,5 +1,6 @@
 using CS557DatabasePrj.BL;
-using CS557DatabasePrj.DL.Repo;  // repository namespace
+using CS557DatabasePrj.DL.Repo;
+using CS557DatabasePrj.Security;
 using CS557DatabasePrj.UI;
 using Dapper;
 using System;
@@ -9,7 +10,6 @@ namespace CS557DatabasePrj
 {
     public partial class frmLogin : Form
     {
-        //Declare the field here (this is what fixes CS0103)
         private readonly UserRepository _users = new UserRepository();
 
         public frmLogin()
@@ -22,11 +22,6 @@ namespace CS557DatabasePrj
         private void btnExit_Click(object sender, EventArgs e)
         {
             Application.Exit();
-        }
-
-        private void frmLogin_Load(object sender, EventArgs e)
-        {
-            // optional: DB warm-up
         }
 
         private async void btnLogin_Click(object sender, EventArgs e)
@@ -49,8 +44,9 @@ namespace CS557DatabasePrj
                     return;
                 }
 
-                // TEMP password match (until hashing is added)
-                if (!string.Equals(password, user.PasswordHash, StringComparison.Ordinal))
+                bool valid = CryptoService.VerifyPassword(password, user.PasswordHash);
+
+                if (!valid)
                 {
                     MessageBox.Show("Invalid username or password.");
                     return;

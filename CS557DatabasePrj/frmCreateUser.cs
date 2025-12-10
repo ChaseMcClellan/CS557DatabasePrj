@@ -1,9 +1,6 @@
 ﻿using CS557DatabasePrj.BL;
 using CS557DatabasePrj.DL.Repo;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+using CS557DatabasePrj.Security;
 
 namespace CS557DatabasePrj.UI
 {
@@ -57,8 +54,13 @@ namespace CS557DatabasePrj.UI
             string user = txtUsername.Text.Trim();
             string first = txtFirst.Text.Trim();
             string last = txtLast.Text.Trim();
-            string SSN = txtSSN.Text.Trim();
-            string pass = txtPassword.Text;
+            string rawPassword = txtPassword.Text;
+            string passwordHash = CryptoService.HashPassword(rawPassword);
+
+            string rawSSN = txtSSN.Text.Trim();
+            string ssnHash = string.IsNullOrWhiteSpace(rawSSN)
+                ? null
+                : CryptoService.HashSSN(rawSSN);
             string phone = txtPhone.Text.Trim();
             string email = txtEmail.Text.Trim();
 
@@ -66,7 +68,7 @@ namespace CS557DatabasePrj.UI
 
             int roleId = chkAdmin.Checked ? 1 : 2;
 
-            var newUser = new User(user, pass, first, last, email, phone, SSN, roleId, branchId);
+            var newUser = new User(user, passwordHash, first, last, email, phone, ssnHash, roleId, branchId);
 
             try
             {
