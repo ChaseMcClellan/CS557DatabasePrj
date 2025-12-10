@@ -9,6 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\CS557DatabasePrj.BL\CS557DatabasePrj.BL.csproj" />
     <ProjectReference Include="..\CS557DatabasePrj.DL\CS557DatabasePrj.DL.csproj" />
   </ItemGroup>
