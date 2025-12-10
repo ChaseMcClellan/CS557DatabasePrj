@@ -340,9 +340,7 @@
 
         #endregion
 
-        private ComboBox cmbKind;
         private Label lblDate;
-        private Label label4;
         private Label lblName;
         private Label Amount;
         private Label lblMemo;
