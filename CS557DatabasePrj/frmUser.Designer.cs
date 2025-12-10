@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             lblHelloUser = new Label();
             btnExit = new Button();
             btnLogout = new Button();
@@ -40,6 +41,7 @@
             lblTransactions = new Label();
             btnPayLoan = new Button();
             btnRefresh = new Button();
+            notifyIcon1 = new NotifyIcon(components);
             ((System.ComponentModel.ISupportInitialize)dgvAccounts).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvTransactions).BeginInit();
             SuspendLayout();
@@ -94,7 +96,7 @@
             // 
             // btnTransfer
             // 
-            btnTransfer.Location = new Point(12, 142);
+            btnTransfer.Location = new Point(11, 67);
             btnTransfer.Margin = new Padding(2, 1, 2, 1);
             btnTransfer.Name = "btnTransfer";
             btnTransfer.Size = new Size(173, 50);
@@ -114,7 +116,7 @@
             // 
             // btnLoan
             // 
-            btnLoan.Location = new Point(12, 76);
+            btnLoan.Location = new Point(10, 205);
             btnLoan.Margin = new Padding(2, 1, 2, 1);
             btnLoan.Name = "btnLoan";
             btnLoan.Size = new Size(173, 50);
@@ -143,7 +145,7 @@
             // 
             // btnPayLoan
             // 
-            btnPayLoan.Location = new Point(11, 206);
+            btnPayLoan.Location = new Point(10, 129);
             btnPayLoan.Margin = new Padding(2, 1, 2, 1);
             btnPayLoan.Name = "btnPayLoan";
             btnPayLoan.Size = new Size(173, 50);
@@ -161,6 +163,11 @@
             btnRefresh.Text = "Refresh";
             btnRefresh.UseVisualStyleBackColor = true;
             btnRefresh.Click += btnRefresh_Click;
+            // 
+            // notifyIcon1
+            // 
+            notifyIcon1.Text = "notifyIcon1";
+            notifyIcon1.Visible = true;
             // 
             // frmUser
             // 
@@ -201,5 +208,6 @@
         private Label lblTransactions;
         private Button btnPayLoan;
         private Button btnRefresh;
+        private NotifyIcon notifyIcon1;
     }
 }

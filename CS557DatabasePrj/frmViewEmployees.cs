@@ -18,7 +18,6 @@ namespace CS557DatabasePrj.UI
 
             this.Load += FrmViewEmployees_Load;
             dgvEmployee.SelectionChanged += dgvEmployee_SelectionChanged;
-            cmbBranch.SelectedIndexChanged += cmbBranch_SelectedIndexChanged;
         }
 
         private async void FrmViewEmployees_Load(object sender, EventArgs e)

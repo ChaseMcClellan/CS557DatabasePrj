@@ -45,6 +45,12 @@ namespace CS557DatabasePrj.UI
             this.Close();
         }
 
+        private string GenerateAccountNumber()
+        {
+            return DateTime.Now.Ticks.ToString();
+        }
+
+
         private async void btnSave_Click(object sender, EventArgs e)
         {
 
@@ -64,10 +70,34 @@ namespace CS557DatabasePrj.UI
 
             try
             {
-                var repo = new UserRepository();
-                var id = await repo.InsertAsync(newUser);
+                var userRepo = new UserRepository();
+                int newUserId = await userRepo.InsertAsync(newUser);
+                var accountRepo = new AccountRepository();
 
-                MessageBox.Show("User created successfully.",
+                var checkingAccount = new Account
+                {
+                    OwnerUserId = newUserId,
+                    BranchId = branchId,
+                    AccountType = AccountType.Checking,
+                    CurrentBalance = 0m,
+                    CurrencyCode = "USD",
+                    AccountNumber = GenerateAccountNumber()
+                };
+
+                var savingsAccount = new Account
+                {
+                    OwnerUserId = newUserId,
+                    BranchId = branchId,
+                    AccountType = AccountType.Savings,
+                    CurrentBalance = 0m,
+                    CurrencyCode = "USD",
+                    AccountNumber = GenerateAccountNumber()
+                };
+
+                await accountRepo.InsertAsync(checkingAccount);
+                await accountRepo.InsertAsync(savingsAccount);
+
+                MessageBox.Show("User and default accounts created successfully.",
                     "Success",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information);
