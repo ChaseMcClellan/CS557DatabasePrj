@@ -29,7 +29,12 @@ VALUES
 SELECT LAST_INSERT_ID();";
             return await conn.ExecuteScalarAsync<int>(sql, e);
         }
-
+        public async Task<IEnumerable<Employee>> GetAllAsync()
+        {
+            using var conn = Open();
+            return await conn.QueryAsync<Employee>(
+                "SELECT * FROM Employees ORDER BY LastName, FirstName;");
+        }
         public async Task<bool> UpdateAsync(Employee e)
         {
             using var conn = Open();
