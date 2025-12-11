@@ -1,16 +1,6 @@
-﻿-- what i got right now 12/10 11:17
--- MySQL Workbench Forward Engineering
-
-SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+﻿SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
-
--- -----------------------------------------------------
--- Schema mydb
--- -----------------------------------------------------
--- -----------------------------------------------------
--- Schema bank_db
--- -----------------------------------------------------
 
 -- -----------------------------------------------------
 -- Schema bank_db
@@ -23,16 +13,16 @@ USE `bank_db` ;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bank_db`.`branches` (
   `Id` INT NOT NULL AUTO_INCREMENT,
-  `Name` VARCHAR(100) NOT NULL,
-  `AddressLine1` VARCHAR(120) NOT NULL,
-  `AddressLine2` VARCHAR(120) NULL DEFAULT NULL,
-  `City` VARCHAR(80) NOT NULL,
-  `State` VARCHAR(40) NOT NULL,
-  `PostalCode` VARCHAR(20) NOT NULL,
-  `Phone` VARCHAR(25) NULL DEFAULT NULL,
-  `UpdatedUtc` DATETIME(6) NULL,
-  `CreatedUtc` DATETIME(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
-  `IsActive` TINYINT(1) NOT NULL DEFAULT 1,
+  `Name` VARCHAR(100) NOT NULL DEFAULT '',
+  `AddressLine1` VARCHAR(45) NOT NULL,
+  `AddressLine2` VARCHAR(45) NULL DEFAULT NULL,
+  `City` VARCHAR(45) NOT NULL,
+  `State` VARCHAR(45) NOT NULL,
+  `PostalCode` VARCHAR(45) NOT NULL,
+  `Phone` VARCHAR(45) NULL DEFAULT NULL,
+  `UpdatedUtc` DATETIME NULL,
+  `CreatedUtc` DATETIME NULL DEFAULT current_timestamp,
+  `IsActive` TINYINT NULL,
   `CreatedByUserId` INT NULL,
   `UpdatedByUserId` INT NULL,
   PRIMARY KEY (`Id`))
@@ -45,10 +35,10 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- Table `bank_db`.`roles`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bank_db`.`roles` (
-  `Id` INT NOT NULL,
-  `Name` VARCHAR(50) NOT NULL, -- make name unique
+  `Id` INT NOT NULL AUTO_INCREMENT,
+  `Name` VARCHAR(45) NOT NULL,
   `Description` VARCHAR(255) NULL DEFAULT NULL,
-  `IsAdmin` TINYINT(1) NOT NULL DEFAULT 0,
+  `IsAdmin` TINYINT NOT NULL,
   PRIMARY KEY (`Id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
@@ -60,18 +50,18 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bank_db`.`users` (
   `Id` INT NOT NULL AUTO_INCREMENT,
-  `Username` VARCHAR(50) NOT NULL UNIQUE, -- unq
-  `FirstName` VARCHAR(60) NULL DEFAULT NULL,
-  `LastName` VARCHAR(60) NULL DEFAULT NULL,
-  `PasswordHash` VARCHAR(255) NOT NULL,
-  `Email` VARCHAR(120) NULL DEFAULT NULL,
-  `Phone` VARCHAR(25) NULL DEFAULT NULL,
+  `UserName` VARCHAR(100) NULL DEFAULT NULL,
+  `FirstName` VARCHAR(45) NULL DEFAULT NULL,
+  `LastName` VARCHAR(45) NULL DEFAULT NULL,
+  `PassWordHash` VARCHAR(255) NOT NULL,
+  `Email` VARCHAR(100) NULL DEFAULT NULL,
+  `Phone` VARCHAR(45) NULL DEFAULT NULL,
   `SsnHash` VARCHAR(255) NULL DEFAULT NULL,
   `RoleId` INT NOT NULL,
-  `HomeBranchId` INT NULL,
-   `UpdatedUtc` DATETIME(6) NULL,
-   `CreatedUtc` DATETIME(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
-  `IsActive` TINYINT(1) NOT  NULL DEFAULT 1,
+  `HomeBranchId` INT NULL DEFAULT NULL,
+  `UpdatedUtc` DATETIME NULL,
+  `CreatedUtc` DATETIME NULL DEFAULT current_timestamp,
+  `IsActive` TINYINT NULL,
   `CreatedByUserId` INT NULL,
   `UpdatedByUserId` INT NULL,
   PRIMARY KEY (`Id`),
@@ -79,10 +69,12 @@ CREATE TABLE IF NOT EXISTS `bank_db`.`users` (
   INDEX `UserRole_idx` (`RoleId` ASC) VISIBLE,
   CONSTRAINT `UserBranch`
     FOREIGN KEY (`HomeBranchId`)
-    REFERENCES `bank_db`.`branches` (`Id`),
+    REFERENCES `bank_db`.`branches` (`Id`)
+    ON UPDATE CASCADE,
   CONSTRAINT `UserRole`
     FOREIGN KEY (`RoleId`)
-    REFERENCES `bank_db`.`roles` (`Id`))
+    REFERENCES `bank_db`.`roles` (`Id`)
+    ON UPDATE CASCADE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
@@ -92,7 +84,7 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- Table `bank_db`.`accounttypes`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bank_db`.`accounttypes` (
-  `Id` INT NOT NULL,
+  `Id` INT NOT NULL AUTO_INCREMENT,
   `Type` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`Id`))
 ENGINE = InnoDB
@@ -105,31 +97,34 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bank_db`.`accounts` (
   `Id` INT NOT NULL AUTO_INCREMENT,
-  `AccountNumber` VARCHAR(30) NOT NULL,
-  `AccountType` INT NOT NULL,
+  `AccountNumber` VARCHAR(45) NOT NULL,
   `OwnerUserId` INT NOT NULL,
-  `BranchId` INT NULL,
-  `CurrentBalance` DECIMAL(18,2) NOT NULL DEFAULT 0,
-  `CurrencyCode` CHAR(3) NOT NULL DEFAULT 'USD',
-  `CreatedUtc` DATETIME(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
-  `UpdatedUtc` DATETIME(6) NULL,
-  `IsActive` TINYINT(1) NOT  NULL DEFAULT 1,
+  `BranchId` INT NOT NULL,
+  `CurrentBalance` DECIMAL(15,2) NOT NULL DEFAULT 0,
+  `AccountType` INT NOT NULL,
+  `Createdutc` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
+  `UpdatedUtc` DATETIME NULL,
+  `CurrencyCode` VARCHAR(3) NOT NULL DEFAULT 'USD',
+  `IsActive` TINYINT NULL,
   `UpdatedByUserId` INT NULL,
   `CreatedByUserId` INT NULL,
   PRIMARY KEY (`Id`),
   INDEX `AccountOwner_idx` (`OwnerUserId` ASC) VISIBLE,
   INDEX `AccountBranch_idx` (`BranchId` ASC) VISIBLE,
   INDEX `AccountType_idx` (`AccountType` ASC) VISIBLE,
-  CONSTRAINT UQ_Accounts_Number UNIQUE (AccountNumber),
   CONSTRAINT `AccountBranch`
     FOREIGN KEY (`BranchId`)
-    REFERENCES `bank_db`.`branches` (`Id`),
+    REFERENCES `bank_db`.`branches` (`Id`)
+    ON UPDATE CASCADE,
   CONSTRAINT `AccountOwner`
     FOREIGN KEY (`OwnerUserId`)
-    REFERENCES `bank_db`.`users` (`Id`),
+    REFERENCES `bank_db`.`users` (`Id`)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE,
   CONSTRAINT `AccountType`
     FOREIGN KEY (`AccountType`)
-    REFERENCES `bank_db`.`accounttypes` (`Id`))
+    REFERENCES `bank_db`.`accounttypes` (`Id`)
+    ON UPDATE CASCADE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
@@ -139,7 +134,7 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- Table `bank_db`.`cardtypes`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bank_db`.`cardtypes` (
-  `Id` INT NOT NULL,
+  `Id` INT NOT NULL AUTO_INCREMENT,
   `Type` VARCHAR(45) NULL DEFAULT NULL,
   PRIMARY KEY (`Id`))
 ENGINE = InnoDB
@@ -150,17 +145,16 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- -----------------------------------------------------
 -- Table `bank_db`.`cards`
 -- -----------------------------------------------------
-
 CREATE TABLE IF NOT EXISTS `bank_db`.`cards` (
   `Id` INT NOT NULL AUTO_INCREMENT,
-  `CardNumberMasked` VARCHAR(25) NOT NULL,
-  `ExpirationUtc`DATETIME(6) NOT NULL,
-  `CardHolderName` VARCHAR(120) NOT NULL,
+  `CardNumberMasked` VARCHAR(255) NOT NULL,
+  `ExpiratationUtc`DATETIME NOT NULL,
+  `CardHolderName` VARCHAR(91) NOT NULL,
   `AccountId` INT NOT NULL,
   `OwnerUserId` INT NOT NULL,
   `CardType` INT NOT NULL,
-  `CreatedUtc` DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
-  `IsActive` TINYINT(1) NOT NULL DEFAULT 1,
+  `CreatedUtc` DATETIME NULL DEFAULT current_timestamp,
+  `IsActive` TINYINT NULL,
   `CreatedByUserId` INT NULL,
   `UpdatedByUserId` INT NULL,
   PRIMARY KEY (`Id`),
@@ -169,39 +163,18 @@ CREATE TABLE IF NOT EXISTS `bank_db`.`cards` (
   INDEX `CardCardType_idx` (`CardType` ASC) VISIBLE,
   CONSTRAINT `CardAccount`
     FOREIGN KEY (`AccountId`)
-    REFERENCES `bank_db`.`accounts` (`Id`),
+    REFERENCES `bank_db`.`accounts` (`Id`)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE,
   CONSTRAINT `CardCardType`
     FOREIGN KEY (`CardType`)
-    REFERENCES `bank_db`.`cardtypes` (`Id`),
+    REFERENCES `bank_db`.`cardtypes` (`Id`)
+    ON UPDATE CASCADE,
   CONSTRAINT `CardOwner`
     FOREIGN KEY (`OwnerUserId`)
-    REFERENCES `bank_db`.`users` (`Id`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
-
-
--- -----------------------------------------------------
--- Table `bank_db`.`deposits`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `bank_db`.`deposits` (
-  `Id` INT NOT NULL DEFAULT 0,
-  `AccountId` INT NOT NULL,
-  `Source` VARCHAR(100) NOT NULL,
-  `ReceivedUtc` DATETIME(6) NOT NULL,
-  `Amount` DECIMAL(18,2) NOT NULL CHECK (Amount >= 0),
-  `UpdatedUtc` DATETIME(6) NULL,
-  `CreatedUtc` DATETIME(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
-  `IsActive` TINYINT(1) NOT  NULL DEFAULT 1,
-  `CreatedByUserId` INT NULL,
-  `UpdatedByUserId` INT NULL,
-  
-  
-  PRIMARY KEY (`Id`),
-  INDEX `DepositAccount_idx` (`AccountId` ASC) VISIBLE,
-  CONSTRAINT `DepositAccount`
-    FOREIGN KEY (`AccountId`)
-    REFERENCES `bank_db`.`accounts` (`Id`))
+    REFERENCES `bank_db`.`users` (`Id`)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
@@ -212,14 +185,14 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bank_db`.`employees` (
   `Id` INT NOT NULL AUTO_INCREMENT,
-  `EmployeeNumber` VARCHAR(40) NOT NULL,
-  `FirstName` VARCHAR(60) NOT NULL,
-  `LastName` VARCHAR(60) NOT NULL,
+  `EmployeeNumber` VARCHAR(45) NULL DEFAULT NULL,
   `BranchId` INT NOT NULL,
-  `UserId` INT NULL,
-  `UpdatedUtc` DATETIME(6) NULL,
-  `CreatedUtc` DATETIME(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
-  `IsActive` TINYINT(1) NOT  NULL DEFAULT 1,
+  `FirstName` VARCHAR(45) NOT NULL,
+  `LastName` VARCHAR(45) NOT NULL,
+  `UserId` INT NULL DEFAULT NULL,
+  `UpdatedUtc` DATETIME NULL,
+  `CreatedUtc` DATETIME NULL DEFAULT current_timestamp,
+  `IsActive` TINYINT NULL,
   `CreatedByUserId` INT NULL,
   `UpdatedByUserId` INT NULL,
   PRIMARY KEY (`Id`),
@@ -228,10 +201,13 @@ CREATE TABLE IF NOT EXISTS `bank_db`.`employees` (
   INDEX `EmployeeUser_idx` (`UserId` ASC) VISIBLE,
   CONSTRAINT `EmployeeBranch`
     FOREIGN KEY (`BranchId`)
-    REFERENCES `bank_db`.`branches` (`Id`),
+    REFERENCES `bank_db`.`branches` (`Id`)
+    ON UPDATE CASCADE,
   CONSTRAINT `EmployeeUser`
     FOREIGN KEY (`UserId`)
-    REFERENCES `bank_db`.`users` (`Id`))
+    REFERENCES `bank_db`.`users` (`Id`)
+    ON UPDATE CASCADE
+    ON DELETE SET NULL)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
@@ -241,7 +217,7 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- Table `bank_db`.`loanstatus`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bank_db`.`loanstatus` (
-  `Id` INT NOT NULL,
+  `Id` INT NOT NULL AUTO_INCREMENT,
   `Type` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`Id`))
 ENGINE = InnoDB
@@ -254,15 +230,15 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bank_db`.`loans` (
   `Id` INT NOT NULL AUTO_INCREMENT,
-  `AccountId` INT NOT NULL, -- unique
-  `Principal` DECIMAL(18,2) NOT NULL CHECK(Principal > 0),
-  `AnnualInterestRate` DECIMAL(9,6) NOT NULL CHECK(AnnualInterestRate > 0),
-  `TermMonths` INT NOT NULL CHECK(TermMonths > 0),
-  `StartUtc`DATETIME(6) NOT NULL,
-  `Status` INT NOT NULL,
-  `UpdatedUtc` DATETIME(6) NULL,
-  `CreatedUtc` DATETIME(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
-  `IsActive` TINYINT(1) NOT  NULL DEFAULT 1,
+  `AccountId` INT NOT NULL,
+  `Principal` DECIMAL(10,0) NOT NULL,
+  `AnnualInterestRate` DECIMAL(10,0) NOT NULL,
+  `TermMonths` INT NOT NULL,
+  `StartUtc`DATETIME NULL DEFAULT NULL,
+  `Status` INT NULL DEFAULT NULL,
+  `UpdatedUtc` DATETIME NULL,
+  `CreatedUtc` DATETIME NULL DEFAULT current_timestamp,
+  `IsActive` TINYINT NULL,
   `CreatedByUserId` INT NULL,
   `UpdatedByUserId` INT NULL,
   PRIMARY KEY (`Id`),
@@ -270,10 +246,13 @@ CREATE TABLE IF NOT EXISTS `bank_db`.`loans` (
   INDEX `LoanStatus_fk_idx` (`Status` ASC) VISIBLE,
   CONSTRAINT `LoanAccount`
     FOREIGN KEY (`AccountId`)
-    REFERENCES `bank_db`.`accounts` (`Id`),
+    REFERENCES `bank_db`.`accounts` (`Id`)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE,
   CONSTRAINT `LoanStatus_fk`
     FOREIGN KEY (`Status`)
-    REFERENCES `bank_db`.`loanstatus` (`Id`))
+    REFERENCES `bank_db`.`loanstatus` (`Id`)
+    ON UPDATE CASCADE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
@@ -283,24 +262,25 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- Table `bank_db`.`loanpayments`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bank_db`.`loanpayments` (
-  `Id` INT NOT NULL DEFAULT 0,
+  `Id` INT NOT NULL AUTO_INCREMENT,
   `LoanId` INT NOT NULL,
-  `Amount` DECIMAL(18,2) NOT NULL CHECK(Amount >=0),
-  `DueDateUTC`DATETIME(6)NOT NULL,
-  `PaidDateUtc`DATETIME(6) NULL,
-  `PrincipalPortion` DECIMAL(18,2) NULL DEFAULT NULL,
-  `InterestPortion` DECIMAL(18,2) NULL DEFAULT NULL,
+  `Amount` DECIMAL(15,2) NOT NULL,
+  `PaidDateUtc`DATETIME NOT NULL,
+  `PrincipalPortion` DECIMAL(15,2) NULL DEFAULT NULL,
+  `InterestPortion` DECIMAL(15,2) NULL DEFAULT NULL,
   `Reference` VARCHAR(45) NULL DEFAULT NULL,
-  `CreatedUtc` DATETIME(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
-  `UpdatedUtc` DATETIME(6) NULL,
-  `IsActive` TINYINT(1) NOT  NULL DEFAULT 1,
+  `DueDateUTC`DATETIME NOT NULL,
+  `CreatedUtc` DATETIME NULL DEFAULT current_timestamp,
+  `IsActive` TINYINT NULL,
   `CreatedByUserId` INT NULL,
   `UpdatedByUserId` INT NULL,
   PRIMARY KEY (`Id`),
   INDEX `LoanPaymentLoan_idx` (`LoanId` ASC) VISIBLE,
   CONSTRAINT `LoanPaymentLoan`
     FOREIGN KEY (`LoanId`)
-    REFERENCES `bank_db`.`loans` (`Id`))
+    REFERENCES `bank_db`.`loans` (`Id`)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
@@ -310,7 +290,7 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- Table `bank_db`.`transactionkinds`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bank_db`.`transactionkinds` (
-  `Id` INT NOT NULL,
+  `Id` INT NOT NULL AUTO_INCREMENT,
   `Type` VARCHAR(45) NULL DEFAULT NULL,
   PRIMARY KEY (`Id`))
 ENGINE = InnoDB
@@ -322,16 +302,15 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- Table `bank_db`.`transfers`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bank_db`.`transfers` (
-  `Id` INT NOT NULL DEFAULT 0,
+  `Id` INT NOT NULL AUTO_INCREMENT,
   `FromAccountId` INT NOT NULL,
   `ToAccountId` INT NOT NULL,
   `InitiatedByUserId` INT NOT NULL,
-  `Amount` DECIMAL(18,2) NOT NULL CHECK(Amount >=0),
+  `Amount` DECIMAL(14,2) NOT NULL,
   `Memo` VARCHAR(255) NULL DEFAULT NULL,
-  `ExecutedUtc` DATETIME(6)NOT NULL,
-  `CreatedUtc` DATETIME(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
-  `UpdatedUtc` DATETIME(6) NULL,
-  `IsActive` TINYINT(1) NOT NULL DEFAULT 1,
+  `ExecutedUtc` DATETIME NULL DEFAULT NULL,
+  `CreatedUtc` DATETIME NULL DEFAULT current_timestamp,
+  `IsActive` TINYINT NULL,
   `CreatedByUserId` INT NULL,
   `UpdatedByUserId` INT NULL,
   PRIMARY KEY (`Id`),
@@ -340,36 +319,68 @@ CREATE TABLE IF NOT EXISTS `bank_db`.`transfers` (
   INDEX `TransferInitiatedByUser_idx` (`InitiatedByUserId` ASC) VISIBLE,
   CONSTRAINT `TransferFromAccount`
     FOREIGN KEY (`FromAccountId`)
-    REFERENCES `bank_db`.`accounts` (`Id`),
+    REFERENCES `bank_db`.`accounts` (`Id`)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE,
   CONSTRAINT `TransferInitiatedByUser`
     FOREIGN KEY (`InitiatedByUserId`)
-    REFERENCES `bank_db`.`users` (`Id`),
+    REFERENCES `bank_db`.`users` (`Id`)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE,
   CONSTRAINT `TransferToAccount`
     FOREIGN KEY (`ToAccountId`)
-    REFERENCES `bank_db`.`accounts` (`Id`))
+    REFERENCES `bank_db`.`accounts` (`Id`)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
+-- -----------------------------------------------------
+-- Table `bank_db`.`deposits`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `bank_db`.`deposits` (
+  `Id` INT NOT NULL,
+  `AccountId` INT NOT NULL,
+  `Source` VARCHAR(45) NOT NULL,
+  `ReceivedUtc` DATETIME NULL DEFAULT NULL,
+  `Amount` DECIMAL(14,2) NULL DEFAULT NULL,
+  `CreatedUtc` DATETIME NULL DEFAULT current_timestamp,
+  `CreatedByUserId` INT NULL,
+  `UpdatedByUserId` INT NULL,
+    `IsActive` TINYINT NULL,
+  PRIMARY KEY (`Id`),
+  INDEX `DepositAccount_idx` (`AccountId` ASC) VISIBLE,
+  CONSTRAINT `DepositAccount`
+    FOREIGN KEY (`AccountId`)
+    REFERENCES `bank_db`.`accounts` (`Id`)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
 
 -- -----------------------------------------------------
 -- Table `bank_db`.`withdrawals`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bank_db`.`withdrawals` (
-  `Id` INT NOT NULL DEFAULT 0,
+  `Id` INT NOT NULL,
   `AccountId` INT NOT NULL,
-  `Amount` DECIMAL(18,2) NOT NULL CHECK (Amount >= 0),
-  `Method` VARCHAR(100) NOT NULL,
-  `ProcessedUtc` DATETIME(6) NOT NULL,
-  `CreatedUtc` DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
-  `IsActive` TINYINT(1) NOT  NULL DEFAULT 1,
+  `Method` VARCHAR(45) NOT NULL,
+  `ReceivedUtc` DATETIME NULL DEFAULT NULL,
+  `Amount` DECIMAL(14,2) NULL DEFAULT NULL,
+  `CreatedUtc` DATETIME NULL DEFAULT current_timestamp,
+  `IsActive` TINYINT NULL,
   `CreatedByUserId` INT NULL,
   `UpdatedByUserId` INT NULL,
+  `ProcessedUtc` DATETIME NULL DEFAULT current_timestamp,
   PRIMARY KEY (`Id`),
   INDEX `DepositAccount_idx` (`AccountId` ASC) VISIBLE,
   CONSTRAINT `WithdrawalAccount`
     FOREIGN KEY (`AccountId`)
-    REFERENCES `bank_db`.`accounts` (`Id`))
+    REFERENCES `bank_db`.`accounts` (`Id`)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
@@ -382,13 +393,13 @@ CREATE TABLE IF NOT EXISTS `bank_db`.`transactions` (
   `Id` INT NOT NULL AUTO_INCREMENT,
   `AccountId` INT NOT NULL,
   `Kind` INT NOT NULL,
-  `Amount` DECIMAL(18,2) NOT NULL,
+  `Amount` DECIMAL(14,2) NOT NULL,
   `Memo` VARCHAR(255) NULL DEFAULT NULL,
-  `PostedUtc` DATETIME(6) NULL DEFAULT NULL,
-  `RelatedEntityId` INT NULL,
-  `UpdatedUtc` DATETIME(6) NULL,
-  `CreatedUtc` DATETIME(6)NULL DEFAULT CURRENT_TIMESTAMP(6),
-  `IsActive` TINYINT(1) NOT  NULL DEFAULT 1,
+  `PostedUtc` DATETIME NULL DEFAULT NULL,
+  `RelatedEntityId` INT NOT NULL,
+  `UpdatedUtc` DATETIME NULL,
+  `CreatedUtc` DATETIME NULL DEFAULT current_timestamp,
+  `IsActive` TINYINT NULL,
   `CreatedByUserId` INT NULL,
   `UpdatedByUserId` INT NULL,
   PRIMARY KEY (`Id`),
@@ -396,10 +407,13 @@ CREATE TABLE IF NOT EXISTS `bank_db`.`transactions` (
   INDEX `TransactionAccount_idx` (`AccountId` ASC) VISIBLE,
   CONSTRAINT `TransactionAccount`
     FOREIGN KEY (`AccountId`)
-    REFERENCES `bank_db`.`accounts` (`Id`),
+    REFERENCES `bank_db`.`accounts` (`Id`)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE,
   CONSTRAINT `TransactionKind`
     FOREIGN KEY (`Kind`)
     REFERENCES `bank_db`.`transactionkinds` (`Id`)
+    ON UPDATE CASCADE
 )ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
@@ -407,11 +421,10 @@ COLLATE = utf8mb4_0900_ai_ci;
 CREATE TABLE IF NOT EXISTS transaction_entity_sequence (
   Id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   EntityType INT NOT NULL,
-  CreatedUtC DATETIME(6)NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+  CreatedUtC DATETIME NOT NULL DEFAULT NOW(),
   INDEX idx_entity_type(EntityType),
-  INDEX idx_created_utc(CreatedUtc)
-  ) AUTO_INCREMENT=100
-  ENGINE = InnoDB; 
+  INDEX idx_created_utc(CreatedUtC)
+  ) ENGINE = InnoDB; 
 -- END TABLES
 
 -- seeding reference tables
@@ -466,7 +479,7 @@ BEGIN
   JOIN users u ON a.OwnerUserId = u.Id
   JOIN accounttypes acct ON a.AccountType = acct.Id
   JOIN branches b ON a.BranchId = b.id
-  WHERE u.Username = p_username;
+  WHERE u.UserName = p_username;
 END$$
 DELIMITER ;
 
@@ -536,10 +549,10 @@ BEGIN
     DECLARE v_account_id INT;
     DECLARE v_account_number VARCHAR(45);
     DECLARE v_owner_name VARCHAR(91);
-    DECLARE v_stored_balance DECIMAL(18,2);
-    DECLARE v_calculated_balance DECIMAL(18,2);
+    DECLARE v_stored_balance DECIMAL(15,2);
+    DECLARE v_calculated_balance DECIMAL(15,2);
     DECLARE v_transaction_count INT;
-    DECLARE v_discrepancy DECIMAL(18,2);
+    DECLARE v_discrepancy DECIMAL(15,2);
     DECLARE v_accounts_checked INT DEFAULT 0;
     DECLARE v_branch_name VARCHAR(100);
     
@@ -566,9 +579,9 @@ BEGIN
     CREATE TEMPORARY TABLE tmp_reconciliation_report (
         AccountNumber VARCHAR(45),
         OwnerName VARCHAR(91),
-        StoredBalance DECIMAL(18,2),
-        CalculatedBalance DECIMAL(18,2),
-        Discrepancy DECIMAL(18,2),
+        StoredBalance DECIMAL(15,2),
+        CalculatedBalance DECIMAL(15,2),
+        Discrepancy DECIMAL(15,2),
         TransactionCount INT,
         `Status` VARCHAR(20)
     );
@@ -655,9 +668,8 @@ BEGIN
     
 END$$
 
-DELIMITER ;
-
 DELIMITER $$
+
 CREATE TRIGGER trg_close_loan_on_zero_balance
 AFTER UPDATE ON accounts
 FOR EACH ROW
@@ -675,6 +687,7 @@ BEGIN
           AND Status != (SELECT Id FROM loanstatus WHERE `Type` = 'Closed');
     END IF;
 END$$
+DELIMITER ;
 
 -- SEEDING
 
@@ -689,7 +702,7 @@ VALUES
      NOW(), 1, NULL, NULL);
 
 INSERT INTO users
-    (Id, Username, FirstName, LastName,
+    (Id, UserName, FirstName, LastName,
      PassWordHash, Email, Phone, SsnHash,
      RoleId, HomeBranchId,
      UpdatedUtc, CreatedUtc, IsActive,
@@ -699,8 +712,37 @@ VALUES
      '$2b$12$BbZPc.vCFy20XGXBX0urWOwCKguw7LV0PgcsPgJGz0kEFoateXklO', 'admin@bank.local', '555-0000', NULL,
      1, 1,
      NOW(), NOW(), 1,
-     NULL, NULL);
+     NULL, NULL),
 
+    (2, 'nick', 'Nick', 'User',
+     'p', 'nick@bank.local', '555-0001', NULL,
+     4, 1,
+     NOW(), NOW(), 1,
+     1, NULL),
+
+    (3, 'chase', 'Chase', 'User',
+     'p', 'chase@bank.local', '555-0002', NULL,
+     4, 1,
+     NOW(), NOW(), 1,
+     1, NULL),
+
+    (4, 'noah', 'Noah', 'User',
+     'p', 'noah@bank.local', '555-0003', NULL,
+     4, 1,
+     NOW(), NOW(), 1,
+     1, NULL),
+
+    (5, 'braydon', 'Braydon', 'User',
+     'p', 'braydon@bank.local', '555-0004', NULL,
+     4, 1,
+     NOW(), NOW(), 1,
+     1, NULL),
+
+    (6, 'harshitha', 'Harshitha', 'User',
+     'p', 'harshitha@bank.local', '555-0005', NULL,
+     4, 1,
+     NOW(), NOW(), 1,
+     1, NULL);
 
 INSERT INTO employees
     (Id, EmployeeNumber, BranchId, FirstName, LastName, UserId,
@@ -720,239 +762,142 @@ INSERT INTO accounts
 VALUES
     -- Admin accounts
     (1, '1000000001', 1, 1, 25000.00,
-     1, NOW(), NULL, 'USD', 1, 1, NULL);
+     1, NOW(), NULL, 'USD', 1, 1, NULL),
+    (2, '1000000002', 1, 1, 5000.00,
+     2, NOW(), NULL, 'USD', 1, 1, NULL),
 
+    (3, '1000000003', 2, 1, 1200.00,
+     1, NOW(), NULL, 'USD', 1, 1, NULL),
+    (4, '1000000004', 2, 1, 800.00,
+     2, NOW(), NULL, 'USD', 1, 1, NULL),
 
--- Start of seeding data for reconciliation demo.
--- =============================================================================
--- 1. INSERT TEST BRANCH
--- =============================================================================
-use bank_db;
-INSERT INTO branches
-    (Name, AddressLine1, AddressLine2, City, State, PostalCode, Phone,
+    (5, '1000000005', 3, 1, 3400.00,
+     1, NOW(), NULL, 'USD', 1, 1, NULL),
+    (6, '1000000006', 3, 1, 15000.00,
+     2, NOW(), NULL, 'USD', 1, 1, NULL),
+
+    (7, '1000000007', 4, 1, 600.00,
+     1, NOW(), NULL, 'USD', 1, 1, NULL),
+
+    (8, '1000000008', 5, 1, 2200.00,
+     1, NOW(), NULL, 'USD', 1, 1, NULL),
+
+    (9, '1000000009', 6, 1, 900.00,
+     1, NOW(), NULL, 'USD', 1, 1, NULL), 
+
+    (10, '2000000001', 3, 1, 5000.00,
+     4, NOW(), NULL, 'USD', 1, 1, NULL);
+
+INSERT INTO cards
+    (Id, CardNumberMasked, ExpiratationUtc, CardHolderName,
+     AccountId, OwnerUserId, CardType,
      CreatedUtc, IsActive, CreatedByUserId, UpdatedByUserId)
 VALUES
-    ('Test Branch',
-     '200 Test St', 'Suite 100',
-     'Madison', 'WI', '53703',
-     '608-555-0200',
-     NOW(), 1, 1, NULL);
+    (1, '**** **** **** 0001', '2028-01-31 00:00:00',
+     'Nick User', 3, 2, 1, NOW(), 1, 1, NULL),
+    (2, '**** **** **** 0002', '2028-02-28 00:00:00',
+     'Chase User', 5, 3, 1, NOW(), 1, 1, NULL),
+    (3, '**** **** **** 0003', '2029-03-31 00:00:00',
+     'Harshitha User', 9, 6, 1, NOW(), 1, 1, NULL),
+    (4, '**** **** **** 9001', '2030-04-30 00:00:00',
+     'Chase User', 10, 3, 2, NOW(), 1, 1, NULL); -- credit for loan account
 
--- =============================================================================
--- 2. INSERT TEST USERS
--- =============================================================================
-INSERT INTO users
-    (Username, FirstName, LastName,
-     PasswordHash, Email, Phone, SsnHash,
-     RoleId, HomeBranchId,
-     UpdatedUtc, CreatedUtc, IsActive,
-     CreatedByUserId, UpdatedByUserId)
+INSERT INTO deposits
+    (Id, AccountId, Source, ReceivedUtc, Amount)
 VALUES
-    ('alice.test', 'Alice', 'Johnson',
-     'p', 'alice@test.local', '555-1001', NULL,
-     3, 2,
-     NOW(), NOW(), 1,
-     1, NULL),
-    ('bob.test', 'Bob', 'Smith',
-     'p', 'bob@test.local', '555-1002', NULL,
-     3, 2,
-     NOW(), NOW(), 1,
-     1, NULL),
-    ('carol.test', 'Carol', 'Davis',
-     'p', 'carol@test.local', '555-1003', NULL,
-     3, 2,
-     NOW(), NOW(), 1,
-     1, NULL),
-    ('dave.test', 'Dave', 'Wilson',
-     'p', 'dave@test.local', '555-1004', NULL,
-     3, 1,
-     NOW(), NOW(), 1,
-     1, NULL);
+    (1, 3, 'Payroll',      '2024-03-01 09:00:00', 1000.00),
+    (2, 5, 'Payroll',      '2024-03-01 09:15:00', 2000.00),
+    (3, 6, 'Bonus',        '2024-03-15 10:00:00', 5000.00),
+    (4, 9, 'Transfer In',  '2024-03-05 12:30:00', 300.00);
 
--- =============================================================================
--- 3. INSERT TEST ACCOUNTS
--- =============================================================================
-INSERT INTO accounts
-    (AccountNumber, OwnerUserId, BranchId, CurrentBalance,
-     AccountType, CreatedUtc, UpdatedUtc, CurrencyCode,
+INSERT INTO withdrawals
+    (Id, AccountId, Method, ReceivedUtc, Amount,
+     CreatedUtc, IsActive, CreatedByUserId, UpdatedByUserId)
+VALUES
+    (1, 3, 'ATM',      '2024-03-02 13:00:00', 200.00, NOW(), 1, 2, NULL),
+    (2, 5, 'DebitCard','2024-03-03 18:30:00', 150.00, NOW(), 1, 3, NULL),
+    (3, 7, 'ATM',      '2024-03-04 11:45:00', 100.00, NOW(), 1, 4, NULL);
+
+INSERT INTO transfers
+    (Id, FromAccountId, ToAccountId, InitiatedByUserId,
+     Amount, Memo, ExecutedUtc, CreatedUtc,
      IsActive, CreatedByUserId, UpdatedByUserId)
 VALUES
-    -- Alice's account - Perfect balance (1400.00)
-    ('2000000100', 2, 2, 1400.00,
-     1, '2024-01-15 00:00:00', NOW(), 'USD', 1, 1, NULL),
-    
-    -- Bob's account - Minor discrepancy (stored 2500.50, should be 2500.00)
-    ('2000000101', 3, 2, 2500.50,
-     1, '2024-02-01 00:00:00', NOW(), 'USD', 1, 1, NULL),
-    
-    -- Carol's account - Major discrepancy (stored 5000.00, should be 4850.00)
-    ('2000000102', 4, 2, 5000.00,
-     2, '2024-03-10 00:00:00', NOW(), 'USD', 1, 1, NULL),
-    
-    -- Dave's account - Different branch (for testing branch filtering)
-    ('1000000103', 5, 1, 3000.00,
-     1, '2024-01-20 00:00:00', NOW(), 'USD', 1, 1, NULL);
+    (1, 3, 4, 2, 150.00, 'Nick move to savings',
+     '2024-03-06 08:30:00', NOW(), 1, 2, NULL),
+    (2, 5, 6, 3, 300.00, 'Chase move to savings',
+     '2024-03-06 09:00:00', NOW(), 1, 3, NULL),
+    (3, 8, 9, 5, 250.00, 'Braydon send to Harshitha',
+     '2024-03-07 14:10:00', NOW(), 1, 5, NULL);
 
--- =============================================================================
--- 4. TRANSACTIONS FOR ACCOUNT 100 (Alice - Perfect Balance)
--- Target: $1,400.00 = 1000 + 750 - 200 + 25 - 75 - 100
--- =============================================================================
+INSERT INTO loans
+    (Id, AccountId, Principal, AnnualInterestRate,
+     TermMonths, StartUtc, Status,
+     UpdatedUtc, CreatedUtc, IsActive, CreatedByUserId, UpdatedByUserId)
+VALUES
+    (1, 10, 5000.00, 5.00,
+     24, '2024-01-15 00:00:00', 2,  -- Status 2 = Active
+     NOW(), NOW(), 1, 3, NULL);
 
--- Initial deposit: $1,000
-INSERT INTO deposits (AccountId, `Source`, ReceivedUtc, Amount, CreatedUtc, IsActive, CreatedByUserId)
-VALUES (2, 'Cash', '2024-01-15 10:00:00', 1000.00, NOW(), 1, 1);
-SET @deposit_id = LAST_INSERT_ID();
+INSERT INTO loanpayments
+    (Id, LoanId, Amount, PaidDateUtc,
+     PrincipalPortion, InterestPortion, Reference,
+     DueDateUTC, CreatedUtc, IsActive, CreatedByUserId, UpdatedByUserId)
+VALUES
+    (1, 1, 230.00, '2024-02-15 00:00:00',
+     210.00, 20.00, 'First payment',
+     '2024-02-15 00:00:00', NOW(), 1, 3, NULL),
+    (2, 1, 230.00, '2024-03-15 00:00:00',
+     211.00, 19.00, 'Second payment',
+     '2024-03-15 00:00:00', NOW(), 1, 3, NULL);
 
-INSERT INTO transactions 
-    (Kind, AccountId, Amount, PostedUtc, IsActive, RelatedEntityId,
-     CreatedUtc, CreatedByUserId)
-VALUES 
-    (1, 2, 1000.00, '2024-01-15 10:00:00', 1, @deposit_id,
-     NOW(), 1);
+INSERT INTO transactions
+    (Id, AccountId, Kind, Amount, Memo,
+     PostedUtc, RelatedEntityId, UpdatedUtc,
+     CreatedUtc, IsActive, CreatedByUserId, UpdatedByUserId)
+VALUES
+    -- From deposits
+    (1, 3, 1, 1000.00, 'Payroll deposit',
+     '2024-03-01 09:00:00', 1, NULL, NOW(), 1, 2, NULL),
+    (2, 5, 1, 2000.00, 'Payroll deposit',
+     '2024-03-01 09:15:00', 2, NULL, NOW(), 1, 3, NULL),
+    (3, 6, 1, 5000.00, 'Bonus deposit',
+     '2024-03-15 10:00:00', 3, NULL, NOW(), 1, 3, NULL),
+    (4, 9, 1, 300.00, 'Transfer in deposit',
+     '2024-03-05 12:30:00', 4, NULL, NOW(), 1, 6, NULL),
 
--- Second deposit: $750
-INSERT INTO deposits (AccountId, `Source`, ReceivedUtc, Amount, CreatedUtc, IsActive, CreatedByUserId)
-VALUES (2, 'Check', '2024-02-10 14:30:00', 750.00, NOW(), 1, 1);
-SET @deposit_id = LAST_INSERT_ID();
+    -- From withdrawals
+    (5, 3, 2, -200.00, 'ATM withdrawal',
+     '2024-03-02 13:00:00', 1, NULL, NOW(), 1, 2, NULL),
+    (6, 5, 2, -150.00, 'Debit card purchase',
+     '2024-03-03 18:30:00', 2, NULL, NOW(), 1, 3, NULL),
+    (7, 7, 2, -100.00, 'ATM withdrawal',
+     '2024-03-04 11:45:00', 3, NULL, NOW(), 1, 4, NULL),
 
-INSERT INTO transactions 
-    (Kind, AccountId, Amount, PostedUtc, IsActive, RelatedEntityId,
-     CreatedUtc, CreatedByUserId)
-VALUES 
-    (1, 2, 750.00, '2024-02-10 14:30:00', 1, @deposit_id,
-     NOW(), 1);
+    -- From transfers
+    (8, 3, 3, -150.00, 'Transfer to savings',
+     '2024-03-06 08:30:00', 1, NULL, NOW(), 1, 2, NULL),
+    (9, 5, 3, -300.00, 'Transfer to savings',
+     '2024-03-06 09:00:00', 2, NULL, NOW(), 1, 3, NULL),
+    (10, 8, 3, -250.00, 'Transfer to Harshitha',
+     '2024-03-07 14:10:00', 3, NULL, NOW(), 1, 5, NULL),
 
--- Withdrawal: $200
-INSERT INTO withdrawals (AccountId, Amount, Method, ProcessedUtc, CreatedUtc, IsActive, CreatedByUserId)
-VALUES (2, 200.00, 'ATM', '2024-03-05 09:15:00', NOW(), 1, 1);
-SET @withdrawal_id = LAST_INSERT_ID();
+    -- From transfers
+    (11, 4, 3, 150.00, 'Transfer from checking',
+     '2024-03-06 08:30:00', 1, NULL, NOW(), 1, 2, NULL),
+    (12, 6, 3, 300.00, 'Transfer from checking',
+     '2024-03-06 09:00:00', 2, NULL, NOW(), 1, 3, NULL),
+    (13, 9, 3, 250.00, 'Transfer from Braydon',
+     '2024-03-07 14:10:00', 3, NULL, NOW(), 1, 6, NULL),
 
-INSERT INTO transactions 
-    (Kind, AccountId, Amount, PostedUtc, IsActive, RelatedEntityId,
-     CreatedUtc, CreatedByUserId)
-VALUES 
-    (2, 2, 200.00, '2024-03-05 09:15:00', 1, @withdrawal_id,
-     NOW(), 1);
+    -- Loan payments
+    (14, 10, 6, -230.00, 'Loan payment 1',
+     '2024-02-15 00:00:00', 1, NULL, NOW(), 1, 3, NULL),
+    (15, 10, 6, -230.00, 'Loan payment 2',
+     '2024-03-15 00:00:00', 2, NULL, NOW(), 1, 3, NULL);
 
--- Interest: $25 (using deposits table as interests table doesn't exist in schema)
-INSERT INTO deposits (AccountId, `Source`, ReceivedUtc, Amount, CreatedUtc, IsActive, CreatedByUserId)
-VALUES (2, 'Interest Payment - March 2024', '2024-03-31 23:59:59', 25.00, NOW(), 1, 1);
-SET @interest_id = LAST_INSERT_ID();
+ALTER TABLE transaction_entity_sequence AUTO_INCREMENT = 100;
 
-INSERT INTO transactions 
-    (Kind, AccountId, Amount, PostedUtc, IsActive, RelatedEntityId,
-     CreatedUtc, CreatedByUserId)
-VALUES 
-    (5, 2, 25.00, '2024-03-31 23:59:59', 1, @interest_id,
-     NOW(), 1);
-
--- Fee: $75 (using withdrawals table as fees table doesn't exist in schema)
-INSERT INTO withdrawals (AccountId, Amount, Method, ProcessedUtc, CreatedUtc, IsActive, CreatedByUserId)
-VALUES (2, 75.00, 'Monthly Maintenance Fee', '2024-04-01 00:00:01', NOW(), 1, 1);
-SET @fee_id = LAST_INSERT_ID();
-
-INSERT INTO transactions 
-    (Kind, AccountId, Amount, PostedUtc, IsActive, RelatedEntityId,
-     CreatedUtc, CreatedByUserId)
-VALUES 
-    (4, 2, 75.00, '2024-04-01 00:00:01', 1, @fee_id,
-     NOW(), 1);
-
-INSERT INTO loans (AccountId, Principal, AnnualInterestRate, TermMonths, StartUtc, Status, CreatedUtc, IsActive, CreatedByUserId)
-VALUES (2, 5000.00, 5.500000, 36, '2024-01-15 00:00:00', 1, NOW(), 1, 1);
-SET @loan_id = LAST_INSERT_ID();
-
--- Loan payment: $100
-INSERT INTO loanpayments (LoanId, Amount, DueDateUTC, PaidDateUtc, CreatedUtc, IsActive, CreatedByUserId)
-VALUES (@loan_id, 100.00, '2024-04-25 00:00:00', '2024-04-25 14:00:00', NOW(), 1, 1);
-SET @payment_id = LAST_INSERT_ID();
-
-INSERT INTO transactions 
-    (Kind, AccountId, Amount, PostedUtc, IsActive, RelatedEntityId,
-     CreatedUtc, CreatedByUserId)
-VALUES 
-    (6, 2, 100.00, '2024-04-25 14:00:00', 1, @payment_id,
-     NOW(), 1);
-
--- Expected: 1000 + 750 - 200 + 25 - 75 - 100 = 1400.00 ✓
-
--- =============================================================================
--- 5. TRANSACTIONS FOR ACCOUNT2(Bob - Minor Discrepancy)
--- Stored: $2,500.50, Calculated: $2,500.00 (Discrepancy: $0.50)
--- =============================================================================
-
--- Initial deposit: $2,000
-INSERT INTO deposits (AccountId, `Source`, ReceivedUtc, Amount, CreatedUtc, IsActive, CreatedByUserId)
-VALUES ( 3 , 'Wire Transfer', '2024-02-01 11:00:00', 2000.00, NOW(), 1, 1);
-SET @deposit_id = LAST_INSERT_ID();
-
-INSERT INTO transactions 
-    (Kind, AccountId, Amount, PostedUtc, IsActive, RelatedEntityId,
-     CreatedUtc, CreatedByUserId)
-VALUES 
-    (1,  3 , 2000.00, '2024-02-01 11:00:00', 1, @deposit_id,
-     NOW(), 1);
-
--- Second deposit: $800
-INSERT INTO deposits (AccountId, `Source`, ReceivedUtc, Amount, CreatedUtc, IsActive, CreatedByUserId)
-VALUES ( 3 , 'Cash', '2024-03-15 16:45:00', 800.00, NOW(), 1, 1);
-SET @deposit_id = LAST_INSERT_ID();
-
-INSERT INTO transactions 
-    (Kind, AccountId, Amount, PostedUtc, IsActive, RelatedEntityId,
-     CreatedUtc, CreatedByUserId)
-VALUES 
-    (1,  3 , 800.00, '2024-03-15 16:45:00', 1, @deposit_id,
-     NOW(), 1);
-
--- Withdrawal: $300
-INSERT INTO withdrawals (AccountId, Amount, Method, ProcessedUtc, CreatedUtc, IsActive, CreatedByUserId)
-VALUES ( 3 , 300.00, 'Teller', '2024-04-20 10:30:00', NOW(), 1, 1);
-SET @withdrawal_id = LAST_INSERT_ID();
-
-INSERT INTO transactions 
-    (Kind, AccountId, Amount, PostedUtc, IsActive, RelatedEntityId,
-     CreatedUtc, CreatedByUserId)
-VALUES 
-    (2,  3 , 300.00, '2024-04-20 10:30:00', 1, @withdrawal_id,
-     NOW(), 1);
-
--- Expected: 2000 + 800 - 300 = 2500.00
--- Stored: 2500.50 → $0.50 discrepancy
-
--- =============================================================================
--- 6. TRANSACTIONS FOR ACCOUNT 102 (Carol - Major Discrepancy)
--- Stored: $5,000.00, Calculated: $4,850.00 (Discrepancy: $150.00)
--- =============================================================================
-
--- Initial deposit: $5,000
-INSERT INTO deposits (AccountId, `Source`, ReceivedUtc, Amount, CreatedUtc, IsActive, CreatedByUserId)
-VALUES (4, 'Wire Transfer', '2024-03-10 13:00:00', 5000.00, NOW(), 1, 1);
-SET @deposit_id = LAST_INSERT_ID();
-
-INSERT INTO transactions 
-    (Kind, AccountId, Amount, PostedUtc, IsActive, RelatedEntityId,
-     CreatedUtc, CreatedByUserId)
-VALUES 
-    (1, 4, 5000.00, '2024-03-10 13:00:00', 1, @deposit_id,
-     NOW(), 1);
-
--- Transfer out: $150 (this should have reduced balance but didn't)
-INSERT INTO transfers (FromAccountId, ToAccountId, InitiatedByUserId, Amount, ExecutedUtc, CreatedUtc, IsActive, CreatedByUserId)
-VALUES (4, 100, 12, 150.00, '2024-04-15 12:00:00', NOW(), 1, 1);
-SET @transfer_id = LAST_INSERT_ID();
-
-INSERT INTO transactions 
-    (Kind, AccountId, Amount, PostedUtc, IsActive, RelatedEntityId,
-     CreatedUtc, CreatedByUserId)
-VALUES 
-    (3, 4, 150.00, '2024-04-15 12:00:00', 1, @transfer_id,
-     NOW(), 1);
-
--- Expected: 5000 - 150 = 4850.00
--- Stored: 5000.00 → $150.00 discrepancy
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
-
-
