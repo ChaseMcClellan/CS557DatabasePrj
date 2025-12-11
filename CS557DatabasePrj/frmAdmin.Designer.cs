@@ -39,13 +39,15 @@
             btnViewBranches = new Button();
             btnTransactions = new Button();
             btnWithdrawl = new Button();
+            btnReport = new Button();
             SuspendLayout();
             // 
             // btnExit
             // 
-            btnExit.Location = new Point(713, 404);
+            btnExit.Location = new Point(815, 539);
+            btnExit.Margin = new Padding(3, 4, 3, 4);
             btnExit.Name = "btnExit";
-            btnExit.Size = new Size(75, 23);
+            btnExit.Size = new Size(86, 31);
             btnExit.TabIndex = 0;
             btnExit.Text = "Exit";
             btnExit.UseVisualStyleBackColor = true;
@@ -53,9 +55,10 @@
             // 
             // btnLogout
             // 
-            btnLogout.Location = new Point(623, 404);
+            btnLogout.Location = new Point(712, 539);
+            btnLogout.Margin = new Padding(3, 4, 3, 4);
             btnLogout.Name = "btnLogout";
-            btnLogout.Size = new Size(75, 23);
+            btnLogout.Size = new Size(86, 31);
             btnLogout.TabIndex = 1;
             btnLogout.Text = "<-] Logout";
             btnLogout.UseVisualStyleBackColor = true;
@@ -63,9 +66,10 @@
             // 
             // btnNewUser
             // 
-            btnNewUser.Location = new Point(39, 32);
+            btnNewUser.Location = new Point(45, 43);
+            btnNewUser.Margin = new Padding(3, 4, 3, 4);
             btnNewUser.Name = "btnNewUser";
-            btnNewUser.Size = new Size(178, 81);
+            btnNewUser.Size = new Size(203, 108);
             btnNewUser.TabIndex = 2;
             btnNewUser.Text = "Create New User";
             btnNewUser.UseVisualStyleBackColor = true;
@@ -73,9 +77,10 @@
             // 
             // btnCreateBranch
             // 
-            btnCreateBranch.Location = new Point(407, 32);
+            btnCreateBranch.Location = new Point(465, 43);
+            btnCreateBranch.Margin = new Padding(3, 4, 3, 4);
             btnCreateBranch.Name = "btnCreateBranch";
-            btnCreateBranch.Size = new Size(178, 81);
+            btnCreateBranch.Size = new Size(203, 108);
             btnCreateBranch.TabIndex = 3;
             btnCreateBranch.Text = "Create Branch";
             btnCreateBranch.UseVisualStyleBackColor = true;
@@ -83,9 +88,10 @@
             // 
             // btnDeposit
             // 
-            btnDeposit.Location = new Point(591, 32);
+            btnDeposit.Location = new Point(675, 43);
+            btnDeposit.Margin = new Padding(3, 4, 3, 4);
             btnDeposit.Name = "btnDeposit";
-            btnDeposit.Size = new Size(178, 81);
+            btnDeposit.Size = new Size(203, 108);
             btnDeposit.TabIndex = 4;
             btnDeposit.Text = "Add Deposit";
             btnDeposit.UseVisualStyleBackColor = true;
@@ -93,9 +99,10 @@
             // 
             // btnCreateEmployee
             // 
-            btnCreateEmployee.Location = new Point(223, 32);
+            btnCreateEmployee.Location = new Point(255, 43);
+            btnCreateEmployee.Margin = new Padding(3, 4, 3, 4);
             btnCreateEmployee.Name = "btnCreateEmployee";
-            btnCreateEmployee.Size = new Size(178, 81);
+            btnCreateEmployee.Size = new Size(203, 108);
             btnCreateEmployee.TabIndex = 5;
             btnCreateEmployee.Text = "Create Employee";
             btnCreateEmployee.UseVisualStyleBackColor = true;
@@ -103,9 +110,10 @@
             // 
             // btnViewUser
             // 
-            btnViewUser.Location = new Point(39, 175);
+            btnViewUser.Location = new Point(45, 233);
+            btnViewUser.Margin = new Padding(3, 4, 3, 4);
             btnViewUser.Name = "btnViewUser";
-            btnViewUser.Size = new Size(178, 81);
+            btnViewUser.Size = new Size(203, 108);
             btnViewUser.TabIndex = 6;
             btnViewUser.Text = "View all Users";
             btnViewUser.UseVisualStyleBackColor = true;
@@ -113,9 +121,10 @@
             // 
             // btnViewEmployees
             // 
-            btnViewEmployees.Location = new Point(223, 175);
+            btnViewEmployees.Location = new Point(255, 233);
+            btnViewEmployees.Margin = new Padding(3, 4, 3, 4);
             btnViewEmployees.Name = "btnViewEmployees";
-            btnViewEmployees.Size = new Size(178, 81);
+            btnViewEmployees.Size = new Size(203, 108);
             btnViewEmployees.TabIndex = 7;
             btnViewEmployees.Text = "View All Employees";
             btnViewEmployees.UseVisualStyleBackColor = true;
@@ -123,9 +132,10 @@
             // 
             // btnViewBranches
             // 
-            btnViewBranches.Location = new Point(407, 175);
+            btnViewBranches.Location = new Point(465, 233);
+            btnViewBranches.Margin = new Padding(3, 4, 3, 4);
             btnViewBranches.Name = "btnViewBranches";
-            btnViewBranches.Size = new Size(178, 81);
+            btnViewBranches.Size = new Size(203, 108);
             btnViewBranches.TabIndex = 8;
             btnViewBranches.Text = "View All Branches";
             btnViewBranches.UseVisualStyleBackColor = true;
@@ -133,9 +143,10 @@
             // 
             // btnTransactions
             // 
-            btnTransactions.Location = new Point(591, 175);
+            btnTransactions.Location = new Point(675, 233);
+            btnTransactions.Margin = new Padding(3, 4, 3, 4);
             btnTransactions.Name = "btnTransactions";
-            btnTransactions.Size = new Size(178, 81);
+            btnTransactions.Size = new Size(203, 108);
             btnTransactions.TabIndex = 9;
             btnTransactions.Text = "View All Transactions";
             btnTransactions.UseVisualStyleBackColor = true;
@@ -143,19 +154,31 @@
             // 
             // btnWithdrawl
             // 
-            btnWithdrawl.Location = new Point(39, 294);
+            btnWithdrawl.Location = new Point(45, 392);
+            btnWithdrawl.Margin = new Padding(3, 4, 3, 4);
             btnWithdrawl.Name = "btnWithdrawl";
-            btnWithdrawl.Size = new Size(178, 78);
+            btnWithdrawl.Size = new Size(203, 104);
             btnWithdrawl.TabIndex = 10;
             btnWithdrawl.Text = "Add Withdrawl";
             btnWithdrawl.UseVisualStyleBackColor = true;
             btnWithdrawl.Click += btnWithdrawl_Click;
             // 
+            // btnReport
+            // 
+            btnReport.Location = new Point(255, 392);
+            btnReport.Name = "btnReport";
+            btnReport.Size = new Size(203, 104);
+            btnReport.TabIndex = 11;
+            btnReport.Text = "Create Reconcilliation Report";
+            btnReport.UseVisualStyleBackColor = true;
+            btnReport.Click += btnReport_Click;
+            // 
             // frmAdmin
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(914, 600);
+            Controls.Add(btnReport);
             Controls.Add(btnWithdrawl);
             Controls.Add(btnTransactions);
             Controls.Add(btnViewBranches);
@@ -167,6 +190,7 @@
             Controls.Add(btnNewUser);
             Controls.Add(btnLogout);
             Controls.Add(btnExit);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "frmAdmin";
             Text = "frmAdmin";
             ResumeLayout(false);
@@ -185,5 +209,6 @@
         private Button btnViewBranches;
         private Button btnTransactions;
         private Button btnWithdrawl;
+        private Button btnReport;
     }
 }

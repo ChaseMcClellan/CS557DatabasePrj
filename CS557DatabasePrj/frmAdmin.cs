@@ -88,5 +88,11 @@ namespace CS557DatabasePrj
             var frm = new frmAddWithdrawl();
             frm.Show();
         }
+
+        private void btnReport_Click(object sender, EventArgs e)
+        {
+            var frm = new frmCreateReport();
+            frm.Show();
+        }
     }
 }
