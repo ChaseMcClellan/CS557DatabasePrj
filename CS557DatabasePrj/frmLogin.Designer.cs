@@ -35,14 +35,14 @@
             lblPassword = new Label();
             lblTitle = new Label();
             btnLogin = new Button();
-            lblAlert = new Label();
             SuspendLayout();
             // 
             // btnExit
             // 
-            btnExit.Location = new Point(713, 415);
+            btnExit.Location = new Point(815, 553);
+            btnExit.Margin = new Padding(3, 4, 3, 4);
             btnExit.Name = "btnExit";
-            btnExit.Size = new Size(75, 23);
+            btnExit.Size = new Size(86, 31);
             btnExit.TabIndex = 0;
             btnExit.Text = "Exit";
             btnExit.UseVisualStyleBackColor = true;
@@ -50,74 +50,65 @@
             // 
             // txtUsername
             // 
-            txtUsername.Location = new Point(375, 118);
+            txtUsername.Location = new Point(429, 250);
+            txtUsername.Margin = new Padding(3, 4, 3, 4);
             txtUsername.Name = "txtUsername";
-            txtUsername.Size = new Size(100, 23);
+            txtUsername.Size = new Size(114, 27);
             txtUsername.TabIndex = 1;
             // 
             // txtPassword
             // 
-            txtPassword.Location = new Point(375, 234);
+            txtPassword.Location = new Point(429, 312);
+            txtPassword.Margin = new Padding(3, 4, 3, 4);
             txtPassword.Name = "txtPassword";
-            txtPassword.Size = new Size(100, 23);
+            txtPassword.Size = new Size(114, 27);
             txtPassword.TabIndex = 2;
             txtPassword.UseSystemPasswordChar = true;
             // 
             // lblUsername
             // 
             lblUsername.AutoSize = true;
-            lblUsername.Location = new Point(315, 121);
+            lblUsername.Location = new Point(348, 257);
             lblUsername.Name = "lblUsername";
-            lblUsername.Size = new Size(60, 15);
+            lblUsername.Size = new Size(75, 20);
             lblUsername.TabIndex = 3;
             lblUsername.Text = "Username";
             // 
             // lblPassword
             // 
             lblPassword.AutoSize = true;
-            lblPassword.Location = new Point(312, 237);
+            lblPassword.Location = new Point(357, 316);
             lblPassword.Name = "lblPassword";
-            lblPassword.Size = new Size(57, 15);
+            lblPassword.Size = new Size(70, 20);
             lblPassword.TabIndex = 4;
             lblPassword.Text = "Password";
             // 
             // lblTitle
             // 
             lblTitle.AutoSize = true;
-            lblTitle.Location = new Point(377, 36);
+            lblTitle.Location = new Point(431, 48);
             lblTitle.Name = "lblTitle";
-            lblTitle.Size = new Size(83, 15);
+            lblTitle.Size = new Size(103, 20);
             lblTitle.TabIndex = 5;
             lblTitle.Text = "BANKING APP";
             // 
             // btnLogin
             // 
-            btnLogin.Location = new Point(376, 330);
+            btnLogin.Location = new Point(430, 440);
+            btnLogin.Margin = new Padding(3, 4, 3, 4);
             btnLogin.Name = "btnLogin";
-            btnLogin.Size = new Size(75, 23);
+            btnLogin.Size = new Size(86, 31);
             btnLogin.TabIndex = 6;
             btnLogin.Text = "Login";
             btnLogin.UseVisualStyleBackColor = true;
             btnLogin.Click += btnLogin_Click;
             // 
-            // lblAlert
-            // 
-            lblAlert.AutoSize = true;
-            lblAlert.ForeColor = Color.Red;
-            lblAlert.Location = new Point(373, 286);
-            lblAlert.Name = "lblAlert";
-            lblAlert.Size = new Size(87, 15);
-            lblAlert.TabIndex = 7;
-            lblAlert.Text = "Incorrect Login";
-            lblAlert.Visible = false;
-            // 
             // frmLogin
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ActiveCaption;
-            ClientSize = new Size(800, 450);
-            Controls.Add(lblAlert);
+            ClientSize = new Size(914, 600);
             Controls.Add(btnLogin);
             Controls.Add(lblTitle);
             Controls.Add(lblPassword);
@@ -125,6 +116,7 @@
             Controls.Add(txtPassword);
             Controls.Add(txtUsername);
             Controls.Add(btnExit);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "frmLogin";
             Text = "Login";
             ResumeLayout(false);
@@ -140,6 +132,5 @@
         private Label lblPassword;
         private Label lblTitle;
         private Button btnLogin;
-        private Label lblAlert;
     }
 }

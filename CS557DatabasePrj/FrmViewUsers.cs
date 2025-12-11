@@ -1,5 +1,6 @@
 ﻿using CS557DatabasePrj.BL;
 using CS557DatabasePrj.DL.Repo;
+using CS557DatabasePrj.Security;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,10 +12,13 @@ namespace CS557DatabasePrj.UI
     public partial class FrmViewUsers : Form
     {
         private List<User> _users = new();
+        private string? _currentRawSsn;
+        private const string SsnMaskedPlaceholder = "XXX-XX-XXXX";
 
         public FrmViewUsers()
         {
             InitializeComponent();
+            txtPassword.UseSystemPasswordChar = true;
 
             this.Load += FrmViewUsers_Load;
             dgvUser.SelectionChanged += dgvUser_SelectionChanged;
@@ -78,7 +82,15 @@ namespace CS557DatabasePrj.UI
             txtLast.Text = u.LastName;
             txtEmail.Text = u.Email ?? "";
             txtPhone.Text = u.Phone ?? "";
-            txtSSN.Text = u.SsnHash ?? "";
+
+            if (string.IsNullOrWhiteSpace(u.SsnHash))
+            {
+                txtSSN.Text = string.Empty;
+            }
+            else
+            {
+                txtSSN.Text = SsnMaskedPlaceholder;
+            }
 
             chkAdmin.Checked = u.RoleId == 1;
 
@@ -98,7 +110,7 @@ namespace CS557DatabasePrj.UI
                 cmbBranch.SelectedIndex = -1;
             }
 
-            txtPassword.Text = u.PasswordHash;
+            txtPassword.Text = string.Empty;
         }
 
         private async void btnUpdate_Click(object sender, EventArgs e)
@@ -148,6 +160,28 @@ namespace CS557DatabasePrj.UI
 
             int roleId = chkAdmin.Checked ? 1 : 2;
 
+            string passwordHash;
+            if (string.IsNullOrWhiteSpace(txtPassword.Text))
+            {
+                passwordHash = original.PasswordHash;
+            }
+            else
+            {
+                passwordHash = CryptoService.HashPassword(txtPassword.Text.Trim());
+            }
+
+            string? ssnToStore;
+
+            if (string.IsNullOrWhiteSpace(txtSSN.Text) ||
+                txtSSN.Text == SsnMaskedPlaceholder)
+            {
+                ssnToStore = original.SsnHash;
+            }
+            else
+            {
+                ssnToStore = CryptoService.HashPassword(txtSSN.Text.Trim());
+            }
+
             var updated = new User
             {
                 Id = original.Id,
@@ -157,15 +191,12 @@ namespace CS557DatabasePrj.UI
                 LastName = txtLast.Text.Trim(),
                 Email = string.IsNullOrWhiteSpace(txtEmail.Text) ? null : txtEmail.Text.Trim(),
                 Phone = string.IsNullOrWhiteSpace(txtPhone.Text) ? null : txtPhone.Text.Trim(),
-                SsnHash = string.IsNullOrWhiteSpace(txtSSN.Text) ? null : txtSSN.Text.Trim(),
+                SsnHash = ssnToStore,
 
                 RoleId = roleId,
                 HomeBranchId = branchId,
 
-                // Keep original password unless new one is entered
-                PasswordHash = string.IsNullOrWhiteSpace(txtPassword.Text)
-                    ? original.PasswordHash
-                    : txtPassword.Text,
+                PasswordHash = passwordHash,
 
                 CreatedUtc = original.CreatedUtc,
                 CreatedByUserId = original.CreatedByUserId,
@@ -248,15 +279,26 @@ namespace CS557DatabasePrj.UI
             catch (Exception ex)
             {
                 MessageBox.Show("Error deleting user:\n" + ex.Message,
-                    "Error",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private string MaskSsnForDisplay(string? ssn)
+        {
+            if (string.IsNullOrWhiteSpace(ssn))
+                return string.Empty;
+
+            var digits = new string(ssn.Where(char.IsDigit).ToArray());
+            if (digits.Length <= 4)
+                return digits;
+
+            string last4 = digits.Substring(digits.Length - 4);
+            return new string('X', digits.Length - 4) + last4;
         }
     }
 }

@@ -44,11 +44,21 @@ namespace CS557DatabasePrj.DL.Repo
         {
             using var conn = Open();
             var sql = @"
-              UPDATE Users SET
-               Username=@Username, FirstName=@FirstName, LastName=@LastName, Email=@Email, Phone=@Phone,
-               SsnHash=@SsnHash, RoleId=@RoleId, HomeBranchId=@HomeBranchId,
-               UpdatedUtc=@UpdatedUtc, UpdatedByUserId=@UpdatedByUserId, IsActive=@IsActive
-              WHERE Id=@Id;";
+UPDATE Users SET
+    UserName      = @Username,
+    FirstName     = @FirstName,
+    LastName      = @LastName,
+    PassWordHash  = @PasswordHash,
+    Email         = @Email,
+    Phone         = @Phone,
+    SsnHash       = @SsnHash,
+    RoleId        = @RoleId,
+    HomeBranchId  = @HomeBranchId,
+    UpdatedUtc    = @UpdatedUtc,
+    UpdatedByUserId = @UpdatedByUserId,
+    IsActive      = @IsActive
+WHERE Id = @Id;";
+
             return (await conn.ExecuteAsync(sql, u)) > 0;
         }
 
@@ -57,6 +67,8 @@ namespace CS557DatabasePrj.DL.Repo
             using var conn = Open();
             return (await conn.ExecuteAsync("DELETE FROM Users WHERE Id=@id;", new { id })) > 0;
         }
+
+
     }
 }
 
