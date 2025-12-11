@@ -1,7 +1,7 @@
 # CS557DatabasePrj
 
 A simple educational **banking system** built in C# WinForms for CS 557 (Database Systems).  
-The app demonstrates a classic 3-layer architecture (UI / Business Logic / Data Access) on top of a MySQL database using Dapper.
+The app demonstrates a classic 3-layer architecture (UI / Business Logic / Data Access) on top of a MySQL database using Dapper, Bcrypt.NET.
 
 ---
 
@@ -103,7 +103,8 @@ The repo is organised into separate projects for each layer:
 - **Language:** C#  
 - **Desktop UI:** Windows Forms  
 - **Database:** MySQL or MariaDB  
-- **ORM / Data Access:** [Dapper](https://github.com/DapperLib/Dapper)  
+- **ORM / Data Access:** [Dapper](https://github.com/DapperLib/Dapper)
+- **Password / SSN Hashing** [Bcrypt.NET](https://github.com/BcryptNet/bcrypt.net)
 - **IDE:** Visual Studio 2022+ (recommended)
 
 ---
