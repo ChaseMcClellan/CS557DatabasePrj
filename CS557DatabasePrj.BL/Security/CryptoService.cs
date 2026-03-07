@@ -17,7 +17,7 @@ namespace CS557DatabasePrj.Security
             return BCrypt.Net.BCrypt.Verify(password, hash);
         }
 
-        private static readonly string _ssnSalt = "BANK_APP_SECRET_2025";
+        private static readonly string _ssnSalt = "BANK";
 
         public static string HashSSN(string ssn)
         {
